@@ -166,33 +166,44 @@ const appData = {
   ]
 };
 
-// Create Vuetify instance
+// Create Vuetify instance with modern color palette
 const vuetify = Vuetify.createVuetify({
   theme: {
     defaultTheme: 'light',
     themes: {
       light: {
+        dark: false,
         colors: {
-          primary: '#1E88E5',   // Blue
-          secondary: '#37474F',  // Dark gray-blue
-          accent: '#FF6E40',    // Orange
-          error: '#F44336',     // Red
-          info: '#00BCD4',      // Cyan
-          success: '#4CAF50',   // Green
-          warning: '#FFC107'    // Amber
+          primary: '#FF5864',    // Vibrant coral/red
+          secondary: '#202738',  // Dark blue
+          accent: '#83DECF',     // Mint/teal
+          background: '#F5F7FA', // Off-white
+          surface: '#FFFFFF',    // White
+          error: '#EB5757',      // Red
+          info: '#64D2DE',       // Cyan
+          success: '#3FC380',    // Green
+          warning: '#FFBA49',    // Amber
         }
       },
       dark: {
+        dark: true,
         colors: {
-          primary: '#42A5F5',   // Lighter blue
-          secondary: '#78909C',  // Lighter gray-blue
-          accent: '#FF9E80',    // Lighter orange
-          error: '#EF5350',     // Lighter red
-          info: '#26C6DA',      // Lighter cyan
-          success: '#66BB6A',   // Lighter green
-          warning: '#FFCA28'    // Lighter amber
+          primary: '#FF7A8B',    // Lighter coral/red
+          secondary: '#344267',  // Lighter dark blue
+          accent: '#9CEEE1',     // Lighter mint/teal
+          background: '#121929', // Very dark blue
+          surface: '#202738',    // Dark blue
+          error: '#FF8A8A',      // Lighter red
+          info: '#87E5F2',       // Lighter cyan
+          success: '#65D89B',    // Lighter green
+          warning: '#FFCF75',    // Lighter amber
         }
       }
+    },
+    variations: {
+      colors: ['primary', 'secondary', 'accent'],
+      lighten: 3,
+      darken: 3,
     }
   }
 });
@@ -250,6 +261,9 @@ const app = Vue.createApp({
     openCalendlyModal() {
       this.isCalendlyModalOpen = true;
       
+      // Load Calendly script if needed
+      loadCalendly();
+      
       // Track event in Google Analytics
       if (localStorage.getItem('cookies-accepted') === 'true') {
         gtag('event', 'open_calendly', {
@@ -284,6 +298,30 @@ const app = Vue.createApp({
           break;
         }
       }
+    },
+    
+    // Calculate position for the navigation indicator
+    getNavIndicatorPosition() {
+      // If there's no active section, don't show the indicator
+      if (!this.activeSection) return { display: 'none' };
+      
+      // Find the active menu item in the DOM
+      const activeItem = document.querySelector(`.hidden-sm-and-down .v-btn.nav-active`);
+      if (!activeItem) return { display: 'none' };
+      
+      // Get the bounding rectangle of the active item
+      const rect = activeItem.getBoundingClientRect();
+      
+      // Calculate the offset from the left of the page
+      const parentRect = activeItem.closest('.v-container').getBoundingClientRect();
+      const offsetLeft = rect.left - parentRect.left;
+      
+      // Return the style object for the indicator
+      return {
+        display: 'block',
+        width: `${rect.width - 16}px`,
+        left: `${offsetLeft + 8}px`
+      };
     }
   },
   
@@ -324,12 +362,32 @@ const app = Vue.createApp({
   
   template: `
     <v-app :theme="theme">
-      <!-- Navigation -->
-      <v-app-bar app :color="theme === 'light' ? 'white' : 'secondary'" elevation="1">
+      <!-- Modern Navigation Bar -->
+      <v-app-bar 
+        app 
+        :color="theme === 'light' ? 'white' : 'surface'" 
+        elevation="0"
+        height="80"
+        class="border-bottom"
+        :class="theme === 'light' ? 'border-light' : 'border-dark'"
+      >
         <v-container class="d-flex align-center">
-          <v-app-bar-title class="text-primary font-weight-bold">
-            Veralake Digital
-          </v-app-bar-title>
+          <!-- Logo -->
+          <div class="d-flex align-center">
+            <v-avatar
+              color="primary"
+              size="42"
+              class="mr-3"
+              style="font-family: 'Space Grotesk', sans-serif;"
+            >
+              <span class="text-white font-weight-bold text-h6">V</span>
+            </v-avatar>
+            <v-app-bar-title>
+              <span class="text-primary font-weight-bold text-h6 text-lowercase">veralake</span>
+              <span class="text-secondary font-weight-bold text-lowercase">.digital</span>
+            </v-app-bar-title>
+          </div>
+          
           <v-spacer></v-spacer>
           
           <!-- Desktop Navigation -->
@@ -337,27 +395,123 @@ const app = Vue.createApp({
             <v-btn 
               v-for="item in menuItems" 
               :key="item.title" 
-              text 
-              class="ml-2"
-              :class="{ 'text-primary': activeSection === item.url.substring(1) }"
+              variant="text"
+              class="font-weight-medium mx-1"
+              :class="{ 
+                'nav-active': activeSection === item.url.substring(1),
+                'text-primary': activeSection === item.url.substring(1)
+              }"
+              rounded="lg"
               @click="scrollToSection(item.url.substring(1))"
             >
               {{ item.title }}
             </v-btn>
-            <v-btn color="primary" class="ml-4" @click="openCalendlyModal">Book a Call</v-btn>
-            <v-btn icon @click="toggleTheme" class="ml-2">
+            
+            <v-btn 
+              color="primary" 
+              class="ml-4 font-weight-bold" 
+              rounded="pill" 
+              elevation="1"
+              @click="openCalendlyModal"
+            >
+              <v-icon start>mdi-calendar-clock</v-icon>
+              Book a Call
+            </v-btn>
+            
+            <v-btn 
+              icon 
+              variant="text" 
+              class="ml-2" 
+              @click="toggleTheme"
+              :aria-label="theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'"
+            >
               <v-icon>{{ theme === 'light' ? 'mdi-weather-night' : 'mdi-weather-sunny' }}</v-icon>
             </v-btn>
           </div>
           
           <!-- Mobile Navigation Toggle -->
-          <div class="hidden-md-and-up">
-            <v-btn icon @click="drawer = !drawer">
-              <v-icon>mdi-menu</v-icon>
+          <div class="hidden-md-and-up d-flex align-center">
+            <!-- Contact button always visible on mobile -->
+            <v-btn 
+              color="primary" 
+              variant="flat" 
+              size="small"
+              density="comfortable"
+              class="mr-3 text-white" 
+              rounded="pill"
+              @click="openCalendlyModal"
+            >
+              <v-icon size="small">mdi-phone</v-icon>
+            </v-btn>
+            
+            <!-- Theme toggle -->
+            <v-btn 
+              icon 
+              variant="text" 
+              size="small" 
+              class="mr-3" 
+              @click="toggleTheme"
+            >
+              <v-icon>{{ theme === 'light' ? 'mdi-weather-night' : 'mdi-weather-sunny' }}</v-icon>
+            </v-btn>
+            
+            <!-- Menu toggle -->
+            <v-btn 
+              icon 
+              :color="drawer ? 'primary' : ''" 
+              variant="text"
+              @click="drawer = !drawer"
+            >
+              <v-icon>{{ drawer ? 'mdi-close' : 'mdi-menu' }}</v-icon>
             </v-btn>
           </div>
         </v-container>
+        
+        <!-- Animated indicator for active nav item (desktop only) -->
+        <div class="nav-indicator-container d-none d-md-block">
+          <div 
+            class="nav-indicator" 
+            :style="getNavIndicatorPosition()"
+          ></div>
+        </div>
       </v-app-bar>
+      
+      <style>
+        .border-bottom {
+          border-bottom-width: 1px;
+          border-bottom-style: solid;
+        }
+        
+        .border-light {
+          border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .border-dark {
+          border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-indicator-container {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          overflow: hidden;
+        }
+        
+        .nav-indicator {
+          position: absolute;
+          bottom: 0;
+          height: 3px;
+          background-color: #FF5864;
+          transition: all 0.3s ease;
+          border-radius: 3px 3px 0 0;
+        }
+        
+        .nav-active {
+          position: relative;
+        }
+      </style>
       
       <!-- Mobile Navigation Drawer -->
       <v-navigation-drawer v-model="drawer" temporary>
@@ -382,106 +536,320 @@ const app = Vue.createApp({
       </v-navigation-drawer>
 
       <v-main>
-        <!-- Hero Section -->
-        <section id="home" class="pt-16">
+        <!-- Hero Section - Modern & Eye-catching -->
+        <section id="home" class="pt-0">
           <v-container fluid class="pa-0">
             <v-row no-gutters>
               <v-col cols="12">
-                <v-sheet color="primary" class="py-16 px-6 text-center">
-                  <v-container>
-                    <h1 class="text-h2 font-weight-bold text-white mb-4">
-                      Transform Your Digital Presence
-                    </h1>
-                    <p class="text-h6 text-white mb-8">
-                      We help businesses grow through innovative digital solutions that deliver measurable results
-                    </p>
-                    <v-btn 
-                      size="large" 
-                      color="white" 
-                      class="text-primary mr-4" 
-                      @click="scrollToSection('services')"
-                    >
-                      Our Services
-                    </v-btn>
-                    <v-btn 
-                      size="large" 
-                      variant="outlined" 
-                      color="white"
-                      @click="openCalendlyModal"
-                    >
-                      Book a Free Consultation
-                    </v-btn>
+                <v-sheet 
+                  height="100vh" 
+                  max-height="800px" 
+                  class="d-flex align-center position-relative overflow-hidden"
+                  :style="{ 
+                    background: theme === 'light' 
+                      ? 'linear-gradient(135deg, rgba(255, 88, 100, 0.97) 0%, rgba(249, 58, 111, 0.97) 100%)' 
+                      : 'linear-gradient(135deg, rgba(32, 39, 56, 0.97) 0%, rgba(18, 25, 41, 0.97) 100%)'
+                  }"
+                >
+                  <!-- Background elements for visual interest -->
+                  <div class="position-absolute" style="top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0;">
+                    <div style="position: absolute; top: -10%; right: -10%; width: 50%; height: 50%; border-radius: 50%; background: rgba(131, 222, 207, 0.2);"></div>
+                    <div style="position: absolute; bottom: -20%; left: -10%; width: 70%; height: 70%; border-radius: 50%; background: rgba(131, 222, 207, 0.1);"></div>
+                    <div style="position: absolute; top: 40%; right: 20%; width: 200px; height: 200px; background: rgba(255, 255, 255, 0.05);"></div>
+                    <div style="position: absolute; top: 70%; left: 30%; width: 150px; height: 150px; background: rgba(255, 255, 255, 0.05);"></div>
+                  </div>
+                  
+                  <v-container class="position-relative" style="z-index: 1;">
+                    <v-row class="align-center">
+                      <v-col cols="12" md="7" class="text-center text-md-left fade-in-up">
+                        <div class="mb-4">
+                          <span class="text-white text-overline font-weight-bold" style="letter-spacing: 2px;">DIGITAL INNOVATION AGENCY</span>
+                        </div>
+                        <h1 class="text-h2 text-md-h1 font-weight-bold text-white mb-4" style="line-height: 1.2;">
+                          Transform Your <span class="text-accent">Digital</span> Presence
+                        </h1>
+                        <p class="text-h6 text-white mb-8 opacity-80" style="max-width: 600px; margin: 0 auto; margin-bottom: 2rem; line-height: 1.6;">
+                          We help ambitious businesses grow through innovative digital solutions that deliver measurable results and exceptional user experiences.
+                        </p>
+                        <div class="d-flex flex-column flex-sm-row justify-center justify-md-start">
+                          <v-btn 
+                            size="x-large" 
+                            color="accent" 
+                            class="text-secondary font-weight-bold px-8 py-3 mr-sm-4 mb-4 mb-sm-0" 
+                            elevation="4"
+                            rounded="pill"
+                            @click="scrollToSection('services')"
+                          >
+                            <v-icon start>mdi-lightbulb-on</v-icon>
+                            Explore Services
+                          </v-btn>
+                          <v-btn 
+                            size="x-large" 
+                            variant="outlined" 
+                            color="white"
+                            class="font-weight-bold px-8 py-3"
+                            rounded="pill"
+                            @click="openCalendlyModal"
+                          >
+                            <v-icon start>mdi-calendar-clock</v-icon>
+                            Free Consultation
+                          </v-btn>
+                        </div>
+                        
+                        <!-- Trusted by logos -->
+                        <div class="mt-16 d-none d-md-block">
+                          <p class="text-white text-body-2 mb-4">TRUSTED BY INDUSTRY LEADERS</p>
+                          <div class="d-flex flex-wrap justify-start align-center">
+                            <img 
+                              v-for="n in 5" 
+                              :key="n"
+                              :src="\`https://via.placeholder.com/120x40/ffffff/202738?text=CLIENT+\${n}\`" 
+                              :alt="\`Client \${n} Logo\`"
+                              class="mr-6 mb-4"
+                              style="opacity: 0.7; filter: brightness(0) invert(1);"
+                              height="30"
+                            />
+                          </div>
+                        </div>
+                      </v-col>
+                      
+                      <v-col cols="12" md="5" class="d-none d-md-flex justify-center align-center fade-in-up">
+                        <!-- Hero image or illustration -->
+                        <v-img
+                          src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                          max-width="500"
+                          class="rounded-xl elevation-10"
+                          style="border: 8px solid rgba(255,255,255,0.1);"
+                        >
+                          <template v-slot:placeholder>
+                            <v-row class="fill-height ma-0" align="center" justify="center">
+                              <v-progress-circular indeterminate color="accent"></v-progress-circular>
+                            </v-row>
+                          </template>
+                        </v-img>
+                      </v-col>
+                    </v-row>
+                    
+                    <!-- Scroll indicator -->
+                    <div class="text-center d-none d-md-block" style="position: absolute; bottom: 30px; left: 0; right: 0;">
+                      <v-btn
+                        icon="mdi-chevron-down"
+                        variant="text"
+                        color="white"
+                        size="large"
+                        @click="scrollToSection('services')"
+                        class="animate-bounce"
+                        style="animation: bounce 2s infinite;"
+                      ></v-btn>
+                    </div>
                   </v-container>
                 </v-sheet>
               </v-col>
             </v-row>
           </v-container>
+          
+          <!-- Floating stats section -->
+          <v-container class="stats-container" style="margin-top: -80px; position: relative; z-index: 2;">
+            <v-card
+              class="rounded-xl mx-auto"
+              max-width="1200"
+              elevation="10"
+              :color="theme === 'light' ? 'surface' : 'surface'"
+            >
+              <v-row no-gutters>
+                <v-col 
+                  v-for="(stat, i) in [
+                    {icon: 'mdi-account-group', value: '150+', label: 'Satisfied Clients'},
+                    {icon: 'mdi-check-decagram', value: '98%', label: 'Success Rate'},
+                    {icon: 'mdi-lightning-bolt', value: '340+', label: 'Projects Completed'},
+                    {icon: 'mdi-trophy', value: '25+', label: 'Industry Awards'}
+                  ]"
+                  :key="i"
+                  cols="6" sm="6" md="3"
+                  class="text-center py-6 px-4"
+                  :class="{'border-right': i < 3}"
+                >
+                  <v-icon size="x-large" color="primary" class="mb-3">{{ stat.icon }}</v-icon>
+                  <h3 class="text-h4 font-weight-bold mb-1">{{ stat.value }}</h3>
+                  <p class="text-body-2">{{ stat.label }}</p>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-container>
+          
+          <style>
+            @keyframes bounce {
+              0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+              }
+              40% {
+                transform: translateY(-10px);
+              }
+              60% {
+                transform: translateY(-5px);
+              }
+            }
+            .border-right {
+              border-right: 1px solid rgba(var(--secondary), 0.1);
+            }
+            @media (max-width: 768px) {
+              .border-right:nth-child(odd) {
+                border-right: 1px solid rgba(var(--secondary), 0.1);
+              }
+              .border-right:nth-child(even) {
+                border-right: none;
+              }
+            }
+          </style>
         </section>
 
-        <!-- Services Section -->
-        <section id="services" class="py-16">
+        <!-- Services Section - Modern & Engaging -->
+        <section id="services" class="py-16 mt-8">
           <v-container>
-            <v-row>
-              <v-col cols="12" class="text-center mb-10">
-                <h2 class="text-h3 font-weight-bold mb-3">Our Services</h2>
-                <p class="text-subtitle-1 mx-auto" style="max-width: 700px;">
-                  Comprehensive digital solutions to help your business thrive in today's competitive landscape
+            <!-- Section Header -->
+            <v-row class="mb-12">
+              <v-col cols="12" md="6" class="d-flex flex-column justify-center">
+                <div>
+                  <span class="text-overline font-weight-bold text-primary" style="letter-spacing: 2px;">OUR EXPERTISE</span>
+                  <h2 class="text-h3 text-md-h2 font-weight-bold mt-2 mb-4">
+                    Innovative <span class="text-primary">Digital Services</span> That Drive Growth
+                  </h2>
+                </div>
+              </v-col>
+              <v-col cols="12" md="6" class="d-flex align-center">
+                <p class="text-body-1" style="line-height: 1.8;">
+                  At veralake.digital, we deliver comprehensive digital solutions tailored to your unique needs. Our team of experts combines creativity, technology, and strategic thinking to help your business thrive in today's competitive landscape.
                 </p>
               </v-col>
-
+            </v-row>
+            
+            <!-- Services Grid -->
+            <v-row>
               <v-col 
-                v-for="service in services" 
+                v-for="(service, index) in services" 
                 :key="service.title" 
                 cols="12" sm="6" lg="4"
-                class="mb-6"
+                class="mb-8"
               >
                 <v-hover v-slot="{ isHovering, props }">
                   <v-card 
                     v-bind="props"
                     height="100%" 
-                    class="pa-6 d-flex flex-column"
-                    :elevation="isHovering ? 8 : 2"
-                    :class="{ 'bg-primary text-white': isHovering }"
+                    class="d-flex flex-column"
+                    rounded="lg"
+                    :elevation="isHovering ? 12 : 3"
+                    style="overflow: hidden; transition: all 0.3s ease;"
+                    :style="isHovering ? 'transform: translateY(-10px);' : ''"
                   >
-                    <v-icon 
-                      size="x-large" 
-                      :color="isHovering ? 'white' : service.color" 
-                      class="mb-4"
+                    <!-- Card header with gradient background -->
+                    <div 
+                      class="service-card-header pa-6"
+                      :style="{
+                        background: isHovering 
+                          ? 'var(--gradient-primary)' 
+                          : theme === 'light' 
+                            ? 'white' 
+                            : 'var(--gradient-dark)',
+                        borderBottom: isHovering 
+                          ? 'none' 
+                          : '2px solid ' + (index % 3 === 0 ? '#FF5864' : index % 3 === 1 ? '#83DECF' : '#FFBA49')
+                      }"
                     >
-                      {{ service.icon }}
-                    </v-icon>
-                    <h3 class="text-h5 font-weight-bold mb-2">{{ service.title }}</h3>
-                    <p class="text-body-1 mb-4">{{ service.description }}</p>
-                    <v-list class="bg-transparent pa-0">
-                      <v-list-item 
-                        v-for="feature in service.features" 
-                        :key="feature"
-                        :class="{ 'text-white': isHovering }"
-                        density="compact"
-                        class="px-0"
+                      <div class="d-flex align-center mb-4">
+                        <v-avatar
+                          :color="isHovering ? 'white' : service.color"
+                          :class="isHovering ? 'text-primary' : 'text-white'"
+                          size="56"
+                          class="mr-4"
+                        >
+                          <v-icon size="28">{{ service.icon }}</v-icon>
+                        </v-avatar>
+                        <h3 
+                          class="text-h5 font-weight-bold mb-0"
+                          :class="isHovering ? 'text-white' : ''"
+                        >
+                          {{ service.title }}
+                        </h3>
+                      </div>
+                      <p 
+                        class="text-body-1 mb-0"
+                        :class="isHovering ? 'text-white' : ''"
                       >
-                        <template v-slot:prepend>
-                          <v-icon 
-                            :color="isHovering ? 'white' : 'success'"
-                            size="small"
-                          >
-                            mdi-check-circle
-                          </v-icon>
-                        </template>
-                        {{ feature }}
-                      </v-list-item>
-                    </v-list>
-                    <v-spacer></v-spacer>
-                    <v-btn 
-                      variant="text" 
-                      :color="isHovering ? 'white' : 'primary'" 
-                      class="mt-4 align-self-start px-0"
-                      @click="openCalendlyModal"
+                        {{ service.description }}
+                      </p>
+                    </div>
+                    
+                    <!-- Card content -->
+                    <div 
+                      class="pa-6 flex-grow-1 d-flex flex-column"
+                      :style="{ background: isHovering ? 'rgba(var(--primary), 0.03)' : '' }"
                     >
-                      Learn More <v-icon end>mdi-arrow-right</v-icon>
-                    </v-btn>
+                      <h4 class="text-subtitle-1 font-weight-bold mb-4">Key Features:</h4>
+                      <v-list class="bg-transparent pa-0 mb-6 flex-grow-1">
+                        <v-list-item 
+                          v-for="feature in service.features" 
+                          :key="feature"
+                          density="compact"
+                          class="px-0 mb-2"
+                        >
+                          <template v-slot:prepend>
+                            <v-icon 
+                              :color="service.color"
+                              size="small"
+                              class="mr-2"
+                            >
+                              mdi-check-circle
+                            </v-icon>
+                          </template>
+                          <v-list-item-title>{{ feature }}</v-list-item-title>
+                        </v-list-item>
+                      </v-list>
+                      
+                      <v-divider class="mb-4"></v-divider>
+                      
+                      <v-btn 
+                        :color="service.color" 
+                        class="text-white mt-auto px-6"
+                        rounded="pill"
+                        elevation="2"
+                        @click="openCalendlyModal"
+                      >
+                        Request Service <v-icon end class="ml-1">mdi-arrow-right</v-icon>
+                      </v-btn>
+                    </div>
                   </v-card>
                 </v-hover>
+              </v-col>
+            </v-row>
+            
+            <!-- CTA Banner -->
+            <v-row class="mt-8">
+              <v-col cols="12">
+                <v-card
+                  class="text-center pa-8 rounded-xl"
+                  :style="{
+                    background: 'var(--gradient-primary)',
+                    color: 'white'
+                  }"
+                  elevation="10"
+                >
+                  <h3 class="text-h4 font-weight-bold mb-4">Not Sure Which Service You Need?</h3>
+                  <p class="text-body-1 mb-8 mx-auto" style="max-width: 700px; opacity: 0.9;">
+                    Our team of experts will help you determine the right solution for your business. 
+                    Schedule a free consultation and let's discuss your specific needs.
+                  </p>
+                  <v-btn
+                    color="white"
+                    size="x-large"
+                    class="text-primary px-8"
+                    rounded="pill"
+                    elevation="3"
+                    @click="openCalendlyModal"
+                  >
+                    <v-icon start>mdi-calendar-check</v-icon>
+                    Book Your Free Consultation
+                  </v-btn>
+                </v-card>
               </v-col>
             </v-row>
           </v-container>

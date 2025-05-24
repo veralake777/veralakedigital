@@ -1,0 +1,79 @@
+Build a modern, responsive digital agency website using Vue.js and Vuetify as the UI framework, fully optimized to convert visitors into clients. The website must include the following features:
+
+Performance & Responsiveness:
+
+Fast load times with optimized images and lazy loading.
+
+Mobile-first, fully responsive design using Vuetify’s grid and components.
+
+Clear, Intuitive Navigation:
+
+Menu with sections: Home, About, Services, Portfolio/Case Studies, Testimonials, Blog/Resources, FAQ, and Contact.
+
+Sticky or easily accessible navigation on all pages, utilizing Vuetify navigation components.
+
+Engaging Visual Design & Branding:
+
+Hero section with large responsive images or background video, styled with Vuetify.
+
+Consistent color palette, typography, and professional branding.
+
+Include subtle Vuetify-powered animations or micro-interactions for engagement.
+
+SEO & Content:
+
+SEO-optimized headings, meta tags, and structured data/schema.
+
+Clear value proposition and concise service descriptions above the fold.
+
+Blog or resources section for content marketing.
+
+Trust & Credibility:
+
+Display client logos, testimonials, case studies, and awards prominently.
+
+Include security badges, privacy policy link, and clear contact info.
+
+Strong Calls to Action (CTAs):
+
+Multiple, visually distinct CTAs like “Book a Free Consultation” or “Schedule a Call” throughout the site, using Vuetify buttons and banners.
+
+Embed Calendly booking widget or a modal popup with my Calendly link for seamless appointment scheduling.
+
+Contact & Lead Capture:
+
+Simple, validated contact form built with Vuetify.
+
+Optional: Live chat or chatbot integration.
+
+Accessibility & Inclusivity:
+
+WCAG 2.1 compliance: alt text for images, keyboard navigation, proper color contrast, ARIA labels.
+
+Include a dark mode toggle using Vuetify’s theme features.
+
+Analytics & Tracking:
+
+Integrate Google Analytics or similar to track user behavior and conversions.
+
+Set up event tracking for CTA clicks and Calendly bookings.
+
+Security & Privacy:
+
+SSL support and secure form handling.
+
+Cookie consent and privacy policy compliance.
+
+Additional Features:
+
+FAQ section addressing common client questions.
+
+Social media links with icons.
+
+Sitemap and schema markup for SEO.
+
+Use Vuetify for all UI components and layout to ensure a polished, professional look and fast development.
+
+Provide clear instructions on how to customize text, images, and the Calendly link after deployment.
+
+The final product should be production-ready, mobile-friendly, visually appealing, and designed to maximize visitor-to-client conversions.
