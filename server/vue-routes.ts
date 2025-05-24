@@ -11,21 +11,13 @@ export function registerVueRoutes(app: Express): void {
 
   // Serve the Vue.js application for all other routes
   app.get("*", (req: Request, res: Response) => {
-    // First check if the file exists in public folder
-    const publicPath = path.resolve("client/public/index.html");
-    
-    // Check if the file exists
-    if (fs.existsSync(publicPath)) {
-      res.sendFile(publicPath);
-    } else {
-      const vuePath = path.resolve("client/vue-app/index.html");
+    const vuePath = path.resolve("client/vue-app/index.html");
       
-      // Check if the Vue app exists
-      if (fs.existsSync(vuePath)) {
-        res.sendFile(vuePath);
-      } else {
-        res.status(404).send("Vue application not found");
-      }
+    // Check if the Vue app exists
+    if (fs.existsSync(vuePath)) {
+      res.sendFile(vuePath);
+    } else {
+      res.status(404).send("Vue application not found");
     }
   });
 }

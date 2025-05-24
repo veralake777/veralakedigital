@@ -236,6 +236,310 @@
       }
     </script>
     
+    <!-- Service Landing Pages -->
+    <script>
+      // Create dynamic service landing pages
+      window.addEventListener('hashchange', function() {
+        if (window.location.hash.startsWith('#services/')) {
+          try {
+            // Get service info from localStorage (set when "Learn More" is clicked)
+            const serviceData = JSON.parse(localStorage.getItem('currentService'));
+            if (serviceData) {
+              // Replace app content with service landing page
+              document.getElementById('app').innerHTML = createServiceLandingPage(serviceData);
+              
+              // Track page view
+              if (window.gtag) {
+                gtag('config', 'G-PLACEHOLDER', {
+                  page_path: window.location.hash
+                });
+              }
+            }
+          } catch (error) {
+            console.error('Error loading service page:', error);
+          }
+        }
+      });
+      
+      // Check if we're on a service page when the page loads
+      window.addEventListener('load', function() {
+        if (window.location.hash.startsWith('#services/')) {
+          try {
+            const serviceData = JSON.parse(localStorage.getItem('currentService'));
+            if (serviceData) {
+              document.getElementById('app').innerHTML = createServiceLandingPage(serviceData);
+            }
+          } catch (error) {
+            console.error('Error loading service page:', error);
+          }
+        }
+      });
+      
+      // Function to create the service landing page HTML
+      function createServiceLandingPage(service) {
+        return `
+          <div class="service-landing" style="font-family: 'Manrope', sans-serif;">
+            <!-- Navigation Bar -->
+            <div class="service-nav" style="background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 15px 0;">
+              <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center;">
+                  <a href="#" style="margin-right: 15px; text-decoration: none; color: #333;">
+                    <span style="font-size: 24px;">←</span>
+                  </a>
+                  <div style="display: flex; align-items: center;">
+                    <div style="width: 36px; height: 36px; border-radius: 50%; background-color: rgb(var(--primary)); color: white; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold;">V</div>
+                    <div>
+                      <span style="color: rgb(var(--primary)); font-weight: bold; font-size: 20px;">veralake</span>
+                      <span style="font-weight: bold; font-size: 20px;">.digital</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <a href="tel:+14706293981" style="text-decoration: none; background-color: rgb(var(--primary)); color: white; padding: 10px 20px; border-radius: 30px; font-weight: 600; display: inline-flex; align-items: center;">
+                    <span style="margin-right: 6px;">📞</span> Call (470) 629-3981
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Hero Section -->
+            <div style="background: var(--gradient-primary); color: white; padding: 120px 20px 60px; text-align: center;">
+              <div style="max-width: 1000px; margin: 0 auto;">
+                <div style="width: 88px; height: 88px; border-radius: 50%; background-color: ${service.color}; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                  <span style="font-size: 36px;">
+                    ${service.icon.replace('mdi-', '').split('').map(char => '⚙️').join('')}
+                  </span>
+                </div>
+                <h1 style="font-size: 48px; font-weight: bold; margin-bottom: 16px;">${service.title}</h1>
+                <p style="font-size: 20px; max-width: 800px; margin: 0 auto 32px;">${service.description}</p>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;">
+                  <a href="#book-consultation" style="text-decoration: none; background-color: white; color: rgb(var(--primary)); padding: 16px 32px; border-radius: 50px; font-weight: 600; font-size: 18px;">
+                    Schedule Free Consultation
+                  </a>
+                  <a href="tel:+14706293981" style="text-decoration: none; background-color: transparent; border: 2px solid white; color: white; padding: 16px 32px; border-radius: 50px; font-weight: 600; font-size: 18px;">
+                    Call Now
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Pain Points Section -->
+            <div style="padding: 80px 20px; background-color: white;">
+              <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+                <h2 style="font-size: 36px; font-weight: bold; margin-bottom: 16px;">Common Challenges</h2>
+                <p style="font-size: 20px; margin-bottom: 48px;">Are you experiencing any of these pain points with your ${service.title.toLowerCase()}?</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px;">
+                  ${service.painPoints ? service.painPoints.map(pain => `
+                    <div style="background-color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 10px; padding: 24px; text-align: left;">
+                      <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                        <div style="width: 48px; height: 48px; border-radius: 50%; background-color: ${service.color}; color: white; display: flex; align-items: center; justify-content: center; margin-right: 16px; font-size: 24px;">⚠️</div>
+                        <h3 style="font-size: 20px; font-weight: bold; margin: 0;">${pain.title}</h3>
+                      </div>
+                      <p style="font-size: 16px; line-height: 1.6;">${pain.description}</p>
+                    </div>
+                  `).join('') : `
+                    <div style="background-color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 10px; padding: 24px; text-align: left;">
+                      <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                        <div style="width: 48px; height: 48px; border-radius: 50%; background-color: ${service.color}; color: white; display: flex; align-items: center; justify-content: center; margin-right: 16px; font-size: 24px;">⚠️</div>
+                        <h3 style="font-size: 20px; font-weight: bold; margin: 0;">Outdated Solutions</h3>
+                      </div>
+                      <p style="font-size: 16px; line-height: 1.6;">Your current approach isn't delivering the results you need in today's rapidly evolving digital landscape.</p>
+                    </div>
+                    <div style="background-color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 10px; padding: 24px; text-align: left;">
+                      <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                        <div style="width: 48px; height: 48px; border-radius: 50%; background-color: ${service.color}; color: white; display: flex; align-items: center; justify-content: center; margin-right: 16px; font-size: 24px;">📉</div>
+                        <h3 style="font-size: 20px; font-weight: bold; margin: 0;">Poor Performance</h3>
+                      </div>
+                      <p style="font-size: 16px; line-height: 1.6;">You're not seeing the conversion rates, engagement, or ROI that you expected from your investment.</p>
+                    </div>
+                    <div style="background-color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 10px; padding: 24px; text-align: left;">
+                      <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                        <div style="width: 48px; height: 48px; border-radius: 50%; background-color: ${service.color}; color: white; display: flex; align-items: center; justify-content: center; margin-right: 16px; font-size: 24px;">❓</div>
+                        <h3 style="font-size: 20px; font-weight: bold; margin: 0;">Lack of Expertise</h3>
+                      </div>
+                      <p style="font-size: 16px; line-height: 1.6;">Your team lacks the specialized knowledge required to implement effective ${service.title.toLowerCase()} strategies.</p>
+                    </div>
+                  `}
+                </div>
+              </div>
+            </div>
+            
+            <!-- Solution Section -->
+            <div style="padding: 80px 20px; background-color: #37474F; color: white;">
+              <div style="max-width: 1200px; margin: 0 auto;">
+                <div style="text-align: center; margin-bottom: 48px;">
+                  <h2 style="font-size: 36px; font-weight: bold; margin-bottom: 16px;">Our Solution</h2>
+                  <p style="font-size: 20px;">Here's how our ${service.title} service can transform your business</p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                  <div>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                      ${service.features.map((feature, index) => `
+                        <li style="margin-bottom: 32px;">
+                          <div style="display: flex;">
+                            <div style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; background-color: ${service.color}; color: white; display: flex; align-items: center; justify-content: center; margin-right: 16px; font-size: 24px;">✓</div>
+                            <div>
+                              <h3 style="font-size: 20px; font-weight: bold; margin: 0 0 8px;">${feature}</h3>
+                              <p style="font-size: 16px; line-height: 1.6; margin: 0;">
+                                ${getFeatureDescription(service.title, feature)}
+                              </p>
+                            </div>
+                          </div>
+                        </li>
+                      `).join('')}
+                    </ul>
+                  </div>
+                  
+                  <div style="display: flex; align-items: center; justify-content: center;">
+                    <img src="${getServiceImage(service.title)}" alt="${service.title}" style="max-width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- CTA Section -->
+            <div style="padding: 80px 20px; background: var(--gradient-primary); color: white; text-align: center;">
+              <div style="max-width: 800px; margin: 0 auto;">
+                <h2 style="font-size: 36px; font-weight: bold; margin-bottom: 16px;">Ready to transform your ${service.title.toLowerCase()}?</h2>
+                <p style="font-size: 20px; margin-bottom: 32px;">Schedule a free consultation today to discuss your specific needs.</p>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;">
+                  <a id="book-consultation" href="#book-consultation" style="text-decoration: none; background-color: white; color: rgb(var(--primary)); padding: 16px 32px; border-radius: 50px; font-weight: 600; font-size: 18px;">
+                    Schedule Free Consultation
+                  </a>
+                  <a href="tel:+14706293981" style="text-decoration: none; background-color: transparent; border: 2px solid white; color: white; padding: 16px 32px; border-radius: 50px; font-weight: 600; font-size: 18px;">
+                    Call (470) 629-3981
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Contact Form Section -->
+            <div style="padding: 80px 20px; background-color: white;">
+              <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h2 style="font-size: 36px; font-weight: bold; margin-bottom: 16px;">Get in Touch</h2>
+                <p style="font-size: 20px; margin-bottom: 32px;">Fill out the form below and I'll get back to you within 24 hours</p>
+                
+                <form style="background-color: white; box-shadow: 0 5px 30px rgba(0,0,0,0.1); border-radius: 10px; padding: 40px; text-align: left;">
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                    <div>
+                      <label style="display: block; margin-bottom: 8px; font-weight: 600;">First Name*</label>
+                      <input type="text" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px;">
+                    </div>
+                    <div>
+                      <label style="display: block; margin-bottom: 8px; font-weight: 600;">Last Name*</label>
+                      <input type="text" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px;">
+                    </div>
+                  </div>
+                  
+                  <div style="margin-bottom: 16px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">Email*</label>
+                    <input type="email" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px;">
+                  </div>
+                  
+                  <div style="margin-bottom: 16px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">Phone*</label>
+                    <input type="tel" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px;">
+                  </div>
+                  
+                  <div style="margin-bottom: 16px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">Company</label>
+                    <input type="text" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px;">
+                  </div>
+                  
+                  <div style="margin-bottom: 24px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">Message*</label>
+                    <textarea required rows="4" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px;"></textarea>
+                  </div>
+                  
+                  <button type="submit" style="background-color: rgb(var(--primary)); color: white; border: none; border-radius: 6px; padding: 14px 24px; font-size: 16px; font-weight: 600; width: 100%; cursor: pointer;">
+                    Send Message
+                  </button>
+                </form>
+              </div>
+            </div>
+            
+            <!-- Footer -->
+            <div style="background-color: #111; color: white; padding: 40px 20px; text-align: center;">
+              <div style="max-width: 1200px; margin: 0 auto;">
+                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                  <div style="width: 36px; height: 36px; border-radius: 50%; background-color: rgb(var(--primary)); color: white; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold;">V</div>
+                  <div>
+                    <span style="color: rgb(var(--primary)); font-weight: bold; font-size: 20px;">veralake</span>
+                    <span style="font-weight: bold; font-size: 20px;">.digital</span>
+                  </div>
+                </div>
+                <p style="margin-bottom: 16px;">Transform your business with innovative digital solutions that deliver real results.</p>
+                <p>© ${new Date().getFullYear()} Veralake Digital. All rights reserved.</p>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // Function to get feature descriptions for the service landing page
+      function getFeatureDescription(serviceTitle, feature) {
+        const descriptions = {
+          "Web Development": {
+            "Responsive Design": "Our responsive websites adapt perfectly to any device, ensuring a seamless user experience that boosts engagement and conversions.",
+            "E-commerce Solutions": "We build robust online stores with secure payment processing, inventory management, and a smooth checkout experience.",
+            "CMS Integration": "Our content management systems make it easy for you to update your website without technical knowledge or developer assistance.",
+            "Performance Optimization": "We optimize your site for lightning-fast loading speeds, improving user experience and search engine rankings."
+          },
+          "Mobile App Development": {
+            "iOS & Android Apps": "We develop native applications for both major platforms, ensuring optimal performance and access to the full user base.",
+            "Cross-platform Solutions": "Our cross-platform approach allows you to reach users on multiple devices with a single codebase, saving time and resources.",
+            "UI/UX Design": "We create intuitive, visually appealing interfaces that delight users and encourage continued engagement with your app.",
+            "App Store Optimization": "We implement proven strategies to improve your app's visibility and download rates in the app stores."
+          },
+          "Digital Marketing": {
+            "SEO & Content Marketing": "We boost your organic visibility through strategic keyword optimization and compelling content that drives qualified traffic.",
+            "Social Media Management": "We build and maintain your brand presence across relevant platforms, engaging with your audience and driving conversions.",
+            "PPC Advertising": "Our targeted pay-per-click campaigns deliver immediate traffic and conversions with measurable ROI.",
+            "Email Marketing": "We create personalized email campaigns that nurture leads, retain customers, and drive repeat business."
+          },
+          "Brand Identity": {
+            "Logo Design": "We create distinctive, memorable logos that capture your brand essence and create instant recognition.",
+            "Brand Guidelines": "We develop comprehensive guidelines to ensure consistent application of your visual identity across all touchpoints.",
+            "Visual Identity": "We craft a cohesive visual system including colors, typography, and imagery that communicates your brand personality.",
+            "Brand Messaging": "We define your brand voice, messaging hierarchy, and key communications to connect with your target audience."
+          },
+          "Analytics & Insights": {
+            "Performance Tracking": "We implement robust tracking systems to monitor all key metrics and provide a clear picture of your digital performance.",
+            "User Behavior Analysis": "We analyze how users interact with your digital properties to identify opportunities for improvement and optimization.",
+            "Conversion Optimization": "We continuously test and refine your digital assets to increase conversion rates and maximize ROI.",
+            "Custom Reporting": "We deliver clear, actionable reports tailored to your specific business goals and KPIs."
+          },
+          "Automation Services": {
+            "Business Process Automation": "We streamline your operations by automating repetitive tasks, reducing errors and freeing your team to focus on strategic work.",
+            "Marketing & Sales Automation": "Our automation solutions nurture leads, personalize customer journeys, and increase conversion rates without manual intervention.",
+            "Custom Workflow Development": "We build tailored automation workflows that address your specific business challenges and integrate with your existing systems.",
+            "Integration with Existing Systems": "We seamlessly connect your current tools and platforms to create a unified, efficient automation ecosystem."
+          }
+        };
+        
+        return descriptions[serviceTitle] && descriptions[serviceTitle][feature] 
+          ? descriptions[serviceTitle][feature] 
+          : "We provide industry-leading solutions that help you achieve your business goals efficiently and effectively.";
+      }
+      
+      // Function to get appropriate images for each service
+      function getServiceImage(serviceTitle) {
+        const images = {
+          "Web Development": "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+          "Mobile App Development": "https://images.unsplash.com/photo-1551650975-87deedd944c3",
+          "Digital Marketing": "https://images.unsplash.com/photo-1533750349088-cd871a92f312",
+          "Brand Identity": "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f",
+          "Analytics & Insights": "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+          "Automation Services": "https://images.unsplash.com/photo-1531482615713-2afd69097998"
+        };
+        
+        return images[serviceTitle] || "https://images.unsplash.com/photo-1460925895917-afdab827c52f";
+      }
+    </script>
+    
     <!-- Main Application Script -->
     <script src="main.js"></script>
   </body>

@@ -668,14 +668,12 @@ const app = Vue.createApp({
       // Track the event
       this.trackEvent('view_service_landing', 'services', service.title);
       
-      // For the service landing pages, we'll create a dedicated page instead
-      // of using Vue templates with style tags (which aren't allowed)
+      // Set the current service and change the view
+      this.currentService = service;
+      this.currentView = 'service-landing';
       
-      // Store service details in localStorage so the landing page can access them
-      localStorage.setItem('currentService', JSON.stringify(service));
-      
-      // Open the service in a new tab or navigate to a dedicated service page
-      window.open(`#services/${encodeURIComponent(service.title.toLowerCase().replace(/\s+/g, '-'))}`, '_self');
+      // Scroll to top
+      window.scrollTo(0, 0);
     },
     
     getSolutionDescription(serviceTitle, feature) {
@@ -1036,7 +1034,7 @@ const app = Vue.createApp({
   template: `
     <v-app :theme="theme">
       <!-- Service Landing Page View -->
-      <div v-if="false"><!-- Temporarily disabled service landing page template due to style tag issues -->
+      <div v-if="currentView === 'service-landing' && currentService">
         <!-- Service Landing Navigation Bar -->
         <v-app-bar 
           app 
@@ -1996,7 +1994,7 @@ const app = Vue.createApp({
         </div>
       </v-app-bar>
       
-      <!-- Style start -->
+      <style>
         .border-bottom {
           border-bottom-width: 1px;
           border-bottom-style: solid;
@@ -2031,7 +2029,7 @@ const app = Vue.createApp({
         .nav-active {
           position: relative;
         }
-      <!-- Style end -->
+      </style>
       
       <!-- Mobile Navigation Drawer -->
       <v-navigation-drawer v-model="drawer" temporary>
@@ -2177,7 +2175,7 @@ const app = Vue.createApp({
                             </div>
                           </div>
                           
-                          <!-- Style start -->
+                          <style>
                             @keyframes scrollClients {
                               0% {
                                 transform: translateX(0);
@@ -2192,7 +2190,7 @@ const app = Vue.createApp({
                             .client-scroller:hover {
                               animation-play-state: paused;
                             }
-                          <!-- Style end -->
+                          </style>
                         </div>
                       </v-col>
                       
@@ -2260,7 +2258,7 @@ const app = Vue.createApp({
             </v-card>
           </v-container>
           
-          <!-- Style start -->
+          <style>
             @keyframes bounce {
               0%, 20%, 50%, 80%, 100% {
                 transform: translateY(0);
@@ -2283,7 +2281,7 @@ const app = Vue.createApp({
                 border-right: none;
               }
             }
-          <!-- Style end -->
+          </style>
         </section>
 
         <!-- Services Section - Modern & Engaging -->
