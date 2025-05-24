@@ -776,7 +776,7 @@ const app = Vue.createApp({
                         </div>
                         
                         <!-- Trusted by logos -->
-                        <div class="mt-16 d-none d-md-block">
+                        <div class="mt-16">
                           <p class="text-white text-body-2 mb-4">TRUSTED BY REAL CLIENTS</p>
                           <div class="d-flex flex-wrap justify-start align-center">
                             <v-chip 
@@ -788,7 +788,7 @@ const app = Vue.createApp({
                               class="mr-4 mb-4 font-weight-medium"
                               variant="elevated"
                             >
-                              <v-icon start size="small">
+                              <v-icon start>
                                 {{ index === 0 ? 'mdi-airplane' : 
                                    index === 1 ? 'mdi-scale-balance' : 
                                    index === 2 ? 'mdi-music' :
