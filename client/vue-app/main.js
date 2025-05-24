@@ -250,6 +250,8 @@ const app = createApp({
       drawer: false,
       showCookieConsent: false,
       isCalendlyModalOpen: false,
+      isServiceDetailOpen: false,
+      selectedService: null,
       activeSection: 'home',
       ...appData
     };
@@ -282,6 +284,15 @@ const app = createApp({
     declineCookies() {
       localStorage.setItem('cookies-accepted', 'false');
       this.showCookieConsent = false;
+    },
+    
+    openServiceDetails(service) {
+      // This method creates a service landing page experience
+      this.selectedService = service;
+      this.isServiceDetailOpen = true;
+      
+      // Track the event
+      trackEvent('view_service_details', 'services', service.title);
     },
     
     openCalendlyModal() {
