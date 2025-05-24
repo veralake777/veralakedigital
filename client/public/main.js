@@ -777,26 +777,34 @@ const app = Vue.createApp({
                         
                         <!-- Trusted by logos -->
                         <div class="mt-16">
-                          <p class="text-white text-body-2 mb-4">TRUSTED BY REAL CLIENTS</p>
-                          <div class="d-flex flex-wrap justify-start align-center">
-                            <v-chip 
-                              v-for="(client, index) in ['AFS Travelers', 'Tara Whalen Law', 'Mux Blank', 'BCS Bulbls', 'TTD Learning Solutions']" 
+                          <p class="text-white text-h6 mb-4">TRUSTED BY REAL CLIENTS</p>
+                          <v-row>
+                            <v-col 
+                              v-for="(client, index) in [
+                                {name: 'AFS Travelers', icon: 'mdi-airplane', color: 'info'},
+                                {name: 'Tara Whalen Law', icon: 'mdi-scale-balance', color: 'success'},
+                                {name: 'Mux Blank', icon: 'mdi-music', color: 'warning'},
+                                {name: 'BCS Bulbls', icon: 'mdi-lightbulb', color: 'accent'},
+                                {name: 'TTD Learning Solutions', icon: 'mdi-school', color: 'error'}
+                              ]" 
                               :key="index"
-                              color="white"
-                              text-color="primary"
-                              size="large"
-                              class="mr-4 mb-4 font-weight-medium"
-                              variant="elevated"
+                              cols="12" sm="6" md="4"
+                              class="mb-4"
                             >
-                              <v-icon start>
-                                {{ index === 0 ? 'mdi-airplane' : 
-                                   index === 1 ? 'mdi-scale-balance' : 
-                                   index === 2 ? 'mdi-music' :
-                                   index === 3 ? 'mdi-lightbulb' : 'mdi-school' }}
-                              </v-icon>
-                              {{ client }}
-                            </v-chip>
-                          </div>
+                              <v-card 
+                                class="rounded-lg py-2 px-3 d-flex align-center" 
+                                color="white"
+                                flat
+                                variant="tonal"
+                                @click="trackEvent('client_click', 'reference', client.name)"
+                              >
+                                <v-avatar :color="client.color" class="mr-3" size="38">
+                                  <v-icon color="white" size="medium">{{ client.icon }}</v-icon>
+                                </v-avatar>
+                                <span class="font-weight-medium text-primary">{{ client.name }}</span>
+                              </v-card>
+                            </v-col>
+                          </v-row>
                         </div>
                       </v-col>
                       
