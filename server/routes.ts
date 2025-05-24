@@ -49,15 +49,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Serve static files from the Vue app directory
-  app.use("/", express.static(path.resolve("client/vue-app")));
+  // Serve static files from the public directory
+  app.use(express.static(path.resolve("client/public")));
   
   // Route to serve the Vue app for all other routes
   app.get("*", (req, res) => {
     // Skip API routes
     if (req.path.startsWith('/api')) return;
     
-    res.sendFile(path.resolve("client/vue-app/index.html"));
+    res.sendFile(path.resolve("client/public/index.html"));
   });
 
   const httpServer = createServer(app);
