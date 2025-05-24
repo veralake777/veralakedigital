@@ -369,8 +369,9 @@ const app = Vue.createApp({
       isCalendlyModalOpen: false,
       isCalendlyLoaded: false,
       selectedBookingOption: null,
-      currentView: 'main', // 'main' or 'project-detail'
+      currentView: 'main', // 'main', 'project-detail', or 'service-landing'
       currentProject: null, // Stores the currently viewed project
+      currentService: null, // Stores the currently viewed service
       bookingOptions: [
         {
           id: "strategy",
@@ -568,6 +569,7 @@ const app = Vue.createApp({
     backToMain() {
       this.currentView = 'main';
       this.currentProject = null;
+      this.currentService = null;
       
       // If the user was previously on the portfolio section, scroll back to it
       setTimeout(() => {
@@ -576,6 +578,288 @@ const app = Vue.createApp({
           portfolioSection.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
+    },
+    
+    viewServiceLanding(service) {
+      // Track the event
+      this.trackEvent('view_service_landing', 'services', service.title);
+      
+      // Set the current service and change the view
+      this.currentService = service;
+      this.currentView = 'service-landing';
+      
+      // Scroll to top
+      window.scrollTo(0, 0);
+    },
+    
+    getSolutionDescription(serviceTitle, feature) {
+      // This method provides detailed descriptions for each feature based on the service
+      const descriptions = {
+        'Web Development': {
+          'Responsive Design': 'Our responsive websites adapt perfectly to any device, ensuring a seamless user experience that boosts engagement and conversions.',
+          'E-commerce Solutions': 'We build robust online stores with secure payment processing, inventory management, and a smooth checkout experience.',
+          'CMS Integration': 'Our content management systems make it easy for you to update your website without technical knowledge or developer assistance.',
+          'Performance Optimization': 'We optimize your site for lightning-fast loading speeds, improving user experience and search engine rankings.'
+        },
+        'Mobile App Development': {
+          'iOS & Android Apps': 'We develop native applications for both major platforms, ensuring optimal performance and access to the full user base.',
+          'Cross-platform Solutions': 'Our cross-platform approach allows you to reach users on multiple devices with a single codebase, saving time and resources.',
+          'UI/UX Design': 'We create intuitive, visually appealing interfaces that delight users and encourage continued engagement with your app.',
+          'App Store Optimization': 'We implement proven strategies to improve your app's visibility and download rates in the app stores.'
+        },
+        'Digital Marketing': {
+          'SEO & Content Marketing': 'We boost your organic visibility through strategic keyword optimization and compelling content that drives qualified traffic.',
+          'Social Media Management': 'We build and maintain your brand presence across relevant platforms, engaging with your audience and driving conversions.',
+          'PPC Advertising': 'Our targeted pay-per-click campaigns deliver immediate traffic and conversions with measurable ROI.',
+          'Email Marketing': 'We create personalized email campaigns that nurture leads, retain customers, and drive repeat business.'
+        },
+        'Brand Identity': {
+          'Logo Design': 'We create distinctive, memorable logos that capture your brand essence and create instant recognition.',
+          'Brand Guidelines': 'We develop comprehensive guidelines to ensure consistent application of your visual identity across all touchpoints.',
+          'Visual Identity': 'We craft a cohesive visual system including colors, typography, and imagery that communicates your brand personality.',
+          'Brand Messaging': 'We define your brand voice, messaging hierarchy, and key communications to connect with your target audience.'
+        },
+        'Analytics & Insights': {
+          'Performance Tracking': 'We implement robust tracking systems to monitor all key metrics and provide a clear picture of your digital performance.',
+          'User Behavior Analysis': 'We analyze how users interact with your digital properties to identify opportunities for improvement and optimization.',
+          'Conversion Optimization': 'We continuously test and refine your digital assets to increase conversion rates and maximize ROI.',
+          'Custom Reporting': 'We deliver clear, actionable reports tailored to your specific business goals and KPIs.'
+        },
+        'Automation Services': {
+          'Business Process Automation': 'We streamline your operations by automating repetitive tasks, reducing errors and freeing your team to focus on strategic work.',
+          'Marketing & Sales Automation': 'Our automation solutions nurture leads, personalize customer journeys, and increase conversion rates without manual intervention.',
+          'Custom Workflow Development': 'We build tailored automation workflows that address your specific business challenges and integrate with your existing systems.',
+          'Integration with Existing Systems': 'We seamlessly connect your current tools and platforms to create a unified, efficient automation ecosystem.'
+        }
+      };
+      
+      return descriptions[serviceTitle] && descriptions[serviceTitle][feature] 
+        ? descriptions[serviceTitle][feature] 
+        : 'We provide industry-leading solutions that help you achieve your business goals efficiently and effectively.';
+    },
+    
+    getSolutionImage(serviceTitle) {
+      // This method returns appropriate images for each service
+      const images = {
+        'Web Development': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f',
+        'Mobile App Development': 'https://images.unsplash.com/photo-1551650975-87deedd944c3',
+        'Digital Marketing': 'https://images.unsplash.com/photo-1533750349088-cd871a92f312',
+        'Brand Identity': 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f',
+        'Analytics & Insights': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71',
+        'Automation Services': 'https://images.unsplash.com/photo-1531482615713-2afd69097998'
+      };
+      
+      return images[serviceTitle] || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f';
+    },
+    
+    getServiceTestimonial(serviceTitle) {
+      // This method returns relevant testimonials for each service
+      const testimonials = {
+        'Web Development': {
+          quote: "Veralake Digital transformed our outdated website into a modern, user-friendly platform that's significantly increased our online conversions. Their attention to detail and focus on performance has made a measurable impact on our business.",
+          name: "Michael Chen",
+          position: "Marketing Director, TechInnovate",
+          avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+        },
+        'Mobile App Development': {
+          quote: "The app Veralake developed for us has received outstanding feedback from users and dramatically improved our customer engagement. Their expertise in both iOS and Android development was invaluable.",
+          name: "Sarah Johnson",
+          position: "Product Manager, HealthConnect",
+          avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+        },
+        'Digital Marketing': {
+          quote: "Since working with Veralake on our digital marketing strategy, we've seen a 215% increase in qualified leads and a significant improvement in our conversion rates. Their data-driven approach delivers real results.",
+          name: "David Rodriguez",
+          position: "CEO, GrowthLabs",
+          avatar: "https://randomuser.me/api/portraits/men/46.jpg"
+        },
+        'Brand Identity': {
+          quote: "Veralake helped us rebrand during a critical growth phase, and the results exceeded our expectations. Our new identity resonates perfectly with our target audience while maintaining our core values.",
+          name: "Emma Davis",
+          position: "Creative Director, EvoLuxe",
+          avatar: "https://randomuser.me/api/portraits/women/65.jpg"
+        },
+        'Analytics & Insights': {
+          quote: "The analytics implementation and custom dashboard Veralake created has completely transformed our decision-making process. We now have clear visibility into what's working and can optimize accordingly.",
+          name: "James Wilson",
+          position: "Data Strategist, InsightCorp",
+          avatar: "https://randomuser.me/api/portraits/men/75.jpg"
+        },
+        'Automation Services': {
+          quote: "The automation solutions Veralake implemented have saved our team over 30 hours per week and dramatically reduced errors. The ROI was evident within the first month, and we continue to see improvements.",
+          name: "Olivia Martinez",
+          position: "Operations Manager, FlowWorks",
+          avatar: "https://randomuser.me/api/portraits/women/23.jpg"
+        }
+      };
+      
+      return testimonials[serviceTitle] || {
+        quote: "Working with Veralake Digital has been transformative for our business. Their expertise, professionalism, and results-oriented approach have helped us achieve and exceed our goals.",
+        name: "Alex Johnson",
+        position: "CEO, Forward Thinking",
+        avatar: "https://randomuser.me/api/portraits/men/22.jpg"
+      };
+    },
+    
+    getServiceFAQs(serviceTitle) {
+      // This method returns service-specific FAQs
+      const faqs = {
+        'Web Development': [
+          {
+            question: "How long does it typically take to develop a website?",
+            answer: "The timeline depends on the complexity of your project. A simple website might take 4-6 weeks, while a complex web application could take 3-6 months. During our initial consultation, we'll provide a more accurate timeline specific to your needs."
+          },
+          {
+            question: "Will my website be mobile-friendly?",
+            answer: "Absolutely! All our websites are built with a mobile-first approach, ensuring they look and function perfectly on all devices, from smartphones to desktops."
+          },
+          {
+            question: "Can I update the website myself after it's built?",
+            answer: "Yes, we integrate user-friendly content management systems (CMS) that allow you to easily update content, add pages, and make basic changes without technical knowledge."
+          },
+          {
+            question: "Do you provide website maintenance services?",
+            answer: "Yes, we offer various maintenance packages to keep your website secure, up-to-date, and performing optimally. This includes regular updates, security monitoring, and technical support."
+          },
+          {
+            question: "How do you approach search engine optimization (SEO)?",
+            answer: "We build SEO best practices into every website from the ground up, including proper semantic HTML structure, optimized loading speeds, mobile responsiveness, and clean code. We also offer additional SEO services to further enhance your visibility."
+          }
+        ],
+        'Mobile App Development': [
+          {
+            question: "Should I build a native app or a cross-platform app?",
+            answer: "This depends on your specific needs. Native apps offer the best performance and access to device features but require separate development for iOS and Android. Cross-platform apps are more cost-effective and faster to market but may have some limitations. We'll help you determine the best approach based on your goals."
+          },
+          {
+            question: "How much does it cost to develop a mobile app?",
+            answer: "App development costs vary widely based on complexity, features, and platforms. During our discovery phase, we'll provide a detailed estimate based on your specific requirements."
+          },
+          {
+            question: "How long does it take to develop a mobile app?",
+            answer: "Typically, a quality mobile app takes 3-6 months to develop, depending on complexity. This includes planning, design, development, testing, and deployment phases."
+          },
+          {
+            question: "Will you help with submitting my app to the app stores?",
+            answer: "Yes, we handle the entire submission process for both the App Store and Google Play, ensuring your app meets all requirements and guidelines for approval."
+          },
+          {
+            question: "Do you provide app maintenance and updates?",
+            answer: "Yes, we offer ongoing maintenance and support to keep your app functioning smoothly, address any issues, and implement updates as operating systems and devices evolve."
+          }
+        ],
+        'Digital Marketing': [
+          {
+            question: "How quickly will I see results from digital marketing efforts?",
+            answer: "Some channels like PPC advertising can produce immediate results, while others like SEO and content marketing are long-term strategies that typically show significant results in 3-6 months. We'll set realistic expectations and provide regular updates on progress."
+          },
+          {
+            question: "What metrics do you track to measure success?",
+            answer: "We track key performance indicators (KPIs) aligned with your business goals, which may include website traffic, conversion rates, engagement metrics, lead generation, and ROI. We provide transparent reporting so you can see exactly how your campaigns are performing."
+          },
+          {
+            question: "How much should I budget for digital marketing?",
+            answer: "Your budget should align with your business goals and competitive landscape. During our consultation, we'll discuss your objectives and recommend an appropriate budget to achieve them, with options for different investment levels."
+          },
+          {
+            question: "Do you specialize in specific industries?",
+            answer: "While we have experience across many industries, we've developed particular expertise in B2B, professional services, e-commerce, and SaaS. However, our data-driven approach is effective across sectors."
+          },
+          {
+            question: "How often will I receive reports on campaign performance?",
+            answer: "We typically provide monthly comprehensive reports, but we can adjust the frequency based on your preferences. We also set up real-time dashboards for clients who want continuous access to performance data."
+          }
+        ],
+        'Brand Identity': [
+          {
+            question: "What is included in a brand identity package?",
+            answer: "Our comprehensive brand identity packages typically include logo design, color palette, typography, graphic elements, brand guidelines, and basic collateral designs. We can customize the package based on your specific needs."
+          },
+          {
+            question: "How long does the branding process take?",
+            answer: "A complete brand identity project typically takes 6-8 weeks, including discovery, concept development, refinement, and finalization. More complex projects may take longer."
+          },
+          {
+            question: "How do you ensure the brand will resonate with our target audience?",
+            answer: "We begin with thorough research to understand your audience, competitors, and industry. This insights-driven approach ensures we create a brand identity that connects with your specific target market."
+          },
+          {
+            question: "Do you provide brand strategy along with visual identity?",
+            answer: "Yes, our branding process includes strategic elements like brand positioning, messaging architecture, and value proposition development to ensure your visual identity is aligned with your business strategy."
+          },
+          {
+            question: "What if I don't like the initial design concepts?",
+            answer: "We include multiple revision rounds in our process. If the initial concepts don't resonate, we'll gather your feedback and refine our approach until we achieve a result you're completely satisfied with."
+          }
+        ],
+        'Analytics & Insights': [
+          {
+            question: "What analytics platforms do you work with?",
+            answer: "We primarily work with Google Analytics 4, but we also have expertise in Adobe Analytics, Mixpanel, Amplitude, and other platforms depending on your needs and existing infrastructure."
+          },
+          {
+            question: "How do you ensure the data is accurate?",
+            answer: "We implement thorough data quality checks, proper tracking configurations, and regular audits to ensure the data you're making decisions on is accurate and reliable."
+          },
+          {
+            question: "Can you integrate data from multiple sources?",
+            answer: "Yes, we can integrate data from various sources including your website, CRM, marketing platforms, and business systems to provide a comprehensive view of your performance."
+          },
+          {
+            question: "Will you help us understand what the data means?",
+            answer: "Absolutely. We don't just deliver numbers; we provide clear insights and actionable recommendations based on the data to help you make informed business decisions."
+          },
+          {
+            question: "Do you create custom dashboards?",
+            answer: "Yes, we create custom dashboards tailored to your specific KPIs and business objectives, making it easy to monitor performance at a glance."
+          }
+        ],
+        'Automation Services': [
+          {
+            question: "What types of processes can be automated?",
+            answer: "Many business processes can be automated, including lead nurturing, customer onboarding, data entry, reporting, inventory management, invoice processing, and customer service interactions, among others."
+          },
+          {
+            question: "How long does it take to implement automation solutions?",
+            answer: "Implementation timelines vary based on complexity. Simple automation workflows can be set up in a few weeks, while more complex integrations may take 2-3 months."
+          },
+          {
+            question: "What platforms and tools do you use for automation?",
+            answer: "We work with a variety of automation platforms including Zapier, Make (formerly Integromat), HubSpot, ActiveCampaign, and custom solutions using APIs. We'll recommend the best tools based on your specific needs and existing systems."
+          },
+          {
+            question: "How much can I expect to save with automation?",
+            answer: "Most clients see a 20-40% reduction in time spent on automated processes, plus improved accuracy and consistency. The exact ROI depends on your current processes and the specific automation implemented."
+          },
+          {
+            question: "Will my team need special training to use the automated systems?",
+            answer: "We provide comprehensive training and documentation for all automation solutions we implement. Most systems are designed to be user-friendly, but we ensure your team feels confident using them."
+          }
+        ]
+      };
+      
+      return faqs[serviceTitle] || [
+        {
+          question: "What is your approach to this service?",
+          answer: "We take a consultative, data-driven approach to understand your specific needs and goals before creating a customized solution that delivers measurable results."
+        },
+        {
+          question: "How do you measure success?",
+          answer: "We establish clear KPIs aligned with your business objectives at the beginning of our engagement and provide regular reporting on progress and results."
+        },
+        {
+          question: "What is the typical timeframe for this service?",
+          answer: "Timeframes vary depending on the scope and complexity of the project. During our initial consultation, we'll provide a more accurate timeline specific to your needs."
+        },
+        {
+          question: "Do you offer ongoing support?",
+          answer: "Yes, we offer various support and maintenance packages to ensure continued success after the initial implementation."
+        },
+        {
+          question: "How much does this service cost?",
+          answer: "We provide customized pricing based on your specific requirements and goals. Contact us for a free consultation and quote tailored to your needs."
+        }
+      ];
     },
 
     handleScroll() {
@@ -665,6 +949,490 @@ const app = Vue.createApp({
 
   template: `
     <v-app :theme="theme">
+      <!-- Service Landing Page View -->
+      <div v-if="currentView === 'service-landing' && currentService">
+        <!-- Service Landing Navigation Bar -->
+        <v-app-bar 
+          app 
+          :color="theme === 'light' ? 'white' : 'surface'" 
+          elevation="0"
+          height="80"
+          class="border-bottom"
+          :class="theme === 'light' ? 'border-light' : 'border-dark'"
+        >
+          <v-container class="d-flex align-center">
+            <!-- Back Button -->
+            <v-btn
+              icon
+              variant="text"
+              class="mr-3"
+              @click="backToMain"
+            >
+              <v-icon>mdi-arrow-left</v-icon>
+            </v-btn>
+            
+            <!-- Logo -->
+            <div class="d-flex align-center">
+              <v-avatar
+                color="primary"
+                size="36"
+                class="mr-2"
+              >
+                <span class="text-white font-weight-bold text-h6">V</span>
+              </v-avatar>
+              <v-app-bar-title>
+                <span class="text-primary font-weight-bold text-h6 text-lowercase">veralake</span>
+                <span class="font-weight-bold text-lowercase">.digital</span>
+              </v-app-bar-title>
+            </div>
+            
+            <v-spacer></v-spacer>
+            
+            <!-- Desktop Navigation -->
+            <div class="d-none d-md-flex align-center">
+              <v-btn
+                class="text-none"
+                variant="text"
+                @click="toggleTheme"
+              >
+                <v-icon v-if="theme === 'light'">mdi-weather-night</v-icon>
+                <v-icon v-else>mdi-weather-sunny</v-icon>
+              </v-btn>
+              <v-btn
+                color="primary"
+                class="ml-4 text-white"
+                @click="openCalendlyModal"
+              >
+                <v-icon start>mdi-phone</v-icon>
+                Call (470) 629-3981
+              </v-btn>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <v-app-bar-nav-icon
+              class="d-flex d-md-none"
+              @click="drawer = true"
+            ></v-app-bar-nav-icon>
+          </v-container>
+        </v-app-bar>
+        
+        <!-- Service Landing Main Content -->
+        <v-main>
+          <!-- Hero Section -->
+          <section class="py-10" :style="{ background: 'var(--gradient-primary)' }">
+            <v-container>
+              <v-row align="center" justify="center">
+                <v-col cols="12" md="10" lg="8" class="text-center text-white">
+                  <v-avatar :color="currentService.color" size="88" class="mb-6">
+                    <v-icon size="x-large" color="white">{{ currentService.icon }}</v-icon>
+                  </v-avatar>
+                  <h1 class="text-h2 font-weight-bold mb-4">{{ currentService.title }}</h1>
+                  <p class="text-h6 mb-8">{{ currentService.description }}</p>
+                  <div class="d-flex flex-column flex-sm-row justify-center">
+                    <v-btn
+                      size="x-large"
+                      color="white"
+                      class="text-primary font-weight-bold px-8 mb-4 mb-sm-0 mr-sm-4"
+                      @click="openCalendlyModal"
+                    >
+                      <v-icon start>mdi-calendar</v-icon>
+                      Schedule Free Consultation
+                    </v-btn>
+                    <v-btn
+                      size="x-large"
+                      variant="outlined"
+                      color="white"
+                      class="font-weight-bold px-8"
+                      href="tel:+14706293981"
+                    >
+                      <v-icon start>mdi-phone</v-icon>
+                      Call Now
+                    </v-btn>
+                  </div>
+                </v-col>
+              </v-row>
+            </v-container>
+          </section>
+          
+          <!-- Pain Points Section -->
+          <section class="py-12">
+            <v-container>
+              <v-row justify="center">
+                <v-col cols="12" md="10" lg="8" class="text-center mb-10">
+                  <h2 class="text-h3 font-weight-bold mb-4">Common Challenges</h2>
+                  <p class="text-subtitle-1">Are you experiencing any of these pain points with your {{ currentService.title.toLowerCase() }}?</p>
+                </v-col>
+              </v-row>
+              
+              <v-row>
+                <v-col 
+                  cols="12" sm="6" md="4"
+                  v-for="(pain, index) in [
+                    {
+                      icon: 'mdi-alert-circle',
+                      title: currentService.painPoints && currentService.painPoints[0] ? currentService.painPoints[0].title : 'Outdated Solutions',
+                      description: currentService.painPoints && currentService.painPoints[0] ? currentService.painPoints[0].description : 'Your current approach isn\\'t delivering the results you need in today\\'s rapidly evolving digital landscape.'
+                    },
+                    {
+                      icon: 'mdi-chart-line-variant',
+                      title: currentService.painPoints && currentService.painPoints[1] ? currentService.painPoints[1].title : 'Poor Performance',
+                      description: currentService.painPoints && currentService.painPoints[1] ? currentService.painPoints[1].description : 'You\\'re not seeing the conversion rates, engagement, or ROI that you expected from your investment.'
+                    },
+                    {
+                      icon: 'mdi-account-question',
+                      title: currentService.painPoints && currentService.painPoints[2] ? currentService.painPoints[2].title : 'Lack of Expertise',
+                      description: currentService.painPoints && currentService.painPoints[2] ? currentService.painPoints[2].description : 'Your team lacks the specialized knowledge required to implement effective ' + currentService.title.toLowerCase() + ' strategies.'
+                    }
+                  ]"
+                  :key="index"
+                  class="mb-6"
+                >
+                  <v-card height="100%" class="pa-6">
+                    <div class="d-flex align-center mb-4">
+                      <v-avatar :color="currentService.color" class="mr-4">
+                        <v-icon color="white">{{ pain.icon }}</v-icon>
+                      </v-avatar>
+                      <h3 class="text-h6 font-weight-bold">{{ pain.title }}</h3>
+                    </div>
+                    <p class="text-body-1">{{ pain.description }}</p>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </section>
+          
+          <!-- Solution Section -->
+          <section class="py-12 bg-secondary">
+            <v-container>
+              <v-row justify="center">
+                <v-col cols="12" md="10" lg="8" class="text-center text-white mb-10">
+                  <h2 class="text-h3 font-weight-bold mb-4">Our Solution</h2>
+                  <p class="text-subtitle-1">Here's how our {{ currentService.title }} service can transform your business</p>
+                </v-col>
+              </v-row>
+              
+              <v-row>
+                <v-col cols="12" md="6">
+                  <div class="d-flex flex-column h-100 justify-center">
+                    <v-list class="bg-transparent pa-0">
+                      <v-list-item 
+                        v-for="(feature, index) in currentService.features" 
+                        :key="index"
+                        class="px-0 mb-6"
+                      >
+                        <template v-slot:prepend>
+                          <v-avatar :color="currentService.color" size="48" class="mr-4">
+                            <v-icon color="white">mdi-check</v-icon>
+                          </v-avatar>
+                        </template>
+                        <v-list-item-title class="text-h6 text-white font-weight-bold">{{ feature }}</v-list-item-title>
+                        <v-list-item-subtitle class="text-white-lighten-2 mt-2">
+                          {{ getSolutionDescription(currentService.title, feature) }}
+                        </v-list-item-subtitle>
+                      </v-list-item>
+                    </v-list>
+                  </div>
+                </v-col>
+                
+                <v-col cols="12" md="6" class="d-flex align-center">
+                  <v-img
+                    :src="getSolutionImage(currentService.title)"
+                    max-height="500"
+                    contain
+                    class="rounded-lg"
+                  ></v-img>
+                </v-col>
+              </v-row>
+            </v-container>
+          </section>
+          
+          <!-- Why Choose Us Section -->
+          <section class="py-12">
+            <v-container>
+              <v-row justify="center">
+                <v-col cols="12" md="10" lg="8" class="text-center mb-10">
+                  <h2 class="text-h3 font-weight-bold mb-4">Why Choose Us</h2>
+                  <p class="text-subtitle-1">What sets our {{ currentService.title }} services apart</p>
+                </v-col>
+              </v-row>
+              
+              <v-row>
+                <v-col 
+                  cols="12" sm="6" md="4"
+                  v-for="(reason, index) in [
+                    {
+                      icon: 'mdi-account-group',
+                      title: 'Experienced Team',
+                      description: 'Our specialists have years of experience delivering exceptional results for businesses like yours.'
+                    },
+                    {
+                      icon: 'mdi-tools',
+                      title: 'Tailored Approach',
+                      description: 'We customize our solutions to address your specific challenges and meet your unique business goals.'
+                    },
+                    {
+                      icon: 'mdi-chart-bar',
+                      title: 'Measurable Results',
+                      description: 'We focus on delivering tangible outcomes that you can measure, track, and build upon.'
+                    },
+                    {
+                      icon: 'mdi-handshake',
+                      title: 'Transparent Partnership',
+                      description: 'You'll always know what we're doing, why we're doing it, and the results we're achieving together.'
+                    },
+                    {
+                      icon: 'mdi-update',
+                      title: 'Continuous Improvement',
+                      description: 'We constantly refine our approach based on performance data to maximize your ROI.'
+                    },
+                    {
+                      icon: 'mdi-clock-time-four',
+                      title: 'Timely Delivery',
+                      description: 'We respect your timeline and work efficiently to deliver high-quality results on schedule.'
+                    }
+                  ]"
+                  :key="index"
+                  class="mb-6"
+                >
+                  <v-card height="100%" class="pa-5 d-flex flex-column">
+                    <div class="d-flex align-center mb-4">
+                      <v-avatar :color="currentService.color" class="mr-3" size="36">
+                        <v-icon color="white" size="small">{{ reason.icon }}</v-icon>
+                      </v-avatar>
+                      <h3 class="text-h6 font-weight-bold">{{ reason.title }}</h3>
+                    </div>
+                    <p class="text-body-2 flex-grow-1">{{ reason.description }}</p>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </section>
+          
+          <!-- Testimonial Section -->
+          <section class="py-12 bg-grey-lighten-4">
+            <v-container>
+              <v-row justify="center">
+                <v-col cols="12" md="10" lg="8" class="text-center mb-10">
+                  <h2 class="text-h3 font-weight-bold mb-4">What Our Clients Say</h2>
+                  <p class="text-subtitle-1">Real results from real businesses</p>
+                </v-col>
+              </v-row>
+              
+              <v-row justify="center">
+                <v-col cols="12" md="10" lg="8">
+                  <v-card class="pa-6">
+                    <v-card-text class="text-center">
+                      <v-icon color="amber" size="x-large" class="mb-6">mdi-format-quote-open</v-icon>
+                      <p class="text-h6 font-italic mb-6">{{ getServiceTestimonial(currentService.title).quote }}</p>
+                      <v-avatar size="80" class="mb-3">
+                        <v-img :src="getServiceTestimonial(currentService.title).avatar"></v-img>
+                      </v-avatar>
+                      <p class="text-h6 font-weight-bold mb-1">{{ getServiceTestimonial(currentService.title).name }}</p>
+                      <p class="text-subtitle-1">{{ getServiceTestimonial(currentService.title).position }}</p>
+                    </v-card-text>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </section>
+          
+          <!-- Process Section -->
+          <section class="py-12">
+            <v-container>
+              <v-row justify="center">
+                <v-col cols="12" md="10" lg="8" class="text-center mb-10">
+                  <h2 class="text-h3 font-weight-bold mb-4">Our Process</h2>
+                  <p class="text-subtitle-1">How we'll work together to achieve your goals</p>
+                </v-col>
+              </v-row>
+              
+              <v-row justify="center">
+                <v-col cols="12" md="10" lg="8">
+                  <v-timeline align="start">
+                    <v-timeline-item
+                      v-for="(step, index) in [
+                        {
+                          title: 'Discovery & Analysis',
+                          description: 'We begin by understanding your business, goals, and current challenges through in-depth research and analysis.'
+                        },
+                        {
+                          title: 'Strategy Development',
+                          description: 'Based on our findings, we create a customized strategy tailored to your specific needs and objectives.'
+                        },
+                        {
+                          title: 'Implementation',
+                          description: 'Our team executes the strategy with precision, applying best practices and innovative approaches.'
+                        },
+                        {
+                          title: 'Monitoring & Optimization',
+                          description: 'We continuously track performance and make data-driven adjustments to maximize results.'
+                        },
+                        {
+                          title: 'Reporting & Review',
+                          description: 'You'll receive regular reports with clear insights and recommendations for ongoing improvement.'
+                        }
+                      ]"
+                      :key="index"
+                      :dot-color="currentService.color"
+                      size="large"
+                    >
+                      <template v-slot:opposite>
+                        <div class="text-h6 font-weight-bold">Step {{ index + 1 }}</div>
+                      </template>
+                      <v-card>
+                        <v-card-title>{{ step.title }}</v-card-title>
+                        <v-card-text>{{ step.description }}</v-card-text>
+                      </v-card>
+                    </v-timeline-item>
+                  </v-timeline>
+                </v-col>
+              </v-row>
+            </v-container>
+          </section>
+          
+          <!-- FAQ Section -->
+          <section class="py-12 bg-grey-lighten-4">
+            <v-container>
+              <v-row justify="center">
+                <v-col cols="12" md="10" lg="8" class="text-center mb-10">
+                  <h2 class="text-h3 font-weight-bold mb-4">Frequently Asked Questions</h2>
+                  <p class="text-subtitle-1">Answers to common questions about our {{ currentService.title }} services</p>
+                </v-col>
+              </v-row>
+              
+              <v-row justify="center">
+                <v-col cols="12" md="10" lg="8">
+                  <v-expansion-panels>
+                    <v-expansion-panel
+                      v-for="(faq, index) in getServiceFAQs(currentService.title)"
+                      :key="index"
+                    >
+                      <v-expansion-panel-title>
+                        <div class="text-subtitle-1 font-weight-bold">{{ faq.question }}</div>
+                      </v-expansion-panel-title>
+                      <v-expansion-panel-text>
+                        <p class="text-body-1">{{ faq.answer }}</p>
+                      </v-expansion-panel-text>
+                    </v-expansion-panel>
+                  </v-expansion-panels>
+                </v-col>
+              </v-row>
+            </v-container>
+          </section>
+          
+          <!-- CTA Section -->
+          <section class="py-16" :style="{ background: 'var(--gradient-primary)' }">
+            <v-container>
+              <v-row justify="center">
+                <v-col cols="12" md="10" lg="8" class="text-center text-white">
+                  <h2 class="text-h3 font-weight-bold mb-4">Ready to transform your {{ currentService.title.toLowerCase() }}?</h2>
+                  <p class="text-h6 mb-8">Schedule a free consultation today to discuss your specific needs.</p>
+                  <div class="d-flex flex-column flex-sm-row justify-center">
+                    <v-btn
+                      size="x-large"
+                      color="white"
+                      class="text-primary font-weight-bold px-8 mb-4 mb-sm-0 mr-sm-4"
+                      @click="openCalendlyModal"
+                    >
+                      <v-icon start>mdi-calendar</v-icon>
+                      Schedule Free Consultation
+                    </v-btn>
+                    <v-btn
+                      size="x-large"
+                      variant="outlined"
+                      color="white"
+                      class="font-weight-bold px-8"
+                      href="tel:+14706293981"
+                    >
+                      <v-icon start>mdi-phone</v-icon>
+                      Call (470) 629-3981
+                    </v-btn>
+                  </div>
+                </v-col>
+              </v-row>
+            </v-container>
+          </section>
+          
+          <!-- Contact Form Section -->
+          <section class="py-12">
+            <v-container>
+              <v-row justify="center">
+                <v-col cols="12" md="10" lg="8" class="text-center mb-10">
+                  <h2 class="text-h3 font-weight-bold mb-4">Get in Touch</h2>
+                  <p class="text-subtitle-1">Fill out the form below and I'll get back to you within 24 hours</p>
+                </v-col>
+              </v-row>
+              
+              <v-row justify="center">
+                <v-col cols="12" md="8" lg="6">
+                  <v-card class="pa-6">
+                    <v-form @submit.prevent="trackEvent('contact_submit', 'contact', currentService.title)">
+                      <v-row>
+                        <v-col cols="12" sm="6">
+                          <v-text-field
+                            label="First Name"
+                            variant="outlined"
+                            density="comfortable"
+                            required
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6">
+                          <v-text-field
+                            label="Last Name"
+                            variant="outlined"
+                            density="comfortable"
+                            required
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                      
+                      <v-text-field
+                        label="Email"
+                        variant="outlined"
+                        density="comfortable"
+                        type="email"
+                        required
+                      ></v-text-field>
+                      
+                      <v-text-field
+                        label="Phone"
+                        variant="outlined"
+                        density="comfortable"
+                        required
+                      ></v-text-field>
+                      
+                      <v-text-field
+                        label="Company"
+                        variant="outlined"
+                        density="comfortable"
+                      ></v-text-field>
+                      
+                      <v-textarea
+                        label="Message"
+                        variant="outlined"
+                        density="comfortable"
+                        rows="4"
+                        required
+                      ></v-textarea>
+                      
+                      <v-btn
+                        type="submit"
+                        color="primary"
+                        size="large"
+                        block
+                        class="mt-4 text-white"
+                      >
+                        Send Message
+                      </v-btn>
+                    </v-form>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </section>
+        </v-main>
+      </div>
+      
       <!-- Project Detail View -->
       <div v-if="currentView === 'project-detail' && currentProject">
         <!-- Project Detail Navigation Bar -->
@@ -1536,15 +2304,29 @@ const app = Vue.createApp({
                       
                       <v-divider class="mb-4"></v-divider>
                       
-                      <v-btn 
-                        :color="service.color" 
-                        class="text-white mt-auto px-6"
-                        rounded="pill"
-                        elevation="2"
-                        @click="openCalendlyModal"
-                      >
-                        Request Service <v-icon end class="ml-1">mdi-arrow-right</v-icon>
-                      </v-btn>
+                      <div class="d-flex flex-column flex-sm-row gap-3">
+                        <v-btn 
+                          :color="service.color" 
+                          class="text-white mt-auto px-6"
+                          variant="flat"
+                          rounded="pill"
+                          elevation="2"
+                          @click="viewServiceLanding(service)"
+                        >
+                          Learn More <v-icon end class="ml-1">mdi-arrow-right</v-icon>
+                        </v-btn>
+                        
+                        <v-btn 
+                          :color="service.color" 
+                          class="text-white mt-auto px-6"
+                          rounded="pill"
+                          elevation="2"
+                          variant="outlined"
+                          @click="openCalendlyModal"
+                        >
+                          Request Service
+                        </v-btn>
+                      </div>
                     </div>
                   </v-card>
                 </v-hover>
