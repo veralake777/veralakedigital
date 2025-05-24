@@ -95,6 +95,22 @@ const appData = {
       title: "E-commerce Platform",
       description:
         "A fully responsive e-commerce platform with integrated payment systems and inventory management.",
+      client: "Fashion Retailer",
+      timeline: "12 weeks",
+      technologies: ["Vue.js", "Node.js", "Stripe API", "MongoDB"],
+      challenge: "Our client needed a modern e-commerce platform that could handle their growing product catalog while providing a seamless shopping experience across all devices.",
+      solution: "We built a fully responsive e-commerce solution with an intuitive admin dashboard for inventory management. The platform features secure payment processing through Stripe, real-time inventory updates, and detailed analytics.",
+      results: [
+        "43% increase in mobile conversion rate",
+        "28% reduction in cart abandonment",
+        "Sales increased by 35% in the first quarter after launch"
+      ],
+      testimonial: "The new platform transformed our online business. The user experience is outstanding and the admin tools make managing our inventory effortless.",
+      gallery: [
+        "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
+        "https://images.unsplash.com/photo-1531297484001-80022131f5a1",
+        "https://images.unsplash.com/photo-1603322327760-9186c297e1f8"
+      ]
     },
     {
       image: "https://images.unsplash.com/photo-1551650975-87deedd944c3",
@@ -102,6 +118,22 @@ const appData = {
       title: "Health & Fitness App",
       description:
         "A feature-rich mobile application for tracking health metrics and workout routines.",
+      client: "Wellness Startup",
+      timeline: "16 weeks",
+      technologies: ["React Native", "Firebase", "HealthKit API", "Google Fit API"],
+      challenge: "Our client wanted to create a fitness app that would stand out in a crowded market by offering personalized workout plans and nutrition tracking in one integrated platform.",
+      solution: "We developed a cross-platform mobile application with customizable workout routines, nutrition tracking, and progress visualization. The app syncs with wearable devices and includes social features for community support.",
+      results: [
+        "100,000+ downloads in the first month",
+        "4.8/5 average rating on app stores",
+        "Featured in the 'New Apps We Love' section on the App Store"
+      ],
+      testimonial: "Veralake Digital delivered beyond our expectations. The app has received amazing feedback from users and continues to grow rapidly.",
+      gallery: [
+        "https://images.unsplash.com/photo-1551650975-87deedd944c3",
+        "https://images.unsplash.com/photo-1550345332-09e3ac987658",
+        "https://images.unsplash.com/photo-1493666438817-866a91353ca9"
+      ]
     },
     {
       image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
@@ -109,6 +141,22 @@ const appData = {
       title: "Financial Dashboard",
       description:
         "An interactive dashboard providing real-time financial insights and analytics.",
+      client: "Investment Firm",
+      timeline: "10 weeks",
+      technologies: ["Vue.js", "D3.js", "Node.js", "MongoDB", "Finance APIs"],
+      challenge: "The client needed a comprehensive dashboard to visualize complex financial data and enable better decision-making for their investment team.",
+      solution: "We created an interactive dashboard with real-time data visualization, customizable reports, and predictive analytics. The platform integrates with multiple financial data sources and provides instant insights through intuitive charts and graphs.",
+      results: [
+        "Decision-making time reduced by 40%",
+        "Analytical errors decreased by 35%",
+        "Team productivity improved by 28%"
+      ],
+      testimonial: "This dashboard has revolutionized how we analyze market data. The visualizations make complex information immediately understandable.",
+      gallery: [
+        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+        "https://images.unsplash.com/photo-1552664730-d307ca884978",
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71"
+      ]
     },
     {
       image: "https://images.unsplash.com/photo-1522542550221-31fd19575a2d",
@@ -116,6 +164,22 @@ const appData = {
       title: "Restaurant Rebranding",
       description:
         "Complete brand identity redesign for a chain of upscale restaurants.",
+      client: "Upscale Restaurant Chain",
+      timeline: "8 weeks",
+      technologies: ["Adobe Creative Suite", "Brand Strategy", "Print & Digital Media"],
+      challenge: "A restaurant chain with 15+ locations needed a complete brand refresh to appeal to a younger demographic without alienating their loyal customer base.",
+      solution: "We developed a comprehensive rebranding strategy including a new logo, color palette, typography, menu design, website, and social media presence. The new brand identity maintained key heritage elements while introducing a more contemporary aesthetic.",
+      results: [
+        "Social media engagement increased by 67%",
+        "Website traffic grew by 45%",
+        "20% increase in younger demographic customers"
+      ],
+      testimonial: "The rebranding perfectly captured our vision of honoring our tradition while moving forward. Our customers love the new look and feel.",
+      gallery: [
+        "https://images.unsplash.com/photo-1522542550221-31fd19575a2d",
+        "https://images.unsplash.com/photo-1577106263724-2c8e03bfe9cf",
+        "https://images.unsplash.com/photo-1565299507177-b0ac66763828"
+      ]
     },
     {
       image: "https://images.unsplash.com/photo-1560472355-536de3962603",
@@ -123,13 +187,45 @@ const appData = {
       title: "Product Launch Campaign",
       description:
         "Multi-channel marketing campaign for a new tech product launch.",
+      client: "Tech Startup",
+      timeline: "6 weeks",
+      technologies: ["Social Media Advertising", "Email Marketing", "Content Marketing", "Analytics"],
+      challenge: "A tech startup needed to build anticipation and drive pre-orders for their innovative new product with a limited marketing budget.",
+      solution: "We designed a comprehensive launch strategy utilizing targeted social media campaigns, influencer partnerships, email marketing, and content creation. The campaign focused on demonstrating the product's unique value proposition across multiple channels.",
+      results: [
+        "Pre-order goal exceeded by 215%",
+        "Over 1.5 million social media impressions",
+        "Featured in 3 major tech publications"
+      ],
+      testimonial: "The campaign exceeded all our expectations. The strategy was perfectly executed, and the results speak for themselves.",
+      gallery: [
+        "https://images.unsplash.com/photo-1560472355-536de3962603",
+        "https://images.unsplash.com/photo-1523726491678-bf852e717f6a",
+        "https://images.unsplash.com/photo-1556761175-4b46a572b786"
+      ]
     },
     {
       image: "https://images.unsplash.com/photo-1547658719-da2b51169166",
       category: "Web Development",
       title: "Educational Platform",
       description:
-        "Interactive learning platform with courses, quizzes, and progress tracking.",
+        "Online learning platform with interactive courses and progress tracking.",
+      client: "Educational Institution",
+      timeline: "14 weeks",
+      technologies: ["Vue.js", "Node.js", "MongoDB", "WebRTC", "AWS"],
+      challenge: "An educational institution needed to transition to a digital learning environment that would maintain engagement and track student progress effectively.",
+      solution: "We developed a comprehensive learning platform with interactive courses, live virtual classrooms, progress tracking, and personalized learning paths. The solution included features for both educators and students, with robust analytics and reporting tools.",
+      results: [
+        "Student engagement increased by 38%",
+        "Course completion rates improved by 45%",
+        "Educator time saved on administrative tasks: 15 hours/week"
+      ],
+      testimonial: "This platform has transformed how we deliver education. The tools for both our educators and students have made learning more accessible and engaging than we thought possible.",
+      gallery: [
+        "https://images.unsplash.com/photo-1547658719-da2b51169166",
+        "https://images.unsplash.com/photo-1588702547919-26089e690ecc",
+        "https://images.unsplash.com/photo-1501504905252-473c47e087f8"
+      ]
     },
   ],
   testimonials: [
@@ -569,8 +665,278 @@ const app = Vue.createApp({
 
   template: `
     <v-app :theme="theme">
-      <!-- Modern Navigation Bar -->
-      <v-app-bar 
+      <!-- Project Detail View -->
+      <div v-if="currentView === 'project-detail' && currentProject">
+        <!-- Project Detail Navigation Bar -->
+        <v-app-bar 
+          app 
+          :color="theme === 'light' ? 'white' : 'surface'" 
+          elevation="0"
+          height="80"
+          class="border-bottom"
+          :class="theme === 'light' ? 'border-light' : 'border-dark'"
+        >
+          <v-container class="d-flex align-center">
+            <!-- Back Button -->
+            <v-btn
+              icon
+              variant="text"
+              class="mr-3"
+              @click="backToMain"
+            >
+              <v-icon>mdi-arrow-left</v-icon>
+            </v-btn>
+            
+            <!-- Logo -->
+            <div class="d-flex align-center">
+              <v-avatar
+                color="primary"
+                size="36"
+                class="mr-2"
+              >
+                <span class="text-white font-weight-bold text-h6">V</span>
+              </v-avatar>
+              <v-app-bar-title>
+                <span class="text-primary font-weight-bold text-h6 text-lowercase">veralake</span>
+                <span class="font-weight-bold text-lowercase">.digital</span>
+              </v-app-bar-title>
+            </div>
+            
+            <v-spacer></v-spacer>
+            
+            <!-- Desktop Navigation -->
+            <div class="d-none d-md-flex align-center">
+              <v-btn
+                class="text-none"
+                variant="text"
+                @click="toggleTheme"
+              >
+                <v-icon v-if="theme === 'light'">mdi-weather-night</v-icon>
+                <v-icon v-else>mdi-weather-sunny</v-icon>
+              </v-btn>
+              <v-btn
+                color="primary"
+                class="ml-4 text-white"
+                @click="openCalendlyModal"
+              >
+                <v-icon start>mdi-calendar</v-icon>
+                Book a Call
+              </v-btn>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <v-app-bar-nav-icon
+              class="d-flex d-md-none"
+              @click="drawer = true"
+            ></v-app-bar-nav-icon>
+          </v-container>
+        </v-app-bar>
+        
+        <!-- Project Detail Main Content -->
+        <v-main>
+          <!-- Hero Section -->
+          <section class="py-10 bg-primary">
+            <v-container>
+              <v-row align="center">
+                <v-col cols="12" md="8" class="text-white">
+                  <v-chip color="white" class="text-primary font-weight-bold mb-4">
+                    {{ currentProject.category }}
+                  </v-chip>
+                  <h1 class="text-h2 font-weight-bold mb-4">{{ currentProject.title }}</h1>
+                  <p class="text-h6 mb-6">{{ currentProject.description }}</p>
+                  <div class="d-flex flex-wrap">
+                    <div class="mr-8 mb-4">
+                      <div class="text-caption text-white-lighten-2 mb-1">CLIENT</div>
+                      <div class="text-subtitle-1">{{ currentProject.client }}</div>
+                    </div>
+                    <div class="mr-8 mb-4">
+                      <div class="text-caption text-white-lighten-2 mb-1">TIMELINE</div>
+                      <div class="text-subtitle-1">{{ currentProject.timeline }}</div>
+                    </div>
+                  </div>
+                </v-col>
+              </v-row>
+            </v-container>
+          </section>
+          
+          <!-- Main Content -->
+          <section class="py-12">
+            <v-container>
+              <v-row>
+                <!-- Left Content -->
+                <v-col cols="12" md="8">
+                  <!-- Main Image -->
+                  <v-img
+                    :src="currentProject.image"
+                    height="500"
+                    cover
+                    class="rounded-lg mb-10"
+                  ></v-img>
+                  
+                  <!-- Project Details -->
+                  <h2 class="text-h4 font-weight-bold mb-6">Project Overview</h2>
+                  
+                  <div class="mb-10">
+                    <h3 class="text-h5 font-weight-bold mb-3">The Challenge</h3>
+                    <p class="text-body-1">{{ currentProject.challenge }}</p>
+                  </div>
+                  
+                  <div class="mb-10">
+                    <h3 class="text-h5 font-weight-bold mb-3">Our Solution</h3>
+                    <p class="text-body-1">{{ currentProject.solution }}</p>
+                  </div>
+                  
+                  <div class="mb-10">
+                    <h3 class="text-h5 font-weight-bold mb-3">Technologies Used</h3>
+                    <div class="d-flex flex-wrap">
+                      <v-chip
+                        v-for="tech in currentProject.technologies"
+                        :key="tech"
+                        class="mr-2 mb-2"
+                        color="primary"
+                        variant="outlined"
+                      >
+                        {{ tech }}
+                      </v-chip>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-10">
+                    <h3 class="text-h5 font-weight-bold mb-3">Results & Impact</h3>
+                    <v-list>
+                      <v-list-item
+                        v-for="(result, index) in currentProject.results"
+                        :key="index"
+                        class="px-0"
+                      >
+                        <template v-slot:prepend>
+                          <v-icon color="success" class="mr-2">mdi-check-circle</v-icon>
+                        </template>
+                        <v-list-item-title>{{ result }}</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </div>
+                  
+                  <!-- Image Gallery -->
+                  <h3 class="text-h5 font-weight-bold mb-3">Project Gallery</h3>
+                  <v-row>
+                    <v-col 
+                      v-for="(image, index) in currentProject.gallery"
+                      :key="index"
+                      cols="12" sm="6"
+                    >
+                      <v-img
+                        :src="image"
+                        height="250"
+                        cover
+                        class="rounded-lg"
+                      ></v-img>
+                    </v-col>
+                  </v-row>
+                </v-col>
+                
+                <!-- Right Sidebar -->
+                <v-col cols="12" md="4">
+                  <v-card class="mb-8 pa-6">
+                    <v-card-title class="text-h6 font-weight-bold mb-4">Client Testimonial</v-card-title>
+                    <v-card-text>
+                      <v-icon color="amber" class="mb-2">mdi-format-quote-open</v-icon>
+                      <p class="text-body-1 font-italic mb-4">{{ currentProject.testimonial }}</p>
+                      <div class="d-flex align-center">
+                        <v-avatar color="primary" class="mr-3">
+                          <v-icon color="white">mdi-account</v-icon>
+                        </v-avatar>
+                        <div>
+                          <p class="text-subtitle-2 font-weight-bold mb-0">{{ currentProject.client }}</p>
+                        </div>
+                      </div>
+                    </v-card-text>
+                  </v-card>
+                  
+                  <v-card class="mb-8 pa-6">
+                    <v-card-title class="text-h6 font-weight-bold mb-4">Similar Projects</v-card-title>
+                    <v-card-text>
+                      <div
+                        v-for="(project, index) in projects.filter(p => p.category === currentProject.category && p.title !== currentProject.title).slice(0, 2)"
+                        :key="index"
+                        class="d-flex align-center mb-4"
+                        @click="viewProjectDetails(project)"
+                        style="cursor: pointer;"
+                      >
+                        <v-avatar rounded size="60" class="mr-3">
+                          <v-img :src="project.image" cover></v-img>
+                        </v-avatar>
+                        <div>
+                          <p class="text-subtitle-2 font-weight-bold mb-0">{{ project.title }}</p>
+                          <p class="text-caption">{{ project.category }}</p>
+                        </div>
+                      </div>
+                    </v-card-text>
+                  </v-card>
+                  
+                  <v-card class="pa-6">
+                    <v-card-title class="text-h6 font-weight-bold mb-4">Ready to Start Your Project?</v-card-title>
+                    <v-card-text>
+                      <p class="text-body-2 mb-4">Let's discuss how we can help you achieve similar results for your business.</p>
+                      <v-btn
+                        color="primary"
+                        size="large"
+                        block
+                        class="text-white mb-3"
+                        @click="openCalendlyModal"
+                      >
+                        Schedule a Consultation
+                      </v-btn>
+                      <v-btn
+                        variant="outlined"
+                        color="primary"
+                        size="large"
+                        block
+                        @click="backToMain"
+                      >
+                        View More Projects
+                      </v-btn>
+                    </v-card-text>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </section>
+          
+          <!-- CTA Section -->
+          <section class="py-10 bg-secondary">
+            <v-container>
+              <v-row justify="center">
+                <v-col cols="12" md="10" class="text-center text-white">
+                  <h2 class="text-h3 font-weight-bold mb-4">Ready to transform your digital presence?</h2>
+                  <p class="text-h6 mb-6">Let's create something amazing together.</p>
+                  <v-btn
+                    color="primary"
+                    size="large"
+                    class="mr-4 text-white"
+                    @click="openCalendlyModal"
+                  >
+                    Book a Free Consultation
+                  </v-btn>
+                  <v-btn
+                    variant="outlined"
+                    color="white"
+                    size="large"
+                    @click="backToMain"
+                  >
+                    View More Projects
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+          </section>
+        </v-main>
+      </div>
+      
+      <!-- Main Website View -->
+      <div v-if="currentView === 'main'">
+        <!-- Modern Navigation Bar -->
+        <v-app-bar 
         app 
         :color="theme === 'light' ? 'white' : 'surface'" 
         elevation="0"
