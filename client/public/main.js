@@ -1,120 +1,166 @@
 // Create Vue application data
 const appData = {
   menuItems: [
-    { title: 'Home', url: '#home' },
-    { title: 'Services', url: '#services' },
-    { title: 'Portfolio', url: '#portfolio' },
-    { title: 'Testimonials', url: '#testimonials' },
-    { title: 'Blog', url: '#blog' },
-    { title: 'Contact', url: '#contact' }
+    { title: "Home", url: "#home" },
+    { title: "Services", url: "#services" },
+    { title: "Portfolio", url: "#portfolio" },
+    { title: "Testimonials", url: "#testimonials" },
+    { title: "Blog", url: "#blog" },
+    { title: "Contact", url: "#contact" },
   ],
   services: [
     {
-      icon: 'mdi-web',
-      color: 'primary',
-      title: 'Web Development',
-      description: 'Custom websites and web applications designed to engage users and drive conversions.',
-      features: ['Responsive Design', 'E-commerce Solutions', 'CMS Integration', 'Performance Optimization']
+      icon: "mdi-web",
+      color: "primary",
+      title: "Web Development",
+      description:
+        "Custom websites and web applications designed to engage users and drive conversions.",
+      features: [
+        "Responsive Design",
+        "E-commerce Solutions",
+        "CMS Integration",
+        "Performance Optimization",
+      ],
     },
     {
-      icon: 'mdi-cellphone',
-      color: 'success',
-      title: 'Mobile App Development',
-      description: 'Native and cross-platform mobile applications that deliver exceptional user experiences.',
-      features: ['iOS & Android Apps', 'Cross-platform Solutions', 'UI/UX Design', 'App Store Optimization']
+      icon: "mdi-cellphone",
+      color: "success",
+      title: "Mobile App Development",
+      description:
+        "Native and cross-platform mobile applications that deliver exceptional user experiences.",
+      features: [
+        "iOS & Android Apps",
+        "Cross-platform Solutions",
+        "UI/UX Design",
+        "App Store Optimization",
+      ],
     },
     {
-      icon: 'mdi-trending-up',
-      color: 'accent',
-      title: 'Digital Marketing',
-      description: 'Strategic marketing campaigns that increase visibility and drive targeted traffic.',
-      features: ['SEO & Content Marketing', 'Social Media Management', 'PPC Advertising', 'Email Marketing']
+      icon: "mdi-trending-up",
+      color: "accent",
+      title: "Digital Marketing",
+      description:
+        "Strategic marketing campaigns that increase visibility and drive targeted traffic.",
+      features: [
+        "SEO & Content Marketing",
+        "Social Media Management",
+        "PPC Advertising",
+        "Email Marketing",
+      ],
     },
     {
-      icon: 'mdi-palette',
-      color: 'info',
-      title: 'Brand Identity',
-      description: 'Comprehensive branding solutions that communicate your unique value proposition.',
-      features: ['Logo Design', 'Brand Guidelines', 'Visual Identity', 'Brand Messaging']
+      icon: "mdi-palette",
+      color: "info",
+      title: "Brand Identity",
+      description:
+        "Comprehensive branding solutions that communicate your unique value proposition.",
+      features: [
+        "Logo Design",
+        "Brand Guidelines",
+        "Visual Identity",
+        "Brand Messaging",
+      ],
     },
     {
-      icon: 'mdi-chart-line',
-      color: 'warning',
-      title: 'Analytics & Insights',
-      description: 'Data-driven insights that help you understand your customers and optimize your digital presence.',
-      features: ['Performance Tracking', 'User Behavior Analysis', 'Conversion Optimization', 'Custom Reporting']
+      icon: "mdi-chart-line",
+      color: "warning",
+      title: "Analytics & Insights",
+      description:
+        "Data-driven insights that help you understand your customers and optimize your digital presence.",
+      features: [
+        "Performance Tracking",
+        "User Behavior Analysis",
+        "Conversion Optimization",
+        "Custom Reporting",
+      ],
     },
     {
-      icon: 'mdi-cloud',
-      color: 'error',
-      title: 'Cloud Solutions',
-      description: 'Scalable cloud infrastructure and solutions that provide reliability and security.',
-      features: ['Cloud Migration', 'AWS & Azure Services', 'Database Management', 'DevOps Integration']
-    }
+      icon: "mdi-robot",
+      color: "error",
+      title: "Automation Services",
+      description:
+        "Custom automation solutions that streamline workflows and increase operational efficiency.",
+      features: [
+        "Business Process Automation",
+        "Marketing & Sales Automation",
+        "Custom Workflow Development",
+        "Integration with Existing Systems",
+      ],
+    },
   ],
   projects: [
     {
-      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c',
-      category: 'Web Development',
-      title: 'E-commerce Platform',
-      description: 'A fully responsive e-commerce platform with integrated payment systems and inventory management.'
+      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
+      category: "Web Development",
+      title: "E-commerce Platform",
+      description:
+        "A fully responsive e-commerce platform with integrated payment systems and inventory management.",
     },
     {
-      image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3',
-      category: 'Mobile App',
-      title: 'Health & Fitness App',
-      description: 'A feature-rich mobile application for tracking health metrics and workout routines.'
+      image: "https://images.unsplash.com/photo-1551650975-87deedd944c3",
+      category: "Mobile App",
+      title: "Health & Fitness App",
+      description:
+        "A feature-rich mobile application for tracking health metrics and workout routines.",
     },
     {
-      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6',
-      category: 'Web Development',
-      title: 'Financial Dashboard',
-      description: 'An interactive dashboard providing real-time financial insights and analytics.'
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+      category: "Web Development",
+      title: "Financial Dashboard",
+      description:
+        "An interactive dashboard providing real-time financial insights and analytics.",
     },
     {
-      image: 'https://images.unsplash.com/photo-1522542550221-31fd19575a2d',
-      category: 'Brand Identity',
-      title: 'Restaurant Rebranding',
-      description: 'Complete brand identity redesign for a chain of upscale restaurants.'
+      image: "https://images.unsplash.com/photo-1522542550221-31fd19575a2d",
+      category: "Brand Identity",
+      title: "Restaurant Rebranding",
+      description:
+        "Complete brand identity redesign for a chain of upscale restaurants.",
     },
     {
-      image: 'https://images.unsplash.com/photo-1560472355-536de3962603',
-      category: 'Digital Marketing',
-      title: 'Product Launch Campaign',
-      description: 'Multi-channel marketing campaign for a new tech product launch.'
+      image: "https://images.unsplash.com/photo-1560472355-536de3962603",
+      category: "Digital Marketing",
+      title: "Product Launch Campaign",
+      description:
+        "Multi-channel marketing campaign for a new tech product launch.",
     },
     {
-      image: 'https://images.unsplash.com/photo-1547658719-da2b51169166',
-      category: 'Web Development',
-      title: 'Educational Platform',
-      description: 'Interactive learning platform with courses, quizzes, and progress tracking.'
-    }
+      image: "https://images.unsplash.com/photo-1547658719-da2b51169166",
+      category: "Web Development",
+      title: "Educational Platform",
+      description:
+        "Interactive learning platform with courses, quizzes, and progress tracking.",
+    },
   ],
   testimonials: [
     {
-      quote: "Working with Veralake Digital transformed our online presence completely. Their strategic approach and attention to detail exceeded our expectations.",
+      quote:
+        "Working with Veralake Digital transformed our online presence completely. Their strategic approach and attention to detail exceeded our expectations.",
       name: "Sarah Johnson",
       position: "CEO, InnovateTech",
-      avatar: "https://randomuser.me/api/portraits/women/1.jpg"
+      avatar: "https://randomuser.me/api/portraits/women/1.jpg",
     },
     {
-      quote: "The Veralake team delivered our mobile app on time and on budget. Their expertise in UX design made a significant difference in user adoption.",
+      quote:
+        "The Veralake team delivered our mobile app on time and on budget. Their expertise in UX design made a significant difference in user adoption.",
       name: "Michael Chen",
       position: "Product Manager, NexGen",
-      avatar: "https://randomuser.me/api/portraits/men/2.jpg"
+      avatar: "https://randomuser.me/api/portraits/men/2.jpg",
     },
     {
-      quote: "Our e-commerce sales increased by 87% after Veralake redesigned our website and implemented their digital marketing strategy.",
+      quote:
+        "Our e-commerce sales increased by 87% after Veralake redesigned our website and implemented their digital marketing strategy.",
       name: "Emma Davis",
       position: "Marketing Director, StyleHouse",
-      avatar: "https://randomuser.me/api/portraits/women/3.jpg"
+      avatar: "https://randomuser.me/api/portraits/women/3.jpg",
     },
     {
-      quote: "The team at Veralake Digital has been instrumental in our digital transformation journey. Their technical expertise is matched by their business acumen.",
+      quote:
+        "The team at Veralake Digital has been instrumental in our digital transformation journey. Their technical expertise is matched by their business acumen.",
       name: "James Wilson",
       position: "CTO, Elevate Solutions",
-      avatar: "https://randomuser.me/api/portraits/men/4.jpg"
-    }
+      avatar: "https://randomuser.me/api/portraits/men/4.jpg",
+    },
   ],
   blogPosts: [
     {
@@ -123,7 +169,8 @@ const appData = {
       date: "May 15, 2023",
       readTime: "5 min read",
       title: "10 SEO Strategies That Actually Work in 2023",
-      excerpt: "Discover the most effective SEO techniques that are driving results in today's digital landscape."
+      excerpt:
+        "Discover the most effective SEO techniques that are driving results in today's digital landscape.",
     },
     {
       image: "https://images.unsplash.com/photo-1553877522-43269d4ea984",
@@ -131,7 +178,8 @@ const appData = {
       date: "April 28, 2023",
       readTime: "7 min read",
       title: "The Future of Web Development: Trends to Watch",
-      excerpt: "Explore emerging technologies and methodologies that are shaping the future of web development."
+      excerpt:
+        "Explore emerging technologies and methodologies that are shaping the future of web development.",
     },
     {
       image: "https://images.unsplash.com/photo-1579389083078-4e7018379f7e",
@@ -139,159 +187,194 @@ const appData = {
       date: "April 10, 2023",
       readTime: "6 min read",
       title: "Creating User-Centered Experiences That Convert",
-      excerpt: "Learn how to design digital experiences that not only delight users but also drive business results."
-    }
+      excerpt:
+        "Learn how to design digital experiences that not only delight users but also drive business results.",
+    },
   ],
   faqItems: [
     {
       question: "What services does Veralake Digital offer?",
-      answer: "We offer a comprehensive range of digital services including web development, mobile app development, digital marketing, brand identity design, UI/UX design, cloud solutions, and analytics implementation."
+      answer:
+        "We offer a comprehensive range of digital services including web development, mobile app development, digital marketing, brand identity design, UI/UX design, automation services, and analytics implementation.",
     },
     {
       question: "How long does it typically take to complete a project?",
-      answer: "Project timelines vary based on scope and complexity. A simple website might take 4-6 weeks, while a complex web application or mobile app could take 3-6 months. During our initial consultation, we'll provide a more accurate timeline specific to your project."
+      answer:
+        "Project timelines vary based on scope and complexity. A simple website might take 4-6 weeks, while a complex web application or mobile app could take 3-6 months. During our initial consultation, we'll provide a more accurate timeline specific to your project.",
     },
     {
       question: "Do you work with clients remotely?",
-      answer: "Yes, we have successfully completed projects with clients from around the world. We use collaborative tools and regular video conferences to ensure smooth communication regardless of location."
+      answer:
+        "Yes, we have successfully completed projects with clients from around the world. We use collaborative tools and regular video conferences to ensure smooth communication regardless of location.",
     },
     {
       question: "What is your pricing structure?",
-      answer: "We offer both fixed-price and time-and-materials pricing models depending on the nature of your project. We provide detailed proposals after understanding your specific requirements during our discovery phase."
+      answer:
+        "We offer both fixed-price and time-and-materials pricing models depending on the nature of your project. We provide detailed proposals after understanding your specific requirements during our discovery phase.",
     },
     {
-      question: "Do you provide ongoing support after the project is completed?",
-      answer: "Yes, we offer various maintenance and support packages to ensure your digital products continue to perform optimally. These can include regular updates, security monitoring, content updates, and performance optimization."
-    }
-  ]
+      question:
+        "Do you provide ongoing support after the project is completed?",
+      answer:
+        "Yes, we offer various maintenance and support packages to ensure your digital products continue to perform optimally. These can include regular updates, security monitoring, content updates, and performance optimization.",
+    },
+  ],
 };
 
 // Create Vuetify instance with modern color palette
 const vuetify = Vuetify.createVuetify({
   theme: {
-    defaultTheme: 'light',
+    defaultTheme: "light",
     themes: {
       light: {
         dark: false,
         colors: {
-          primary: '#FF5864',    // Vibrant coral/red
-          secondary: '#202738',  // Dark blue
-          accent: '#83DECF',     // Mint/teal
-          background: '#F5F7FA', // Off-white
-          surface: '#FFFFFF',    // White
-          error: '#EB5757',      // Red
-          info: '#64D2DE',       // Cyan
-          success: '#3FC380',    // Green
-          warning: '#FFBA49',    // Amber
-        }
+          primary: "#FF5864", // Vibrant coral/red
+          secondary: "#202738", // Dark blue
+          accent: "#83DECF", // Mint/teal
+          background: "#F5F7FA", // Off-white
+          surface: "#FFFFFF", // White
+          error: "#EB5757", // Red
+          info: "#64D2DE", // Cyan
+          success: "#3FC380", // Green
+          warning: "#FFBA49", // Amber
+        },
       },
       dark: {
         dark: true,
         colors: {
-          primary: '#FF7A8B',    // Lighter coral/red
-          secondary: '#344267',  // Lighter dark blue
-          accent: '#9CEEE1',     // Lighter mint/teal
-          background: '#121929', // Very dark blue
-          surface: '#202738',    // Dark blue
-          error: '#FF8A8A',      // Lighter red
-          info: '#87E5F2',       // Lighter cyan
-          success: '#65D89B',    // Lighter green
-          warning: '#FFCF75',    // Lighter amber
-        }
-      }
+          primary: "#FF7A8B", // Lighter coral/red
+          secondary: "#344267", // Lighter dark blue
+          accent: "#9CEEE1", // Lighter mint/teal
+          background: "#121929", // Very dark blue
+          surface: "#202738", // Dark blue
+          error: "#FF8A8A", // Lighter red
+          info: "#87E5F2", // Lighter cyan
+          success: "#65D89B", // Lighter green
+          warning: "#FFCF75", // Lighter amber
+        },
+      },
     },
     variations: {
-      colors: ['primary', 'secondary', 'accent'],
+      colors: ["primary", "secondary", "accent"],
       lighten: 3,
       darken: 3,
-    }
-  }
+    },
+  },
 });
 
 // Initialize Vue app
 const app = Vue.createApp({
   data() {
     return {
-      theme: 'light',
+      theme: "light",
       drawer: false,
       showCookieConsent: false,
       isCalendlyModalOpen: false,
       isCalendlyLoaded: false,
       selectedBookingOption: null,
       bookingOptions: [
-        { id: 'strategy', name: 'Marketing Strategy Session', url: 'https://calendly.com/veralake-digital/marketing-strategy', duration: '15 min', description: 'Quick session to discuss your marketing strategy needs and challenges.' },
-        { id: 'analytics', name: 'Free Analytics Setup Call', url: 'https://calendly.com/veralake-digital/analytics-setup', duration: '30 min', description: 'Discuss how to set up analytics for your business and extract valuable insights.' },
-        { id: 'consultation', name: 'Marketing Consultation', url: 'https://calendly.com/veralake-digital/consultation', duration: '30 min', description: 'In-depth consultation about your marketing and digital presence.' },
-        { id: 'meeting', name: '30 Minute Meeting', url: 'https://calendly.com/veralake-digital/30min', duration: '30 min', description: 'General meeting to discuss your business needs and how we can help.' }
+        {
+          id: "strategy",
+          name: "Marketing Strategy Session",
+          url: "https://calendly.com/veralake-digital/marketing-strategy",
+          duration: "15 min",
+          description:
+            "Quick session to discuss your marketing strategy needs and challenges.",
+        },
+        {
+          id: "analytics",
+          name: "Free Analytics Setup Call",
+          url: "https://calendly.com/veralake-digital/analytics-setup",
+          duration: "30 min",
+          description:
+            "Discuss how to set up analytics for your business and extract valuable insights.",
+        },
+        {
+          id: "consultation",
+          name: "Marketing Consultation",
+          url: "https://calendly.com/veralake-digital/consultation",
+          duration: "30 min",
+          description:
+            "In-depth consultation about your marketing and digital presence.",
+        },
+        {
+          id: "meeting",
+          name: "30 Minute Meeting",
+          url: "https://calendly.com/veralake-digital/30min",
+          duration: "30 min",
+          description:
+            "General meeting to discuss your business needs and how we can help.",
+        },
       ],
-      activeSection: 'home',
-      ...appData
+      activeSection: "home",
+      ...appData,
     };
   },
   computed: {
     isMobile() {
       return this.$vuetify?.display?.xs || false;
-    }
+    },
   },
   methods: {
     toggleTheme() {
-      this.theme = this.theme === 'light' ? 'dark' : 'light';
-      localStorage.setItem('theme', this.theme);
+      this.theme = this.theme === "light" ? "dark" : "light";
+      localStorage.setItem("theme", this.theme);
     },
-    
+
     scrollToSection(sectionId) {
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
         this.drawer = false;
       }
     },
-    
+
     acceptCookies() {
-      localStorage.setItem('cookies-accepted', 'true');
+      localStorage.setItem("cookies-accepted", "true");
       this.showCookieConsent = false;
-      
+
       // Reload analytics after accepting cookies
-      fetch('/api/ga-id')
-        .then(response => response.json())
-        .then(data => {
+      fetch("/api/ga-id")
+        .then((response) => response.json())
+        .then((data) => {
           if (data.measurementId) {
-            gtag('config', data.measurementId);
+            gtag("config", data.measurementId);
           }
         });
     },
-    
+
     declineCookies() {
-      localStorage.setItem('cookies-accepted', 'false');
+      localStorage.setItem("cookies-accepted", "false");
       this.showCookieConsent = false;
     },
-    
+
     openCalendlyModal(optionId) {
       this.isCalendlyModalOpen = true;
-      
+
       // Set the selected booking option if specified
       if (optionId) {
-        const option = this.bookingOptions.find(opt => opt.id === optionId);
+        const option = this.bookingOptions.find((opt) => opt.id === optionId);
         this.selectedBookingOption = option || this.bookingOptions[0];
       } else {
         // Default to first option if none specified
         this.selectedBookingOption = this.bookingOptions[0];
       }
-      
+
       // Track event in Google Analytics
-      if (localStorage.getItem('cookies-accepted') === 'true') {
-        gtag('event', 'open_calendly', {
-          'event_category': 'engagement',
-          'event_label': this.selectedBookingOption?.id || 'booking'
+      if (localStorage.getItem("cookies-accepted") === "true") {
+        gtag("event", "open_calendly", {
+          event_category: "engagement",
+          event_label: this.selectedBookingOption?.id || "booking",
         });
       }
-      
+
       // Load the Calendly widget after a short delay
       setTimeout(() => {
         // Load Calendly script if not already loaded
         if (!window.Calendly) {
-          const script = document.createElement('script');
-          script.src = 'https://assets.calendly.com/assets/external/widget.js';
+          const script = document.createElement("script");
+          script.src = "https://assets.calendly.com/assets/external/widget.js";
           script.async = true;
           script.onload = () => this.initCalendly();
           document.head.appendChild(script);
@@ -300,84 +383,91 @@ const app = Vue.createApp({
         }
       }, 300);
     },
-    
+
     selectBookingOption(option) {
       this.selectedBookingOption = option;
       this.isCalendlyLoaded = false;
       this.initCalendly();
-      
+
       // Track option selection in Google Analytics
-      if (localStorage.getItem('cookies-accepted') === 'true') {
-        gtag('event', 'select_booking_type', {
-          'event_category': 'booking',
-          'event_label': option.id
+      if (localStorage.getItem("cookies-accepted") === "true") {
+        gtag("event", "select_booking_type", {
+          event_category: "booking",
+          event_label: option.id,
         });
       }
     },
-    
+
     goToCalendly(option) {
       this.selectedBookingOption = option;
-      
+
       // Track in Google Analytics
-      if (localStorage.getItem('cookies-accepted') === 'true') {
-        gtag('event', 'calendly_booking', {
-          'event_category': 'conversion',
-          'event_label': option.id
+      if (localStorage.getItem("cookies-accepted") === "true") {
+        gtag("event", "calendly_booking", {
+          event_category: "conversion",
+          event_label: option.id,
         });
       }
-      
+
       // Open Calendly in a new tab
-      window.open(option.url, '_blank');
-      
+      window.open(option.url, "_blank");
+
       // Close the modal
       this.closeCalendlyModal();
     },
-    
+
     initCalendly() {
       // Get the container element
-      const container = document.querySelector('.calendly-inline-widget');
+      const container = document.querySelector(".calendly-inline-widget");
       if (!container) return;
-      
+
       // Only proceed if we have a booking option selected
       if (!this.selectedBookingOption) return;
-      
+
       // Clear any existing content
-      container.innerHTML = '';
-      
+      container.innerHTML = "";
+
       // Set container height
-      container.style.height = '630px';
-      container.style.minWidth = '320px';
-      
+      container.style.height = "630px";
+      container.style.minWidth = "320px";
+
       // Initialize Calendly widget with the selected booking option
       if (window.Calendly) {
         window.Calendly.initInlineWidget({
           url: this.selectedBookingOption.url,
-          parentElement: container
+          parentElement: container,
         });
-        
+
         this.isCalendlyLoaded = true;
       }
     },
-    
+
     closeCalendlyModal() {
       this.isCalendlyModalOpen = false;
     },
-    
+
     trackEvent(action, category, label) {
-      if (localStorage.getItem('cookies-accepted') === 'true') {
-        gtag('event', action, {
-          'event_category': category,
-          'event_label': label
+      if (localStorage.getItem("cookies-accepted") === "true") {
+        gtag("event", action, {
+          event_category: category,
+          event_label: label,
         });
       }
     },
-    
+
     handleScroll() {
-      const sections = ['home', 'services', 'portfolio', 'testimonials', 'blog', 'contact'];
+      const sections = [
+        "home",
+        "services",
+        "portfolio",
+        "testimonials",
+        "blog",
+        "contact",
+      ];
       for (const section of sections) {
         const element = document.getElementById(section);
         if (!element) continue;
-        
+
         const rect = element.getBoundingClientRect();
         if (rect.top <= 100 && rect.bottom >= 100) {
           this.activeSection = section;
@@ -385,67 +475,71 @@ const app = Vue.createApp({
         }
       }
     },
-    
+
     // Calculate position for the navigation indicator
     getNavIndicatorPosition() {
       // If there's no active section, don't show the indicator
-      if (!this.activeSection) return { display: 'none' };
-      
+      if (!this.activeSection) return { display: "none" };
+
       // Find the active menu item in the DOM
-      const activeItem = document.querySelector(`.hidden-sm-and-down .v-btn.nav-active`);
-      if (!activeItem) return { display: 'none' };
-      
+      const activeItem = document.querySelector(
+        `.hidden-sm-and-down .v-btn.nav-active`,
+      );
+      if (!activeItem) return { display: "none" };
+
       // Get the bounding rectangle of the active item
       const rect = activeItem.getBoundingClientRect();
-      
+
       // Calculate the offset from the left of the page
-      const parentRect = activeItem.closest('.v-container').getBoundingClientRect();
+      const parentRect = activeItem
+        .closest(".v-container")
+        .getBoundingClientRect();
       const offsetLeft = rect.left - parentRect.left;
-      
+
       // Return the style object for the indicator
       return {
-        display: 'block',
+        display: "block",
         width: `${rect.width - 16}px`,
-        left: `${offsetLeft + 8}px`
+        left: `${offsetLeft + 8}px`,
       };
-    }
+    },
   },
-  
+
   mounted() {
     // Load saved theme preference
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       this.theme = savedTheme;
     }
-    
+
     // Check if cookies have been accepted
-    const cookiesAccepted = localStorage.getItem('cookies-accepted');
+    const cookiesAccepted = localStorage.getItem("cookies-accepted");
     if (!cookiesAccepted) {
       this.showCookieConsent = true;
     }
-    
+
     // Setup scroll event listener for active section tracking
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
     this.handleScroll();
-    
+
     // Track initial page view if cookies are accepted
-    if (cookiesAccepted === 'true') {
-      fetch('/api/ga-id')
-        .then(response => response.json())
-        .then(data => {
+    if (cookiesAccepted === "true") {
+      fetch("/api/ga-id")
+        .then((response) => response.json())
+        .then((data) => {
           if (data.measurementId) {
-            gtag('config', data.measurementId, {
-              'page_path': window.location.pathname
+            gtag("config", data.measurementId, {
+              page_path: window.location.pathname,
             });
           }
         });
     }
   },
-  
+
   beforeUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener("scroll", this.handleScroll);
   },
-  
+
   template: `
     <v-app :theme="theme">
       <!-- Modern Navigation Bar -->
@@ -901,9 +995,9 @@ const app = Vue.createApp({
               <v-row no-gutters>
                 <v-col 
                   v-for="(stat, i) in [
-                    {icon: 'mdi-account-group', value: '20+', label: 'Satisfied Clients'},
+                    {icon: 'mdi-account-group', value: '100+', label: 'Satisfied Clients'},
                     {icon: 'mdi-check-decagram', value: '95%', label: 'Client Retention'},
-                    {icon: 'mdi-lightning-bolt', value: '40+', label: 'Projects Completed'},
+                    {icon: 'mdi-lightning-bolt', value: '150+', label: 'Projects Completed'},
                     {icon: 'mdi-chart-line', value: '3X', label: 'Average ROI'}
                   ]"
                   :key="i"
@@ -1694,8 +1788,8 @@ const app = Vue.createApp({
         <v-icon>mdi-chevron-up</v-icon>
       </v-btn>
     </v-app>
-  `
+  `,
 });
 
 // Mount the app
-app.use(vuetify).mount('#app');
+app.use(vuetify).mount("#app");
