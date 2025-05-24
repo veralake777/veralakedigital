@@ -1,8 +1,15 @@
-import type { Express } from "express";
+import express, { type Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import path from "path";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Google Analytics endpoint to provide the measurement ID
+  app.get("/api/ga-id", (req, res) => {
+    const measurementId = process.env.VITE_GA_MEASUREMENT_ID || "";
+    res.json({ measurementId });
+  });
+  
   // Contact form endpoint
   app.post('/api/contact', async (req, res) => {
     try {
@@ -40,6 +47,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         message: 'An error occurred while processing your request. Please try again later.' 
       });
     }
+  });
+
+  // Serve static files from the Vue app directory
+  app.use("/", express.static(path.resolve("client/vue-app")));
+  
+  // Route to serve the Vue app for all other routes
+  app.get("*", (req, res) => {
+    // Skip API routes
+    if (req.path.startsWith('/api')) return;
+    
+    res.sendFile(path.resolve("client/vue-app/index.html"));
   });
 
   const httpServer = createServer(app);
