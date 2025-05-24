@@ -779,10 +779,10 @@ const app = Vue.createApp({
                         <div class="mt-16 mb-16" style="position: relative; z-index: 5;">
                           <h3 class="text-white text-h5 font-weight-bold mb-6">BRANDS I'VE HELPED</h3>
                           
-                          <!-- Desktop Client Display (3+ columns) -->
+                          <!-- Desktop Client Display (Single Row) -->
                           <div class="d-none d-md-block">
-                            <v-row>
-                              <v-col 
+                            <div class="d-flex justify-space-between align-center flex-nowrap overflow-auto pb-3">
+                              <div 
                                 v-for="(client, index) in [
                                   {name: 'AFS Travelers', icon: 'mdi-airplane', color: 'info'},
                                   {name: 'Tara Whalen Law', icon: 'mdi-scale-balance', color: 'success'},
@@ -791,11 +791,11 @@ const app = Vue.createApp({
                                   {name: 'TTD Learning Solutions', icon: 'mdi-school', color: 'error'}
                                 ]" 
                                 :key="index"
-                                cols="12" sm="6" md="4"
-                                class="mb-4"
+                                class="mx-2"
                               >
                                 <v-card 
                                   class="rounded-lg py-3 px-4 d-flex align-center" 
+                                  width="200"
                                   color="white"
                                   elevation="3"
                                   @click="trackEvent('client_click', 'reference', client.name)"
@@ -807,8 +807,8 @@ const app = Vue.createApp({
                                   </v-avatar>
                                   <span class="font-weight-bold text-primary text-body-1">{{ client.name }}</span>
                                 </v-card>
-                              </v-col>
-                            </v-row>
+                              </div>
+                            </div>
                           </div>
                           
                           <!-- Mobile Client Carousel -->
