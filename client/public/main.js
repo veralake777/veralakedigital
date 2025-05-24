@@ -777,17 +777,25 @@ const app = Vue.createApp({
                         
                         <!-- Trusted by logos -->
                         <div class="mt-16 d-none d-md-block">
-                          <p class="text-white text-body-2 mb-4">TRUSTED BY INDUSTRY LEADERS</p>
+                          <p class="text-white text-body-2 mb-4">TRUSTED BY REAL CLIENTS</p>
                           <div class="d-flex flex-wrap justify-start align-center">
-                            <img 
-                              v-for="n in 5" 
-                              :key="n"
-                              :src="\`https://via.placeholder.com/120x40/ffffff/202738?text=CLIENT+\${n}\`" 
-                              :alt="\`Client \${n} Logo\`"
-                              class="mr-6 mb-4"
-                              style="opacity: 0.7; filter: brightness(0) invert(1);"
-                              height="30"
-                            />
+                            <v-chip 
+                              v-for="(client, index) in ['AFS Travelers', 'Tara Whalen Law', 'Mux Blank', 'BCS Bulbls', 'TTD Learning Solutions']" 
+                              :key="index"
+                              color="white"
+                              text-color="primary"
+                              size="large"
+                              class="mr-4 mb-4 font-weight-medium"
+                              variant="elevated"
+                            >
+                              <v-icon start size="small">
+                                {{ index === 0 ? 'mdi-airplane' : 
+                                   index === 1 ? 'mdi-scale-balance' : 
+                                   index === 2 ? 'mdi-music' :
+                                   index === 3 ? 'mdi-lightbulb' : 'mdi-school' }}
+                              </v-icon>
+                              {{ client }}
+                            </v-chip>
                           </div>
                         </div>
                       </v-col>
