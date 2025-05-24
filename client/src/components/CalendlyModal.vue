@@ -1,3 +1,4 @@
+
 <template>
   <v-dialog
     v-model="localValue"
@@ -51,11 +52,9 @@ const localValue = computed({
 
 const calendlyLoaded = ref(false)
 
-// Load Calendly widget when modal is opened
 watch(localValue, (newValue) => {
   if (newValue) {
     loadCalendlyWidget()
-    // Track event when Calendly modal is opened
     trackEvent('open_calendly', 'engagement', 'booking_widget')
   }
 })
@@ -66,27 +65,21 @@ const loadCalendlyWidget = () => {
     return
   }
 
-  // Load Calendly script
   const script = document.createElement('script')
   script.src = 'https://assets.calendly.com/assets/external/widget.js'
   script.async = true
   script.onload = () => {
     calendlyLoaded.value = true
   }
-
   document.head.appendChild(script)
 
-  // Load Calendly styles
   const link = document.createElement('link')
   link.href = 'https://assets.calendly.com/assets/external/widget.css'
   link.rel = 'stylesheet'
-
   document.head.appendChild(link)
 }
 
-// Initialize Calendly when component is mounted
 onMounted(() => {
-  // If modal is already open on mount, load Calendly widget
   if (localValue.value) {
     loadCalendlyWidget()
   }
@@ -104,21 +97,28 @@ onMounted(() => {
   font-family: 'Poppins', sans-serif;
 }
 
-.v-card:hover,
-.v-card.selected {
-  background-color: var(--v-primary-base);
-}
-
-.v-card:hover .v-card-text,
-.v-card.selected .v-card-text,
-.v-card:hover .v-card-title,
-.v-card.selected .v-card-title,
-.v-card:hover .v-card-subtitle,
-.v-card.selected .v-card-subtitle {
+.v-card-selected {
+  background-color: var(--v-primary-base) !important;
   color: white !important;
 }
 
-.v-btn.v-btn--variant-flat {
-  color: inherit;
+.v-card-selected .v-card-text,
+.v-card-selected .v-card-title,
+.v-card-selected .v-card-subtitle {
+  color: white !important;
+}
+
+:deep(.calendly-inline-widget) {
+  min-width: 320px;
+  height: 630px;
+}
+
+:deep(.calendly-inline-widget .button) {
+  color: white !important;
+}
+
+:deep(.calendly-inline-widget .calendly-selected) {
+  color: white !important;
+  background-color: var(--v-primary-base) !important;
 }
 </style>
