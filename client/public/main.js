@@ -776,8 +776,8 @@ const app = Vue.createApp({
                         </div>
                         
                         <!-- Trusted by logos -->
-                        <div class="mt-16">
-                          <p class="text-white text-h6 mb-4">TRUSTED BY REAL CLIENTS</p>
+                        <div class="mt-16 mb-16" style="position: relative; z-index: 5;">
+                          <h3 class="text-white text-h5 font-weight-bold mb-6">TRUSTED BY REAL CLIENTS</h3>
                           <v-row>
                             <v-col 
                               v-for="(client, index) in [
@@ -792,16 +792,15 @@ const app = Vue.createApp({
                               class="mb-4"
                             >
                               <v-card 
-                                class="rounded-lg py-2 px-3 d-flex align-center" 
+                                class="rounded-lg py-3 px-4 d-flex align-center" 
                                 color="white"
-                                flat
-                                variant="tonal"
+                                elevation="3"
                                 @click="trackEvent('client_click', 'reference', client.name)"
                               >
-                                <v-avatar :color="client.color" class="mr-3" size="38">
+                                <v-avatar :color="client.color" class="mr-3" size="42">
                                   <v-icon color="white" size="medium">{{ client.icon }}</v-icon>
                                 </v-avatar>
-                                <span class="font-weight-medium text-primary">{{ client.name }}</span>
+                                <span class="font-weight-bold text-primary text-body-1">{{ client.name }}</span>
                               </v-card>
                             </v-col>
                           </v-row>
@@ -844,7 +843,7 @@ const app = Vue.createApp({
           </v-container>
           
           <!-- Floating stats section -->
-          <v-container class="stats-container" style="margin-top: -80px; position: relative; z-index: 2;">
+          <v-container class="stats-container" style="margin-top: 80px; position: relative; z-index: 1;">
             <v-card
               class="rounded-xl mx-auto"
               max-width="1200"
