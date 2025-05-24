@@ -104,8 +104,21 @@ onMounted(() => {
   font-family: 'Poppins', sans-serif;
 }
 
-/* Add this style to ensure text is visible when a button is selected in Calendly */
-.calendly-inline-widget .calendly-grid .calendly-event-name {
-    color: black !important; /* Or any other visible color */
+.v-card:hover,
+.v-card.selected {
+  background-color: var(--v-primary-base);
+}
+
+.v-card:hover .v-card-text,
+.v-card.selected .v-card-text,
+.v-card:hover .v-card-title,
+.v-card.selected .v-card-title,
+.v-card:hover .v-card-subtitle,
+.v-card.selected .v-card-subtitle {
+  color: white !important;
+}
+
+.v-btn.v-btn--variant-flat {
+  color: inherit;
 }
 </style>
