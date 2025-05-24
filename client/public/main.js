@@ -846,10 +846,10 @@ const app = Vue.createApp({
               <v-row no-gutters>
                 <v-col 
                   v-for="(stat, i) in [
-                    {icon: 'mdi-account-group', value: '150+', label: 'Satisfied Clients'},
-                    {icon: 'mdi-check-decagram', value: '98%', label: 'Success Rate'},
-                    {icon: 'mdi-lightning-bolt', value: '340+', label: 'Projects Completed'},
-                    {icon: 'mdi-trophy', value: '25+', label: 'Industry Awards'}
+                    {icon: 'mdi-account-group', value: '20+', label: 'Satisfied Clients'},
+                    {icon: 'mdi-check-decagram', value: '95%', label: 'Client Retention'},
+                    {icon: 'mdi-lightning-bolt', value: '40+', label: 'Projects Completed'},
+                    {icon: 'mdi-chart-line', value: '3X', label: 'Average ROI'}
                   ]"
                   :key="i"
                   cols="6" sm="6" md="3"
