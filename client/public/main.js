@@ -470,14 +470,14 @@ const app = Vue.createApp({
             </v-avatar>
             <v-app-bar-title>
               <span class="text-primary font-weight-bold text-h6 text-lowercase">veralake</span>
-              <span class="text-secondary font-weight-bold text-lowercase">.digital</span>
+              <span class="font-weight-bold text-lowercase">.digital</span>
             </v-app-bar-title>
           </div>
           
           <v-spacer></v-spacer>
           
           <!-- Desktop Navigation -->
-          <div class="hidden-sm-and-down">
+          <div class="hidden-sm-and-down d-flex align-center">
             <v-btn 
               v-for="item in menuItems" 
               :key="item.title" 
@@ -493,6 +493,7 @@ const app = Vue.createApp({
               {{ item.title }}
             </v-btn>
             
+            <!-- Book a Call Button -->
             <v-btn 
               color="primary" 
               class="ml-4 font-weight-bold" 
@@ -548,7 +549,7 @@ const app = Vue.createApp({
               </v-card>
             </v-menu>
             
-            <!-- Single Theme Toggle for Desktop -->
+            <!-- Theme Toggle -->
             <v-btn 
               icon 
               variant="text" 
@@ -562,8 +563,20 @@ const app = Vue.createApp({
           </div>
           
           <!-- Mobile Navigation Toggle -->
-          <div class="hidden-md-and-up d-flex align-center">
-            <!-- Contact button always visible on mobile -->
+          <div class="d-flex d-md-none align-center">
+            <!-- Book a Call Button for Mobile -->
+            <v-btn 
+              color="primary" 
+              variant="flat"
+              size="small"
+              density="comfortable"
+              class="mr-2 text-white rounded-pill"
+              @click="openCalendlyModal"
+            >
+              <v-icon size="small">mdi-calendar-clock</v-icon>
+            </v-btn>
+            
+            <!-- Contact Button for Mobile -->
             <v-menu
               transition="slide-y-transition"
               location="bottom"
@@ -571,10 +584,10 @@ const app = Vue.createApp({
               <template v-slot:activator="{ props }">
                 <v-btn
                   color="primary"
-                  variant="flat"
+                  variant="tonal"
                   size="small"
                   density="comfortable"
-                  class="mr-3 text-white rounded-pill"
+                  class="mr-2 rounded-pill"
                   v-bind="props"
                 >
                   <v-icon size="small">mdi-phone</v-icon>
@@ -609,25 +622,24 @@ const app = Vue.createApp({
               </v-card>
             </v-menu>
             
-            <!-- Single Theme Toggle for Mobile -->
+            <!-- Theme Toggle for Mobile -->
             <v-btn 
               icon 
               variant="text" 
               size="small" 
-              class="mr-3" 
+              class="mr-2" 
               @click="toggleTheme"
             >
               <v-icon v-if="theme === 'light'">mdi-weather-night</v-icon>
               <v-icon v-else>mdi-weather-sunny</v-icon>
             </v-btn>
             
-            <!-- Menu toggle (mobile only) -->
+            <!-- Menu Toggle (Mobile Only) -->
             <v-btn 
               icon 
               :color="drawer ? 'primary' : ''" 
               variant="text"
               @click="drawer = !drawer"
-              class="d-md-none"
             >
               <v-icon>{{ drawer ? 'mdi-close' : 'mdi-menu' }}</v-icon>
             </v-btn>
