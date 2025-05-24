@@ -216,6 +216,8 @@ const app = Vue.createApp({
       drawer: false,
       showCookieConsent: false,
       isCalendlyModalOpen: false,
+      isCalendlyLoaded: false,
+      calendlyUrl: 'https://calendly.com/veralake-digital/30min',
       activeSection: 'home',
       ...appData
     };
@@ -261,9 +263,6 @@ const app = Vue.createApp({
     openCalendlyModal() {
       this.isCalendlyModalOpen = true;
       
-      // Load Calendly script if needed
-      loadCalendly();
-      
       // Track event in Google Analytics
       if (localStorage.getItem('cookies-accepted') === 'true') {
         gtag('event', 'open_calendly', {
@@ -271,6 +270,41 @@ const app = Vue.createApp({
           'event_label': 'booking'
         });
       }
+      
+      // Load the Calendly widget after a short delay
+      setTimeout(() => {
+        // Load Calendly script if not already loaded
+        if (!window.Calendly) {
+          const script = document.createElement('script');
+          script.src = 'https://assets.calendly.com/assets/external/widget.js';
+          script.async = true;
+          script.onload = () => this.initCalendly();
+          document.head.appendChild(script);
+        } else {
+          this.initCalendly();
+        }
+      }, 300);
+    },
+    
+    initCalendly() {
+      // Get the container element
+      const container = document.querySelector('.calendly-inline-widget');
+      if (!container) return;
+      
+      // Clear any existing content
+      container.innerHTML = '';
+      
+      // Set container height
+      container.style.height = '630px';
+      container.style.minWidth = '320px';
+      
+      // Initialize Calendly widget
+      window.Calendly.initInlineWidget({
+        url: this.calendlyUrl,
+        parentElement: container
+      });
+      
+      this.isCalendlyLoaded = true;
     },
     
     closeCalendlyModal() {
@@ -1254,28 +1288,23 @@ const app = Vue.createApp({
       
       <!-- Calendly Modal -->
       <v-dialog v-model="isCalendlyModalOpen" width="800" persistent>
-        <v-card>
-          <v-card-title class="text-h5 bg-primary text-white pa-4">
-            <span>Schedule a Consultation</span>
+        <v-card class="rounded-lg overflow-hidden">
+          <v-card-title class="text-h5 bg-primary text-white pa-4 d-flex align-center">
+            <v-icon start class="mr-2">mdi-calendar-clock</v-icon>
+            <span>Schedule a Free Consultation</span>
             <v-spacer></v-spacer>
-            <v-btn icon @click="closeCalendlyModal">
+            <v-btn icon variant="text" color="white" @click="closeCalendlyModal">
               <v-icon>mdi-close</v-icon>
             </v-btn>
           </v-card-title>
           <v-card-text class="pa-0">
-            <div class="calendly-inline-widget">
-              <!-- Placeholder for actual Calendly embed -->
-              <div class="d-flex flex-column align-center justify-center" style="height:600px;">
-                <v-icon size="large" color="primary" class="mb-4">mdi-calendar-clock</v-icon>
-                <h3 class="text-h5 mb-2">Book Your Free Consultation</h3>
-                <p class="text-body-1 text-center mx-4 mb-6">
-                  Select a convenient time for a 30-minute strategy call with our team.
-                </p>
-                <v-btn color="primary" size="large">
-                  Open Booking Calendar
-                </v-btn>
-                <p class="text-caption mt-4 text-center">
-                  This would typically open the Calendly scheduling interface
+            <div class="calendly-inline-widget" style="min-width:320px; height:630px;">
+              <!-- Loading State -->
+              <div v-if="!isCalendlyLoaded" class="d-flex flex-column align-center justify-center" style="height:630px;">
+                <v-progress-circular indeterminate color="primary" size="60" width="6" class="mb-5"></v-progress-circular>
+                <h3 class="text-h5 font-weight-bold mb-3">Loading Booking Calendar</h3>
+                <p class="text-body-1 text-center mx-8">
+                  Please wait while we prepare your scheduling options for a 30-minute strategy call with our team.
                 </p>
               </div>
             </div>
