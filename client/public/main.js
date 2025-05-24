@@ -21,6 +21,20 @@ const appData = {
         "CMS Integration",
         "Performance Optimization",
       ],
+      painPoints: [
+        {
+          title: "Outdated Website",
+          description: "Your current website looks outdated, loads slowly, and doesn't represent your brand well, potentially driving away potential customers."
+        },
+        {
+          title: "Poor Mobile Experience",
+          description: "Your website doesn't work well on mobile devices, causing frustration for the majority of users who browse on smartphones."
+        },
+        {
+          title: "Low Conversion Rates",
+          description: "Your website isn't effectively converting visitors into leads or customers due to poor user experience or unclear calls-to-action."
+        }
+      ]
     },
     {
       icon: "mdi-cellphone",
@@ -34,6 +48,20 @@ const appData = {
         "UI/UX Design",
         "App Store Optimization",
       ],
+      painPoints: [
+        {
+          title: "Missing Mobile Presence",
+          description: "Your business lacks a mobile app presence, missing out on opportunities to engage with customers on their preferred devices."
+        },
+        {
+          title: "Outdated Mobile App",
+          description: "Your existing app has poor reviews, crashes frequently, or lacks the features and design quality users expect in 2025."
+        },
+        {
+          title: "Platform Limitations",
+          description: "Your current app only works on one platform (iOS or Android), limiting your reach to potential customers."
+        }
+      ]
     },
     {
       icon: "mdi-trending-up",
@@ -595,41 +623,41 @@ const app = Vue.createApp({
     getSolutionDescription(serviceTitle, feature) {
       // This method provides detailed descriptions for each feature based on the service
       const descriptions = {
-        'Web Development': {
-          'Responsive Design': 'Our responsive websites adapt perfectly to any device, ensuring a seamless user experience that boosts engagement and conversions.',
-          'E-commerce Solutions': 'We build robust online stores with secure payment processing, inventory management, and a smooth checkout experience.',
-          'CMS Integration': 'Our content management systems make it easy for you to update your website without technical knowledge or developer assistance.',
-          'Performance Optimization': 'We optimize your site for lightning-fast loading speeds, improving user experience and search engine rankings.'
+        "Web Development": {
+          "Responsive Design": "Our responsive websites adapt perfectly to any device, ensuring a seamless user experience that boosts engagement and conversions.",
+          "E-commerce Solutions": "We build robust online stores with secure payment processing, inventory management, and a smooth checkout experience.",
+          "CMS Integration": "Our content management systems make it easy for you to update your website without technical knowledge or developer assistance.",
+          "Performance Optimization": "We optimize your site for lightning-fast loading speeds, improving user experience and search engine rankings."
         },
-        'Mobile App Development': {
-          'iOS & Android Apps': 'We develop native applications for both major platforms, ensuring optimal performance and access to the full user base.',
-          'Cross-platform Solutions': 'Our cross-platform approach allows you to reach users on multiple devices with a single codebase, saving time and resources.',
-          'UI/UX Design': 'We create intuitive, visually appealing interfaces that delight users and encourage continued engagement with your app.',
-          'App Store Optimization': 'We implement proven strategies to improve your app's visibility and download rates in the app stores.'
+        "Mobile App Development": {
+          "iOS & Android Apps": "We develop native applications for both major platforms, ensuring optimal performance and access to the full user base.",
+          "Cross-platform Solutions": "Our cross-platform approach allows you to reach users on multiple devices with a single codebase, saving time and resources.",
+          "UI/UX Design": "We create intuitive, visually appealing interfaces that delight users and encourage continued engagement with your app.",
+          "App Store Optimization": "We implement proven strategies to improve your app's visibility and download rates in the app stores."
         },
-        'Digital Marketing': {
-          'SEO & Content Marketing': 'We boost your organic visibility through strategic keyword optimization and compelling content that drives qualified traffic.',
-          'Social Media Management': 'We build and maintain your brand presence across relevant platforms, engaging with your audience and driving conversions.',
-          'PPC Advertising': 'Our targeted pay-per-click campaigns deliver immediate traffic and conversions with measurable ROI.',
-          'Email Marketing': 'We create personalized email campaigns that nurture leads, retain customers, and drive repeat business.'
+        "Digital Marketing": {
+          "SEO & Content Marketing": "We boost your organic visibility through strategic keyword optimization and compelling content that drives qualified traffic.",
+          "Social Media Management": "We build and maintain your brand presence across relevant platforms, engaging with your audience and driving conversions.",
+          "PPC Advertising": "Our targeted pay-per-click campaigns deliver immediate traffic and conversions with measurable ROI.",
+          "Email Marketing": "We create personalized email campaigns that nurture leads, retain customers, and drive repeat business."
         },
-        'Brand Identity': {
-          'Logo Design': 'We create distinctive, memorable logos that capture your brand essence and create instant recognition.',
-          'Brand Guidelines': 'We develop comprehensive guidelines to ensure consistent application of your visual identity across all touchpoints.',
-          'Visual Identity': 'We craft a cohesive visual system including colors, typography, and imagery that communicates your brand personality.',
-          'Brand Messaging': 'We define your brand voice, messaging hierarchy, and key communications to connect with your target audience.'
+        "Brand Identity": {
+          "Logo Design": "We create distinctive, memorable logos that capture your brand essence and create instant recognition.",
+          "Brand Guidelines": "We develop comprehensive guidelines to ensure consistent application of your visual identity across all touchpoints.",
+          "Visual Identity": "We craft a cohesive visual system including colors, typography, and imagery that communicates your brand personality.",
+          "Brand Messaging": "We define your brand voice, messaging hierarchy, and key communications to connect with your target audience."
         },
-        'Analytics & Insights': {
-          'Performance Tracking': 'We implement robust tracking systems to monitor all key metrics and provide a clear picture of your digital performance.',
-          'User Behavior Analysis': 'We analyze how users interact with your digital properties to identify opportunities for improvement and optimization.',
-          'Conversion Optimization': 'We continuously test and refine your digital assets to increase conversion rates and maximize ROI.',
-          'Custom Reporting': 'We deliver clear, actionable reports tailored to your specific business goals and KPIs.'
+        "Analytics & Insights": {
+          "Performance Tracking": "We implement robust tracking systems to monitor all key metrics and provide a clear picture of your digital performance.",
+          "User Behavior Analysis": "We analyze how users interact with your digital properties to identify opportunities for improvement and optimization.",
+          "Conversion Optimization": "We continuously test and refine your digital assets to increase conversion rates and maximize ROI.",
+          "Custom Reporting": "We deliver clear, actionable reports tailored to your specific business goals and KPIs."
         },
-        'Automation Services': {
-          'Business Process Automation': 'We streamline your operations by automating repetitive tasks, reducing errors and freeing your team to focus on strategic work.',
-          'Marketing & Sales Automation': 'Our automation solutions nurture leads, personalize customer journeys, and increase conversion rates without manual intervention.',
-          'Custom Workflow Development': 'We build tailored automation workflows that address your specific business challenges and integrate with your existing systems.',
-          'Integration with Existing Systems': 'We seamlessly connect your current tools and platforms to create a unified, efficient automation ecosystem.'
+        "Automation Services": {
+          "Business Process Automation": "We streamline your operations by automating repetitive tasks, reducing errors and freeing your team to focus on strategic work.",
+          "Marketing & Sales Automation": "Our automation solutions nurture leads, personalize customer journeys, and increase conversion rates without manual intervention.",
+          "Custom Workflow Development": "We build tailored automation workflows that address your specific business challenges and integrate with your existing systems.",
+          "Integration with Existing Systems": "We seamlessly connect your current tools and platforms to create a unified, efficient automation ecosystem."
         }
       };
       
