@@ -75,6 +75,20 @@ const appData = {
         "PPC Advertising",
         "Email Marketing",
       ],
+      painPoints: [
+        {
+          title: "Low Search Rankings",
+          description: "Your business is invisible in search results, making it difficult for potential customers to find you online."
+        },
+        {
+          title: "Ineffective Ad Spend",
+          description: "You're spending money on digital ads but not seeing meaningful returns or clear data on performance."
+        },
+        {
+          title: "Inconsistent Social Presence",
+          description: "Your social media accounts are inactive or inconsistent, missing opportunities to engage with your audience."
+        }
+      ]
     },
     {
       icon: "mdi-palette",
@@ -88,6 +102,20 @@ const appData = {
         "Visual Identity",
         "Brand Messaging",
       ],
+      painPoints: [
+        {
+          title: "Inconsistent Brand Image",
+          description: "Your brand looks different across various platforms and materials, creating confusion and reducing recognition."
+        },
+        {
+          title: "Dated Visual Identity",
+          description: "Your logo and visual identity feel outdated and don't effectively communicate your brand's current values and offerings."
+        },
+        {
+          title: "Weak Brand Positioning",
+          description: "Your brand fails to differentiate from competitors, making it difficult for customers to understand why they should choose you."
+        }
+      ]
     },
     {
       icon: "mdi-chart-line",
@@ -101,6 +129,20 @@ const appData = {
         "Conversion Optimization",
         "Custom Reporting",
       ],
+      painPoints: [
+        {
+          title: "Data Blind Spots",
+          description: "You're making business decisions without clear data, relying on gut feelings rather than actionable insights."
+        },
+        {
+          title: "Overwhelming Information",
+          description: "You have access to analytics but struggle to interpret the data or extract meaningful business insights."
+        },
+        {
+          title: "Disconnected Data Sources",
+          description: "Your data exists in multiple platforms and systems, making it impossible to see the complete customer journey."
+        }
+      ]
     },
     {
       icon: "mdi-robot",
@@ -114,6 +156,20 @@ const appData = {
         "Custom Workflow Development",
         "Integration with Existing Systems",
       ],
+      painPoints: [
+        {
+          title: "Manual Process Bottlenecks",
+          description: "Your team spends hours on repetitive tasks that could be automated, wasting valuable time and resources."
+        },
+        {
+          title: "Disconnected Systems",
+          description: "Your business tools don't talk to each other, requiring manual data entry and leading to errors and inefficiencies."
+        },
+        {
+          title: "Inconsistent Follow-ups",
+          description: "Your team struggles to consistently follow up with leads and customers, resulting in missed opportunities and revenue."
+        }
+      ]
     },
   ],
   projects: [
