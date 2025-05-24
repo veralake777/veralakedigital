@@ -775,35 +775,91 @@ const app = Vue.createApp({
                           </v-btn>
                         </div>
                         
-                        <!-- Trusted by logos -->
+                        <!-- Success Stories Carousel -->
                         <div class="mt-16 mb-16" style="position: relative; z-index: 5;">
-                          <h3 class="text-white text-h5 font-weight-bold mb-6">TRUSTED BY REAL CLIENTS</h3>
-                          <v-row>
-                            <v-col 
-                              v-for="(client, index) in [
-                                {name: 'AFS Travelers', icon: 'mdi-airplane', color: 'info'},
-                                {name: 'Tara Whalen Law', icon: 'mdi-scale-balance', color: 'success'},
-                                {name: 'Mux Blank', icon: 'mdi-music', color: 'warning'},
-                                {name: 'BCS Bulbls', icon: 'mdi-lightbulb', color: 'accent'},
-                                {name: 'TTD Learning Solutions', icon: 'mdi-school', color: 'error'}
-                              ]" 
-                              :key="index"
-                              cols="12" sm="6" md="4"
-                              class="mb-4"
-                            >
-                              <v-card 
-                                class="rounded-lg py-3 px-4 d-flex align-center" 
-                                color="white"
-                                elevation="3"
-                                @click="trackEvent('client_click', 'reference', client.name)"
+                          <h3 class="text-white text-h5 font-weight-bold mb-6">SUCCESS STORIES</h3>
+                          
+                          <!-- Desktop Client Display (3+ columns) -->
+                          <div class="d-none d-md-block">
+                            <v-row>
+                              <v-col 
+                                v-for="(client, index) in [
+                                  {name: 'AFS Travelers', icon: 'mdi-airplane', color: 'info'},
+                                  {name: 'Tara Whalen Law', icon: 'mdi-scale-balance', color: 'success'},
+                                  {name: 'Mux Blank', icon: 'mdi-music', color: 'warning'},
+                                  {name: 'BCS Bulbls', icon: 'mdi-lightbulb', color: 'accent'},
+                                  {name: 'TTD Learning Solutions', icon: 'mdi-school', color: 'error'}
+                                ]" 
+                                :key="index"
+                                cols="12" sm="6" md="4"
+                                class="mb-4"
                               >
-                                <v-avatar :color="client.color" class="mr-3" size="42">
-                                  <v-icon color="white" size="medium">{{ client.icon }}</v-icon>
-                                </v-avatar>
-                                <span class="font-weight-bold text-primary text-body-1">{{ client.name }}</span>
-                              </v-card>
-                            </v-col>
-                          </v-row>
+                                <v-card 
+                                  class="rounded-lg py-3 px-4 d-flex align-center" 
+                                  color="white"
+                                  elevation="3"
+                                  @click="trackEvent('client_click', 'reference', client.name)"
+                                  ripple
+                                  hover
+                                >
+                                  <v-avatar :color="client.color" class="mr-3" size="42">
+                                    <v-icon color="white" size="medium">{{ client.icon }}</v-icon>
+                                  </v-avatar>
+                                  <span class="font-weight-bold text-primary text-body-1">{{ client.name }}</span>
+                                </v-card>
+                              </v-col>
+                            </v-row>
+                          </div>
+                          
+                          <!-- Mobile Client Carousel -->
+                          <div class="d-block d-md-none">
+                            <v-carousel
+                              height="140"
+                              hide-delimiters
+                              :show-arrows="false"
+                              cycle
+                              interval="3000"
+                              class="client-carousel"
+                            >
+                              <v-carousel-item
+                                v-for="(client, index) in [
+                                  {name: 'AFS Travelers', icon: 'mdi-airplane', color: 'info'},
+                                  {name: 'Tara Whalen Law', icon: 'mdi-scale-balance', color: 'success'},
+                                  {name: 'Mux Blank', icon: 'mdi-music', color: 'warning'},
+                                  {name: 'BCS Bulbls', icon: 'mdi-lightbulb', color: 'accent'},
+                                  {name: 'TTD Learning Solutions', icon: 'mdi-school', color: 'error'}
+                                ]"
+                                :key="index"
+                              >
+                                <v-card 
+                                  class="rounded-lg py-3 px-4 d-flex align-center mx-auto" 
+                                  color="white"
+                                  elevation="3"
+                                  style="width: 90%; max-width: 300px;"
+                                  @click="trackEvent('client_click', 'reference', client.name)"
+                                >
+                                  <v-avatar :color="client.color" class="mr-3" size="52">
+                                    <v-icon color="white" size="large">{{ client.icon }}</v-icon>
+                                  </v-avatar>
+                                  <span class="font-weight-bold text-primary text-h6">{{ client.name }}</span>
+                                </v-card>
+                              </v-carousel-item>
+                            </v-carousel>
+                            
+                            <!-- Navigation Dots -->
+                            <div class="text-center mt-2">
+                              <v-btn
+                                v-for="(client, index) in 5"
+                                :key="index"
+                                icon="mdi-circle"
+                                density="compact"
+                                size="x-small"
+                                color="white"
+                                variant="text"
+                                class="mx-1"
+                              ></v-btn>
+                            </div>
+                          </div>
                         </div>
                       </v-col>
                       
