@@ -537,8 +537,31 @@ const app = Vue.createApp({
 
       // Set the selected booking option if specified
       if (optionId) {
-        const option = this.bookingOptions.find((opt) => opt.id === optionId);
-        this.selectedBookingOption = option || this.bookingOptions[0];
+        // Check if optionId is a service name (string not matching any booking option)
+        if (typeof optionId === 'string' && !this.bookingOptions.find(opt => opt.id === optionId)) {
+          // Create a custom option for this service
+          const serviceData = this.services.find(service => service.title === optionId);
+          if (serviceData) {
+            // Use service data to create a customized booking option
+            this.selectedBookingOption = {
+              id: 'service-' + optionId.toLowerCase().replace(/\s+/g, '-'),
+              name: optionId + ' Consultation',
+              description: 'Discuss how our ' + optionId + ' services can help your business grow. We\'ll cover your specific needs, potential solutions, and a roadmap for implementation.',
+              calendlyUrl: 'veralake/30min',
+              painPoints: serviceData.painPoints || [],
+              features: serviceData.features || [],
+              serviceTitle: optionId
+            };
+          } else {
+            // Fall back to regular option
+            const option = this.bookingOptions.find((opt) => opt.id === optionId);
+            this.selectedBookingOption = option || this.bookingOptions[0];
+          }
+        } else {
+          // Use the regular booking option
+          const option = this.bookingOptions.find((opt) => opt.id === optionId);
+          this.selectedBookingOption = option || this.bookingOptions[0];
+        }
       } else {
         // Default to first option if none specified
         this.selectedBookingOption = this.bookingOptions[0];
@@ -668,14 +691,15 @@ const app = Vue.createApp({
       // Track the event
       this.trackEvent('view_service_landing', 'services', service.title);
       
-      // For the service landing pages, we'll create a dedicated page instead
-      // of using Vue templates with style tags (which aren't allowed)
+      // Instead of using service landing pages (which were causing errors),
+      // open a modal with service details for better conversion
+      this.currentService = service;
+      this.isCalendlyModalOpen = true;
       
-      // Store service details in localStorage so the landing page can access them
-      localStorage.setItem('currentService', JSON.stringify(service));
-      
-      // Open the service in a new tab or navigate to a dedicated service page
-      window.open(`#services/${encodeURIComponent(service.title.toLowerCase().replace(/\s+/g, '-'))}`, '_self');
+      // Load Calendly if not already loaded
+      if (!this.isCalendlyLoaded) {
+        this.loadCalendly();
+      }
     },
     
     getSolutionDescription(serviceTitle, feature) {
@@ -2397,9 +2421,9 @@ const app = Vue.createApp({
                           variant="flat"
                           rounded="pill"
                           elevation="2"
-                          @click="viewServiceLanding(service)"
+                          @click="openCalendlyModal(service.title)"
                         >
-                          Learn More <v-icon end class="ml-1">mdi-arrow-right</v-icon>
+                          Schedule Consultation <v-icon end class="ml-1">mdi-calendar</v-icon>
                         </v-btn>
                         
                         <v-btn 
@@ -2408,9 +2432,9 @@ const app = Vue.createApp({
                           rounded="pill"
                           elevation="2"
                           variant="outlined"
-                          @click="openCalendlyModal"
+                          href="tel:+14706293981"
                         >
-                          Request Service
+                          Call Now
                         </v-btn>
                       </div>
                     </div>

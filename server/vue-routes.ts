@@ -9,6 +9,16 @@ export function registerVueRoutes(app: Express): void {
     res.json({ measurementId });
   });
 
+  // Handle service landing pages
+  app.get("/services/:service", (req: Request, res: Response) => {
+    const publicPath = path.resolve("client/public/index.html");
+    if (fs.existsSync(publicPath)) {
+      res.sendFile(publicPath);
+    } else {
+      res.status(404).send("Service page not found");
+    }
+  });
+  
   // Serve the Vue.js application for all other routes
   app.get("*", (req: Request, res: Response) => {
     const vuePath = path.resolve("client/vue-app/index.html");
