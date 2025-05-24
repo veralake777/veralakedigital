@@ -646,76 +646,83 @@
           </v-card>
         </v-dialog>
         
-        <!-- Service Detail Modal (Service Landing Page) -->
-        <v-dialog v-model="isServiceDetailOpen" width="900" scrollable persistent>
-          <v-card v-if="selectedService" class="rounded-lg">
-            <!-- Service Header -->
-            <v-card-title :class="`text-h5 text-white d-flex align-center`" :style="`background-color: var(--v-${selectedService.color}-base)`">
-              <v-icon class="mr-2">{{ selectedService.icon }}</v-icon>
-              <span>{{ selectedService.title }}</span>
-              <v-spacer></v-spacer>
-              <v-btn icon variant="text" color="white" @click="isServiceDetailOpen = false">
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-            </v-card-title>
+        <!-- Project Details Dialog -->
+        <v-dialog v-model="isServiceDetailOpen" width="800">
+          <v-card v-if="selectedService">
+            <v-img
+              height="250"
+              :src="'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'"
+              cover
+              :style="`background-color: var(--v-${selectedService.color || 'primary'}-base)`"
+              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+            >
+              <v-card-title class="text-white flex-column align-start justify-end fill-height">
+                <div class="text-overline font-weight-bold">SERVICE DETAILS</div>
+                <div class="text-h4 font-weight-bold my-2">{{ selectedService.title }}</div>
+                <div class="d-flex align-center">
+                  <v-icon color="white" class="mr-1" size="small">mdi-check-circle</v-icon>
+                  <span class="text-body-2">Professional Service</span>
+                </div>
+              </v-card-title>
+            </v-img>
             
-            <v-card-text class="pa-0">
-              <!-- Service Hero Banner -->
-              <div class="pa-6 pb-0">
-                <h2 class="text-h4 font-weight-bold mb-4">Transform Your Business with {{ selectedService.title }}</h2>
-                <p class="text-subtitle-1 mb-6">{{ selectedService.description }}</p>
-              </div>
+            <v-card-text class="pa-4">
+              <!-- Main Description -->
+              <p class="text-body-1 mb-6">{{ selectedService.description }}</p>
               
-              <!-- Features with Benefits Section -->
-              <div class="px-6 py-4">
-                <h3 class="text-h6 font-weight-bold mb-4">Key Benefits</h3>
-                <v-row>
-                  <v-col v-for="(feature, index) in selectedService.features" :key="index" cols="12" sm="6" class="d-flex">
-                    <v-card variant="outlined" class="pa-4 flex-grow-1">
-                      <div class="d-flex align-center mb-2">
-                        <v-icon :color="selectedService.color" class="mr-2">mdi-check-circle</v-icon>
-                        <span class="font-weight-bold">{{ feature }}</span>
-                      </div>
-                      <p class="text-caption">
-                        {{ index === 0 ? 'Increase engagement and conversion with our expertise.' : 
-                           index === 1 ? 'Stay ahead of competitors with industry best practices.' : 
-                           index === 2 ? 'Tailored solutions designed for your specific business needs.' : 
-                           'Measurable results with transparent reporting and analytics.' }}
+              <!-- Features Section -->
+              <h3 class="text-h6 font-weight-bold mb-4">Key Features</h3>
+              <v-row>
+                <v-col v-for="(feature, index) in selectedService.features" :key="index" cols="12" md="6">
+                  <div class="d-flex mb-4">
+                    <v-icon :color="selectedService.color || 'primary'" class="mr-3">mdi-check-circle</v-icon>
+                    <div>
+                      <h4 class="text-subtitle-1 font-weight-bold">{{ feature }}</h4>
+                      <p class="text-body-2">
+                        {{ index === 0 ? 'Increase engagement and drive business growth.' : 
+                           index === 1 ? 'Stay ahead of competition with innovative solutions.' : 
+                           index === 2 ? 'Tailored approach based on your specific requirements.' : 
+                           'Reliable service with measurable results.' }}
                       </p>
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </div>
+                    </div>
+                  </div>
+                </v-col>
+              </v-row>
               
-              <!-- Pain Points Section -->
-              <div class="px-6 py-4 bg-grey-lighten-4">
-                <h3 class="text-h6 font-weight-bold mb-4">Common Challenges We Solve</h3>
-                <v-list class="bg-transparent px-0">
-                  <v-list-item v-for="(i, index) in 3" :key="index">
-                    <template v-slot:prepend>
-                      <v-icon color="error" class="mr-2">mdi-alert-circle-outline</v-icon>
-                    </template>
-                    <v-list-item-title class="font-weight-medium">
-                      {{ index === 0 ? 'Inconsistent Results' : 
-                         index === 1 ? 'Wasted Resources' : 
-                         'Missed Opportunities' }}
-                    </v-list-item-title>
-                    <v-list-item-subtitle>
-                      {{ index === 0 ? 'You\'re not seeing reliable, measurable outcomes from your current approach.' : 
-                         index === 1 ? 'Your team is spending time and money without clear return on investment.' : 
-                         'Your competitors are capturing market share that should be yours.' }}
-                    </v-list-item-subtitle>
-                  </v-list-item>
-                </v-list>
-              </div>
+              <!-- Call to Action -->
+              <v-card class="mt-6 mb-4 pa-4" :color="selectedService.color || 'primary'" variant="flat">
+                <div class="text-white">
+                  <h3 class="text-h6 font-weight-bold mb-2">Ready to get started?</h3>
+                  <p class="text-body-2 mb-4">Schedule a free consultation to discuss how we can help your business grow with our {{ selectedService.title }} service.</p>
+                  <div class="d-flex flex-wrap gap-2">
+                    <v-btn 
+                      color="white" 
+                      :class="`text-${selectedService.color || 'primary'}`" 
+                      variant="flat"
+                      @click="openCalendlyModal(); isServiceDetailOpen = false; trackEvent('service_consultation', 'cta', selectedService.title)"
+                    >
+                      <v-icon start>mdi-calendar</v-icon> Schedule Consultation
+                    </v-btn>
+                    <v-btn 
+                      color="white" 
+                      variant="outlined"
+                      href="tel:+14706293981"
+                      @click="trackEvent('service_call', 'cta', selectedService.title)"
+                    >
+                      <v-icon start>mdi-phone</v-icon> Call Now
+                    </v-btn>
+                  </div>
+                </div>
+              </v-card>
               
               <!-- Testimonial -->
-              <div class="px-6 py-4">
+              <div class="mt-6 mb-4">
+                <h3 class="text-h6 font-weight-bold mb-4">What Our Clients Say</h3>
                 <v-card variant="outlined" class="pa-4">
-                  <v-icon :color="selectedService.color" size="large" class="mb-2">mdi-format-quote-open</v-icon>
+                  <v-icon :color="selectedService.color || 'primary'" size="large" class="mb-2">mdi-format-quote-open</v-icon>
                   <p class="text-body-1 font-italic mb-4">
-                    Working with Veralake on our {{ selectedService.title.toLowerCase() }} was a game-changer for our business. 
-                    Their strategic approach helped us achieve remarkable results and created new growth opportunities.
+                    Working with Veralake Digital on our {{ selectedService.title.toLowerCase() }} project was a game-changer. 
+                    Their expertise helped us achieve our goals faster than expected.
                   </p>
                   <div class="d-flex align-center">
                     <v-avatar size="48" class="mr-3">
@@ -728,54 +735,23 @@
                   </div>
                 </v-card>
               </div>
-              
-              <!-- FAQ Section -->
-              <div class="px-6 py-4">
-                <h3 class="text-h6 font-weight-bold mb-4">Frequently Asked Questions</h3>
-                <v-expansion-panels variant="accordion">
-                  <v-expansion-panel>
-                    <v-expansion-panel-title>
-                      How long does it take to see results from {{ selectedService.title }}?
-                    </v-expansion-panel-title>
-                    <v-expansion-panel-text>
-                      While you may see initial improvements within weeks, meaningful results typically develop over 3-6 months as we optimize and refine our approach based on data and market response.
-                    </v-expansion-panel-text>
-                  </v-expansion-panel>
-                  <v-expansion-panel>
-                    <v-expansion-panel-title>
-                      What makes your {{ selectedService.title }} approach different?
-                    </v-expansion-panel-title>
-                    <v-expansion-panel-text>
-                      We combine industry best practices with customized strategies tailored to your unique business goals, audience, and market conditions. Our focus is on measurable outcomes, not just activities.
-                    </v-expansion-panel-text>
-                  </v-expansion-panel>
-                  <v-expansion-panel>
-                    <v-expansion-panel-title>
-                      How do you measure success with {{ selectedService.title }}?
-                    </v-expansion-panel-title>
-                    <v-expansion-panel-text>
-                      We establish clear KPIs aligned with your business objectives, then track and report on these metrics regularly, making data-driven adjustments to maximize results and ROI.
-                    </v-expansion-panel-text>
-                  </v-expansion-panel>
-                </v-expansion-panels>
-              </div>
-              
-              <!-- CTA Section -->
-              <div class="px-6 py-8">
-                <v-card :color="selectedService.color" class="text-white pa-6 rounded-lg">
-                  <h3 class="text-h5 font-weight-bold mb-3">Ready to transform your {{ selectedService.title.toLowerCase() }}?</h3>
-                  <p class="mb-6">Schedule a free consultation to discuss your needs and discover how we can help your business grow.</p>
-                  <div class="d-flex flex-wrap gap-3">
-                    <v-btn color="white" class="text-primary" variant="elevated" size="large" @click="openCalendlyModal(); isServiceDetailOpen = false; trackEvent('service_cta_click', 'services', selectedService.title)">
-                      <v-icon start>mdi-calendar</v-icon> Schedule Consultation
-                    </v-btn>
-                    <v-btn variant="outlined" color="white" size="large" href="tel:+14706293981" @click="trackEvent('service_call_click', 'services', selectedService.title)">
-                      <v-icon start>mdi-phone</v-icon> Call Us Now
-                    </v-btn>
-                  </div>
-                </v-card>
-              </div>
             </v-card-text>
+            
+            <v-divider></v-divider>
+            
+            <v-card-actions class="pa-4">
+              <v-btn variant="text" @click="isServiceDetailOpen = false">
+                <v-icon start>mdi-arrow-left</v-icon> Back
+              </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn 
+                :color="selectedService.color || 'primary'" 
+                variant="elevated"
+                @click="openCalendlyModal(); isServiceDetailOpen = false; trackEvent('service_consultation', 'action', selectedService.title)"
+              >
+                Get Started <v-icon end>mdi-arrow-right</v-icon>
+              </v-btn>
+            </v-card-actions>
           </v-card>
         </v-dialog>
         
