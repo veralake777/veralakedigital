@@ -219,10 +219,10 @@ const app = Vue.createApp({
       isCalendlyLoaded: false,
       selectedBookingOption: null,
       bookingOptions: [
-        { id: 'strategy', name: 'Marketing Strategy Session', url: 'https://calendly.com/veralake-digital/marketing-strategy', duration: '15 min' },
-        { id: 'analytics', name: 'Free Analytics Setup Call', url: 'https://calendly.com/veralake-digital/analytics-setup', duration: '30 min' },
-        { id: 'consultation', name: 'Marketing Consultation', url: 'https://calendly.com/veralake-digital/consultation', duration: '30 min' },
-        { id: 'meeting', name: '30 Minute Meeting', url: 'https://calendly.com/veralake-digital/30min', duration: '30 min' }
+        { id: 'strategy', name: 'Marketing Strategy Session', url: 'https://calendly.com/veralake-digital/marketing-strategy', duration: '15 min', description: 'Quick session to discuss your marketing strategy needs and challenges.' },
+        { id: 'analytics', name: 'Free Analytics Setup Call', url: 'https://calendly.com/veralake-digital/analytics-setup', duration: '30 min', description: 'Discuss how to set up analytics for your business and extract valuable insights.' },
+        { id: 'consultation', name: 'Marketing Consultation', url: 'https://calendly.com/veralake-digital/consultation', duration: '30 min', description: 'In-depth consultation about your marketing and digital presence.' },
+        { id: 'meeting', name: '30 Minute Meeting', url: 'https://calendly.com/veralake-digital/30min', duration: '30 min', description: 'General meeting to discuss your business needs and how we can help.' }
       ],
       activeSection: 'home',
       ...appData
@@ -1385,10 +1385,7 @@ const app = Vue.createApp({
                   
                   <v-card-text class="pt-4">
                     <p class="text-body-2 mb-4">
-                      {{ option.id === 'strategy' ? 'Quick session to discuss your marketing strategy needs and challenges.' :
-                         option.id === 'analytics' ? 'Discuss how to set up analytics for your business and extract valuable insights.' :
-                         option.id === 'consultation' ? 'In-depth consultation about your marketing and digital presence.' :
-                         'General meeting to discuss your business needs and how we can help.' }}
+                      {{ option.description }}
                     </p>
                     
                     <v-btn
