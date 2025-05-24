@@ -504,6 +504,51 @@ const app = Vue.createApp({
               Book a Call
             </v-btn>
             
+            <!-- Phone Contact Menu -->
+            <v-menu
+              transition="slide-y-transition"
+              location="bottom"
+            >
+              <template v-slot:activator="{ props }">
+                <v-btn
+                  color="primary"
+                  variant="tonal"
+                  class="ml-2 rounded-pill"
+                  v-bind="props"
+                >
+                  <v-icon>mdi-phone</v-icon>
+                </v-btn>
+              </template>
+              <v-card min-width="200">
+                <v-card-text class="pa-4">
+                  <div class="d-flex flex-column gap-2">
+                    <v-btn
+                      block
+                      color="primary"
+                      variant="flat"
+                      href="tel:+14706293981"
+                      class="mb-2"
+                      @click="trackEvent('phone_call', 'contact', 'navbar')"
+                    >
+                      <v-icon start>mdi-phone</v-icon>
+                      Call Now
+                    </v-btn>
+                    <v-btn
+                      block
+                      color="primary"
+                      variant="outlined"
+                      href="sms:+14706293981"
+                      @click="trackEvent('text_message', 'contact', 'navbar')"
+                    >
+                      <v-icon start>mdi-message</v-icon>
+                      Send Text
+                    </v-btn>
+                  </div>
+                </v-card-text>
+              </v-card>
+            </v-menu>
+            
+            <!-- Single Theme Toggle for Desktop -->
             <v-btn 
               icon 
               variant="text" 
@@ -511,26 +556,60 @@ const app = Vue.createApp({
               @click="toggleTheme"
               :aria-label="theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'"
             >
-              <v-icon>{{ theme === 'light' ? 'mdi-weather-night' : 'mdi-weather-sunny' }}</v-icon>
+              <v-icon v-if="theme === 'light'">mdi-weather-night</v-icon>
+              <v-icon v-else>mdi-weather-sunny</v-icon>
             </v-btn>
           </div>
           
           <!-- Mobile Navigation Toggle -->
           <div class="hidden-md-and-up d-flex align-center">
             <!-- Contact button always visible on mobile -->
-            <v-btn 
-              color="primary" 
-              variant="flat" 
-              size="small"
-              density="comfortable"
-              class="mr-3 text-white" 
-              rounded="pill"
-              @click="openCalendlyModal"
+            <v-menu
+              transition="slide-y-transition"
+              location="bottom"
             >
-              <v-icon size="small">mdi-phone</v-icon>
-            </v-btn>
+              <template v-slot:activator="{ props }">
+                <v-btn
+                  color="primary"
+                  variant="flat"
+                  size="small"
+                  density="comfortable"
+                  class="mr-3 text-white rounded-pill"
+                  v-bind="props"
+                >
+                  <v-icon size="small">mdi-phone</v-icon>
+                </v-btn>
+              </template>
+              <v-card min-width="200">
+                <v-card-text class="pa-4">
+                  <div class="d-flex flex-column gap-2">
+                    <v-btn
+                      block
+                      color="primary"
+                      variant="flat"
+                      href="tel:+14706293981"
+                      class="mb-2"
+                      @click="trackEvent('phone_call', 'contact', 'navbar_mobile')"
+                    >
+                      <v-icon start>mdi-phone</v-icon>
+                      Call Now
+                    </v-btn>
+                    <v-btn
+                      block
+                      color="primary"
+                      variant="outlined"
+                      href="sms:+14706293981"
+                      @click="trackEvent('text_message', 'contact', 'navbar_mobile')"
+                    >
+                      <v-icon start>mdi-message</v-icon>
+                      Send Text
+                    </v-btn>
+                  </div>
+                </v-card-text>
+              </v-card>
+            </v-menu>
             
-            <!-- Theme toggle -->
+            <!-- Single Theme Toggle for Mobile -->
             <v-btn 
               icon 
               variant="text" 
@@ -538,15 +617,17 @@ const app = Vue.createApp({
               class="mr-3" 
               @click="toggleTheme"
             >
-              <v-icon>{{ theme === 'light' ? 'mdi-weather-night' : 'mdi-weather-sunny' }}</v-icon>
+              <v-icon v-if="theme === 'light'">mdi-weather-night</v-icon>
+              <v-icon v-else>mdi-weather-sunny</v-icon>
             </v-btn>
             
-            <!-- Menu toggle -->
+            <!-- Menu toggle (mobile only) -->
             <v-btn 
               icon 
               :color="drawer ? 'primary' : ''" 
               variant="text"
               @click="drawer = !drawer"
+              class="d-md-none"
             >
               <v-icon>{{ drawer ? 'mdi-close' : 'mdi-menu' }}</v-icon>
             </v-btn>
