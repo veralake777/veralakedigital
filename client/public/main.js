@@ -315,6 +315,24 @@ const app = Vue.createApp({
       }
     },
     
+    goToCalendly(option) {
+      this.selectedBookingOption = option;
+      
+      // Track in Google Analytics
+      if (localStorage.getItem('cookies-accepted') === 'true') {
+        gtag('event', 'calendly_booking', {
+          'event_category': 'conversion',
+          'event_label': option.id
+        });
+      }
+      
+      // Open Calendly in a new tab
+      window.open(option.url, '_blank');
+      
+      // Close the modal
+      this.closeCalendlyModal();
+    },
+    
     initCalendly() {
       // Get the container element
       const container = document.querySelector('.calendly-inline-widget');
@@ -1332,55 +1350,77 @@ const app = Vue.createApp({
             </v-btn>
           </v-card-title>
           
-          <!-- Booking Option Selector -->
-          <v-card-text class="pa-4 pb-0 booking-options-container" style="background: rgba(var(--primary), 0.03); border-bottom: 1px solid rgba(var(--primary), 0.1);">
-            <h3 class="text-h6 font-weight-bold mb-3">Select Consultation Type:</h3>
-            <v-chip-group
-              v-model="selectedBookingOption"
-              selected-class="bg-primary text-white"
-              mandatory
-              class="mb-2"
-            >
-              <v-chip
-                v-for="option in bookingOptions"
-                :key="option.id"
-                :value="option"
-                filter
+          <v-card-text class="pa-4">
+            <div class="text-center mb-8">
+              <h3 class="text-h5 font-weight-bold mb-3">Choose Your Consultation Type</h3>
+              <p class="text-body-1">Select the type of consultation that best fits your needs</p>
+            </div>
+            
+            <v-row class="justify-center">
+              <v-col v-for="option in bookingOptions" :key="option.id" cols="12" sm="6" md="6" class="px-2">
+                <v-card
+                  :elevation="selectedBookingOption?.id === option.id ? 8 : 2"
+                  :class="{'border-primary': selectedBookingOption?.id === option.id}"
+                  class="booking-option-card h-100 transition-swing"
+                  style="transition: all 0.3s ease; overflow: hidden; border: 2px solid transparent;"
+                  @click="goToCalendly(option)"
+                  hover
+                >
+                  <v-card-item :class="selectedBookingOption?.id === option.id ? 'bg-primary text-white' : ''">
+                    <template v-slot:prepend>
+                      <v-icon
+                        size="large"
+                        :color="selectedBookingOption?.id === option.id ? 'white' : option.id === 'strategy' ? 'primary' : option.id === 'analytics' ? 'info' : option.id === 'consultation' ? 'accent' : 'secondary'"
+                      >
+                        {{ option.id === 'strategy' ? 'mdi-chart-line' : 
+                           option.id === 'analytics' ? 'mdi-google-analytics' : 
+                           option.id === 'consultation' ? 'mdi-briefcase' : 'mdi-calendar-clock' }}
+                      </v-icon>
+                    </template>
+                    <v-card-title>{{ option.name }}</v-card-title>
+                    <v-card-subtitle :class="selectedBookingOption?.id === option.id ? 'text-white' : ''">
+                      {{ option.duration }} • One-on-One
+                    </v-card-subtitle>
+                  </v-card-item>
+                  
+                  <v-card-text class="pt-4">
+                    <p class="text-body-2 mb-4">
+                      {{ option.id === 'strategy' ? 'Quick session to discuss your marketing strategy needs and challenges.' :
+                         option.id === 'analytics' ? 'Discuss how to set up analytics for your business and extract valuable insights.' :
+                         option.id === 'consultation' ? 'In-depth consultation about your marketing and digital presence.' :
+                         'General meeting to discuss your business needs and how we can help.' }}
+                    </p>
+                    
+                    <v-btn
+                      block
+                      color="primary"
+                      variant="flat"
+                      :class="selectedBookingOption?.id === option.id ? 'bg-white text-primary' : ''"
+                      @click.stop="goToCalendly(option)"
+                    >
+                      <v-icon start>mdi-calendar-plus</v-icon>
+                      Schedule Now
+                    </v-btn>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+            
+            <!-- Direct Calendly Link Option -->
+            <div class="text-center mt-8">
+              <p class="text-body-2 mb-2">Prefer to book directly on Calendly?</p>
+              <v-btn
                 variant="outlined"
                 color="primary"
-                class="px-4 py-3 mr-2 mb-2"
-                @click="selectBookingOption(option)"
+                size="small"
+                href="https://calendly.com/veralake-digital"
+                target="_blank"
+                rel="noopener noreferrer"
+                @click="trackEvent('open_calendly_external', 'booking', 'external_link')"
               >
-                <v-icon 
-                  start 
-                  :icon="option.id === 'strategy' ? 'mdi-chart-line' : 
-                         option.id === 'analytics' ? 'mdi-google-analytics' : 
-                         option.id === 'consultation' ? 'mdi-briefcase' : 'mdi-calendar-clock'"
-                  class="mr-1"
-                ></v-icon>
-                {{ option.name }}
-                <span class="ml-1 text-caption">{{ option.duration }}</span>
-              </v-chip>
-            </v-chip-group>
-            <p v-if="selectedBookingOption" class="text-body-2 mb-3">
-              <v-icon size="small" color="primary" class="mr-1">mdi-information-outline</v-icon>
-              {{ selectedBookingOption.id === 'strategy' ? 'Quick session to discuss your marketing strategy needs and challenges.' :
-                 selectedBookingOption.id === 'analytics' ? 'Discuss how to set up analytics for your business and extract valuable insights.' :
-                 selectedBookingOption.id === 'consultation' ? 'In-depth consultation about your marketing and digital presence.' :
-                 'General meeting to discuss your business needs and how we can help.' }}
-            </p>
-          </v-card-text>
-          
-          <v-card-text class="pa-0">
-            <div class="calendly-inline-widget" style="min-width:320px; height:600px;">
-              <!-- Loading State -->
-              <div v-if="!isCalendlyLoaded" class="d-flex flex-column align-center justify-center" style="height:600px;">
-                <v-progress-circular indeterminate color="primary" size="60" width="6" class="mb-5"></v-progress-circular>
-                <h3 class="text-h5 font-weight-bold mb-3">Loading Calendar</h3>
-                <p class="text-body-1 text-center mx-8">
-                  Please wait while we prepare the scheduling options for your {{ selectedBookingOption ? selectedBookingOption.name : 'consultation' }}.
-                </p>
-              </div>
+                <v-icon start size="small">mdi-open-in-new</v-icon>
+                Open Calendly
+              </v-btn>
             </div>
           </v-card-text>
         </v-card>
