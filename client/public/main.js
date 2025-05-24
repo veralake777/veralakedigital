@@ -1350,52 +1350,132 @@ const app = Vue.createApp({
             </v-btn>
           </v-card-title>
           
+          <!-- Simple Modal Content -->
           <v-card-text class="pa-4">
             <div class="text-center mb-8">
               <h3 class="text-h5 font-weight-bold mb-3">Choose Your Consultation Type</h3>
               <p class="text-body-1">Select the type of consultation that best fits your needs</p>
             </div>
             
-            <v-row class="justify-center">
-              <v-col v-for="option in bookingOptions" :key="option.id" cols="12" sm="6" md="6" class="px-2">
-                <v-card
-                  :elevation="selectedBookingOption?.id === option.id ? 8 : 2"
-                  :class="{'border-primary': selectedBookingOption?.id === option.id}"
-                  class="booking-option-card h-100 transition-swing"
-                  style="transition: all 0.3s ease; overflow: hidden; border: 2px solid transparent;"
-                  @click="goToCalendly(option)"
-                  hover
-                >
-                  <v-card-item :class="selectedBookingOption?.id === option.id ? 'bg-primary text-white' : ''">
+            <v-row>
+              <!-- Marketing Strategy Session -->
+              <v-col cols="12" sm="6" class="mb-4">
+                <v-card class="h-100" elevation="2">
+                  <v-card-item :class="{'bg-primary text-white': selectedBookingOption?.id === 'strategy'}">
                     <template v-slot:prepend>
-                      <v-icon
-                        size="large"
-                        :color="selectedBookingOption?.id === option.id ? 'white' : option.id === 'strategy' ? 'primary' : option.id === 'analytics' ? 'info' : option.id === 'consultation' ? 'accent' : 'secondary'"
-                      >
-                        {{ option.id === 'strategy' ? 'mdi-chart-line' : 
-                           option.id === 'analytics' ? 'mdi-google-analytics' : 
-                           option.id === 'consultation' ? 'mdi-briefcase' : 'mdi-calendar-clock' }}
-                      </v-icon>
+                      <v-avatar color="primary" class="text-white">
+                        <v-icon>mdi-chart-line</v-icon>
+                      </v-avatar>
                     </template>
-                    <v-card-title>{{ option.name }}</v-card-title>
-                    <v-card-subtitle :class="selectedBookingOption?.id === option.id ? 'text-white' : ''">
-                      {{ option.duration }} • One-on-One
+                    <v-card-title>Marketing Strategy Session</v-card-title>
+                    <v-card-subtitle :class="{'text-white': selectedBookingOption?.id === 'strategy'}">
+                      15 min • One-on-One
                     </v-card-subtitle>
                   </v-card-item>
-                  
                   <v-card-text class="pt-4">
                     <p class="text-body-2 mb-4">
-                      {{ option.description }}
+                      Quick session to discuss your marketing strategy needs and challenges.
                     </p>
-                    
-                    <v-btn
-                      block
-                      color="primary"
+                    <v-btn 
+                      block 
+                      color="primary" 
+                      @click="goToCalendly(bookingOptions[0])"
                       variant="flat"
-                      :class="selectedBookingOption?.id === option.id ? 'bg-white text-primary' : ''"
-                      @click.stop="goToCalendly(option)"
                     >
-                      <v-icon start>mdi-calendar-plus</v-icon>
+                      <v-icon start>mdi-calendar</v-icon>
+                      Schedule Now
+                    </v-btn>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              
+              <!-- Free Analytics Setup Call -->
+              <v-col cols="12" sm="6" class="mb-4">
+                <v-card class="h-100" elevation="2">
+                  <v-card-item :class="{'bg-info text-white': selectedBookingOption?.id === 'analytics'}">
+                    <template v-slot:prepend>
+                      <v-avatar color="info" class="text-white">
+                        <v-icon>mdi-google-analytics</v-icon>
+                      </v-avatar>
+                    </template>
+                    <v-card-title>Free Analytics Setup Call</v-card-title>
+                    <v-card-subtitle :class="{'text-white': selectedBookingOption?.id === 'analytics'}">
+                      30 min • One-on-One
+                    </v-card-subtitle>
+                  </v-card-item>
+                  <v-card-text class="pt-4">
+                    <p class="text-body-2 mb-4">
+                      Discuss how to set up analytics for your business and extract valuable insights.
+                    </p>
+                    <v-btn 
+                      block 
+                      color="info" 
+                      @click="goToCalendly(bookingOptions[1])"
+                      variant="flat"
+                    >
+                      <v-icon start>mdi-calendar</v-icon>
+                      Schedule Now
+                    </v-btn>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              
+              <!-- Marketing Consultation -->
+              <v-col cols="12" sm="6" class="mb-4">
+                <v-card class="h-100" elevation="2">
+                  <v-card-item :class="{'bg-accent text-white': selectedBookingOption?.id === 'consultation'}">
+                    <template v-slot:prepend>
+                      <v-avatar color="accent" class="text-white">
+                        <v-icon>mdi-briefcase</v-icon>
+                      </v-avatar>
+                    </template>
+                    <v-card-title>Marketing Consultation</v-card-title>
+                    <v-card-subtitle :class="{'text-white': selectedBookingOption?.id === 'consultation'}">
+                      30 min • One-on-One
+                    </v-card-subtitle>
+                  </v-card-item>
+                  <v-card-text class="pt-4">
+                    <p class="text-body-2 mb-4">
+                      In-depth consultation about your marketing and digital presence.
+                    </p>
+                    <v-btn 
+                      block 
+                      color="accent" 
+                      @click="goToCalendly(bookingOptions[2])"
+                      variant="flat"
+                    >
+                      <v-icon start>mdi-calendar</v-icon>
+                      Schedule Now
+                    </v-btn>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              
+              <!-- 30 Minute Meeting -->
+              <v-col cols="12" sm="6" class="mb-4">
+                <v-card class="h-100" elevation="2">
+                  <v-card-item :class="{'bg-secondary text-white': selectedBookingOption?.id === 'meeting'}">
+                    <template v-slot:prepend>
+                      <v-avatar color="secondary" class="text-white">
+                        <v-icon>mdi-calendar-clock</v-icon>
+                      </v-avatar>
+                    </template>
+                    <v-card-title>30 Minute Meeting</v-card-title>
+                    <v-card-subtitle :class="{'text-white': selectedBookingOption?.id === 'meeting'}">
+                      30 min • One-on-One
+                    </v-card-subtitle>
+                  </v-card-item>
+                  <v-card-text class="pt-4">
+                    <p class="text-body-2 mb-4">
+                      General meeting to discuss your business needs and how we can help.
+                    </p>
+                    <v-btn 
+                      block 
+                      color="secondary" 
+                      @click="goToCalendly(bookingOptions[3])"
+                      variant="flat"
+                    >
+                      <v-icon start>mdi-calendar</v-icon>
                       Schedule Now
                     </v-btn>
                   </v-card-text>
@@ -1403,8 +1483,8 @@ const app = Vue.createApp({
               </v-col>
             </v-row>
             
-            <!-- Direct Calendly Link Option -->
-            <div class="text-center mt-8">
+            <!-- Direct Calendly Link -->
+            <div class="text-center mt-6 pt-2" style="border-top: 1px solid rgba(var(--primary), 0.1);">
               <p class="text-body-2 mb-2">Prefer to book directly on Calendly?</p>
               <v-btn
                 variant="outlined"
