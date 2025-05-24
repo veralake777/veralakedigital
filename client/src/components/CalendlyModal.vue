@@ -12,12 +12,12 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
-      
+
       <v-card-text class="pa-6">
         <p class="text-body-1 text-medium-emphasis mb-6">
           Select a convenient time for a 30-minute call with our team to discuss your project and how we can help you achieve your business goals.
         </p>
-        
+
         <div class="calendly-container">
           <div v-if="calendlyLoaded" class="calendly-inline-widget" data-url="https://calendly.com/d/example-meeting/30min" style="min-width:320px;height:630px;"></div>
           <div v-else class="calendly-placeholder d-flex flex-column align-center justify-center">
@@ -65,7 +65,7 @@ const loadCalendlyWidget = () => {
     calendlyLoaded.value = true
     return
   }
-  
+
   // Load Calendly script
   const script = document.createElement('script')
   script.src = 'https://assets.calendly.com/assets/external/widget.js'
@@ -73,14 +73,14 @@ const loadCalendlyWidget = () => {
   script.onload = () => {
     calendlyLoaded.value = true
   }
-  
+
   document.head.appendChild(script)
-  
+
   // Load Calendly styles
   const link = document.createElement('link')
   link.href = 'https://assets.calendly.com/assets/external/widget.css'
   link.rel = 'stylesheet'
-  
+
   document.head.appendChild(link)
 }
 
@@ -102,5 +102,10 @@ onMounted(() => {
 
 .font-poppins {
   font-family: 'Poppins', sans-serif;
+}
+
+/* Add this style to ensure text is visible when a button is selected in Calendly */
+.calendly-inline-widget .calendly-grid .calendly-event-name {
+    color: black !important; /* Or any other visible color */
 }
 </style>
