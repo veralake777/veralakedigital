@@ -273,6 +273,8 @@ const app = Vue.createApp({
       isCalendlyModalOpen: false,
       isCalendlyLoaded: false,
       selectedBookingOption: null,
+      currentView: 'main', // 'main' or 'project-detail'
+      currentProject: null, // Stores the currently viewed project
       bookingOptions: [
         {
           id: "strategy",
@@ -453,6 +455,31 @@ const app = Vue.createApp({
           event_label: label,
         });
       }
+    },
+    
+    viewProjectDetails(project) {
+      // Track the event
+      this.trackEvent('view_project_details', 'portfolio', project.title);
+      
+      // Set the current project and change the view
+      this.currentProject = project;
+      this.currentView = 'project-detail';
+      
+      // Scroll to top
+      window.scrollTo(0, 0);
+    },
+    
+    backToMain() {
+      this.currentView = 'main';
+      this.currentProject = null;
+      
+      // If the user was previously on the portfolio section, scroll back to it
+      setTimeout(() => {
+        const portfolioSection = document.getElementById('portfolio');
+        if (portfolioSection) {
+          portfolioSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
     },
 
     handleScroll() {
@@ -1235,7 +1262,7 @@ const app = Vue.createApp({
                         <v-btn 
                           variant="outlined" 
                           color="white"
-                          @click="trackEvent('view_project', 'portfolio', project.title)"
+                          @click="viewProjectDetails(project)"
                         >
                           View Details
                         </v-btn>
