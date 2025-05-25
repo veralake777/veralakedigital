@@ -179,20 +179,20 @@ const app = Vue.createApp({
       ],
       faqItems: [
         {
-          question: "What services does Veralake Digital offer?",
-          answer: "We provide comprehensive digital solutions including web development, mobile app development, e-commerce, UI/UX design, digital marketing, and cloud solutions. Our team can handle projects of any size, from simple websites to complex enterprise applications."
+          question: "What services does Vera Lake Digital offer?",
+          answer: "I provide comprehensive digital solutions including web development, mobile app development, e-commerce, UI/UX design, digital marketing, and cloud solutions. I can handle projects of any size, from simple websites to complex enterprise applications."
         },
         {
           question: "How long does it take to build a website?",
-          answer: "The timeline varies depending on the complexity of the project. A simple informational website might take 2-4 weeks, while a complex e-commerce platform or custom web application could take 2-4 months. We'll provide a detailed timeline during our initial consultation based on your specific requirements."
+          answer: "The timeline varies depending on the complexity of the project. A simple informational website might take 2-4 weeks, while a complex e-commerce platform or custom web application could take 2-4 months. I'll provide a detailed timeline during our initial consultation based on your specific requirements."
         },
         {
           question: "What is your development process?",
-          answer: "Our process includes discovery (understanding your goals and requirements), planning (creating wireframes and project roadmap), design (creating visual mockups), development (building the actual product), testing (ensuring everything works perfectly), launch, and ongoing support and maintenance."
+          answer: "My process includes discovery (understanding your goals and requirements), planning (creating wireframes and project roadmap), design (creating visual mockups), development (building the actual product), testing (ensuring everything works perfectly), launch, and ongoing support and maintenance."
         },
         {
           question: "Do you offer website maintenance services?",
-          answer: "Yes, we offer ongoing maintenance and support packages to keep your digital products secure, up-to-date, and performing optimally. These can include regular updates, security monitoring, performance optimization, content updates, and technical support."
+          answer: "Yes, I offer ongoing maintenance and support packages to keep your digital products secure, up-to-date, and performing optimally. These can include regular updates, security monitoring, performance optimization, content updates, and technical support."
         },
         {
           question: "How much does a website or app cost?",

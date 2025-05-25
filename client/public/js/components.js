@@ -399,7 +399,7 @@ const BlogSection = {
         <div class="section-header">
           <h2 class="section-title">Latest Insights</h2>
           <p class="section-subtitle">
-            Tips, trends and insights from our digital marketing experts
+            Tips, trends and insights from my digital marketing experience
           </p>
         </div>
         
@@ -447,7 +447,7 @@ const FaqSection = {
         <div class="section-header">
           <h2 class="section-title">Frequently Asked Questions</h2>
           <p class="section-subtitle">
-            Get answers to common questions about our services
+            Get answers to common questions about my services
           </p>
         </div>
         
@@ -474,7 +474,7 @@ const FaqSection = {
           <div class="faq-cta">
             <div class="cta-card">
               <h3>Still have questions?</h3>
-              <p>We're here to help you with any questions about our services.</p>
+              <p>I'm here to help you with any questions about my services.</p>
               <button class="cta-button" @click="$emit('open-calendly')">
                 Schedule a Consultation
               </button>
