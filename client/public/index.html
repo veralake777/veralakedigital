@@ -50,6 +50,16 @@
     .client-scroller {
       animation: scrollClients 20s linear infinite;
     }
+    
+    /* Critical fixes for mobile menu */
+    .v-navigation-drawer {
+      position: fixed !important;
+      z-index: 1000 !important;
+    }
+    
+    .v-overlay__scrim {
+      opacity: 0.5 !important;
+    }
   </style>
 </head>
 <body>
