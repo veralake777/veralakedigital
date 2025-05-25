@@ -10,7 +10,11 @@ const AppHeader = {
       <div class="header-container">
         <div class="logo">
           <a href="#hero">
-            <img src="/images/veralake-logo.svg" alt="Veralake Digital" />
+            <div class="logo-text">
+              <span class="logo-vera">Vera</span>
+              <span class="logo-lake">Lake</span>
+              <span class="logo-digital">Digital</span>
+            </div>
           </a>
         </div>
         
@@ -27,7 +31,8 @@ const AppHeader = {
             <i :class="['mdi', darkMode ? 'mdi-weather-sunny' : 'mdi-weather-night']"></i>
           </button>
           <button class="consultation-btn" @click="$emit('open-calendly')">
-            Free Consultation
+            <span>Free Consultation</span>
+            <i class="mdi mdi-arrow-right"></i>
           </button>
           <button class="mobile-menu-btn" @click="$emit('toggle-mobile-menu', true)">
             <i class="mdi mdi-menu"></i>
@@ -50,7 +55,11 @@ const AppNavDrawer = {
       <div class="nav-drawer" @click.stop :class="{ 'open': isOpen }">
         <div class="drawer-header">
           <div class="logo">
-            <img src="/images/veralake-logo.svg" alt="Veralake Digital" />
+            <div class="logo-text">
+              <span class="logo-vera">Vera</span>
+              <span class="logo-lake">Lake</span>
+              <span class="logo-digital">Digital</span>
+            </div>
           </div>
           <button class="close-btn" @click="$emit('close')">
             <i class="mdi mdi-close"></i>
@@ -66,12 +75,30 @@ const AppNavDrawer = {
         </nav>
         
         <div class="drawer-actions">
-          <button class="theme-toggle" @click="$emit('toggle-theme')">
-            <i :class="['mdi', darkMode ? 'mdi-weather-sunny' : 'mdi-weather-night']"></i>
-            <span>{{ darkMode ? 'Light Mode' : 'Dark Mode' }}</span>
-          </button>
+          <div class="theme-toggle-container">
+            <button class="theme-toggle" @click="$emit('toggle-theme')">
+              <div class="toggle-icon">
+                <i :class="['mdi', darkMode ? 'mdi-weather-sunny' : 'mdi-weather-night']"></i>
+              </div>
+              <span>{{ darkMode ? 'Light Mode' : 'Dark Mode' }}</span>
+            </button>
+          </div>
+          
+          <div class="social-links">
+            <a href="#" class="social-link">
+              <i class="mdi mdi-twitter"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="mdi mdi-linkedin"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="mdi mdi-instagram"></i>
+            </a>
+          </div>
+          
           <button class="consultation-btn" @click="openCalendly">
-            Free Consultation
+            <span>Free Consultation</span>
+            <i class="mdi mdi-arrow-right"></i>
           </button>
         </div>
       </div>
@@ -93,35 +120,82 @@ const AppNavDrawer = {
 const HeroSection = {
   template: `
     <section id="hero" class="hero-section">
+      <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
       <div class="hero-container">
         <div class="hero-content">
+          <div class="brand-badge">Vera Lake Digital</div>
           <h1 class="hero-title">
-            Modern Solutions For <span class="highlight">Digital Growth</span>
+            Transform Your <span class="gradient-text">Digital Presence</span>
           </h1>
           <p class="hero-subtitle">
-            We build beautiful, functional websites and applications that drive results for your business.
+            We craft innovative digital solutions that elevate your brand, engage your audience, and drive measurable results for your business.
           </p>
           <div class="hero-actions">
             <button class="cta-button primary" @click="$emit('open-calendly')">
-              Free Consultation
+              <span>Free Consultation</span>
+              <i class="mdi mdi-arrow-right"></i>
             </button>
             <button class="cta-button secondary" @click="$emit('navigate', 'services')">
-              Our Services
+              <span>Explore Services</span>
             </button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-value">8+</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <div class="stat-value">200+</div>
+              <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <div class="stat-value">98%</div>
+              <div class="stat-label">Client Satisfaction</div>
+            </div>
           </div>
         </div>
         <div class="hero-image">
-          <img src="/images/hero-illustration.svg" alt="Digital Solutions" onerror="this.src='https://via.placeholder.com/500x400?text=Veralake+Digital'" />
+          <div class="image-container">
+            <img src="https://cdn.dribbble.com/userupload/6997440/file/original-4f75e25433ddd93e394e71d338b05aa9.png?resize=1024x768" alt="Digital Solutions" onerror="this.src='https://cdn.dribbble.com/userupload/3070734/file/original-d2ff31d7d2ac2d2c5c5a7194e0137d06.png?resize=1024x768'" />
+            <div class="floating-element element-1">
+              <i class="mdi mdi-server-network"></i>
+              <span>Cloud Services</span>
+            </div>
+            <div class="floating-element element-2">
+              <i class="mdi mdi-cellphone-link"></i>
+              <span>Mobile Apps</span>
+            </div>
+            <div class="floating-element element-3">
+              <i class="mdi mdi-web"></i>
+              <span>Web Development</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="hero-clients">
-        <p>Trusted by:</p>
+        <p>Trusted by innovative brands:</p>
         <div class="client-logos">
-          <img src="/images/clients/afs-travelers.png" alt="AFS Travelers" onerror="this.src='https://via.placeholder.com/120x40?text=AFS+Travelers'" />
-          <img src="/images/clients/tara-whalen-law.png" alt="Tara Whalen Law" onerror="this.src='https://via.placeholder.com/120x40?text=Tara+Whalen+Law'" />
-          <img src="/images/clients/mux-blank.png" alt="Mux Blank" onerror="this.src='https://via.placeholder.com/120x40?text=Mux+Blank'" />
-          <img src="/images/clients/bcs-bulbls.png" alt="BCS Bulbls" onerror="this.src='https://via.placeholder.com/120x40?text=BCS+Bulbls'" />
-          <img src="/images/clients/ttd-learning.png" alt="TTD Learning Solutions" onerror="this.src='https://via.placeholder.com/120x40?text=TTD+Learning'" />
+          <div class="logo-item">
+            <img src="https://placehold.co/120x40/ffffff/192430?text=AFS+Travelers" alt="AFS Travelers" />
+          </div>
+          <div class="logo-item">
+            <img src="https://placehold.co/140x40/ffffff/192430?text=Tara+Whalen+Law" alt="Tara Whalen Law" />
+          </div>
+          <div class="logo-item">
+            <img src="https://placehold.co/120x40/ffffff/192430?text=Mux+Blank" alt="Mux Blank" />
+          </div>
+          <div class="logo-item">
+            <img src="https://placehold.co/120x40/ffffff/192430?text=BCS+Bulbls" alt="BCS Bulbls" />
+          </div>
+          <div class="logo-item">
+            <img src="https://placehold.co/150x40/ffffff/192430?text=TTD+Learning" alt="TTD Learning Solutions" />
+          </div>
         </div>
       </div>
     </section>
@@ -135,31 +209,53 @@ const ServicesSection = {
   },
   template: `
     <section id="services" class="services-section">
+      <div class="section-bg-shapes">
+        <div class="service-shape shape-1"></div>
+        <div class="service-shape shape-2"></div>
+      </div>
       <div class="section-container">
         <div class="section-header">
-          <h2 class="section-title">Our Services</h2>
+          <div class="section-tag">Our Expertise</div>
+          <h2 class="section-title">Services That <span class="gradient-text">Drive Results</span></h2>
           <p class="section-subtitle">
-            We provide end-to-end digital solutions to help your business succeed online
+            We help businesses transform their digital presence with cutting-edge solutions tailored to their unique needs
           </p>
         </div>
         
         <div class="services-grid">
           <div v-for="(service, index) in services" :key="index" class="service-card">
-            <div class="service-icon">
-              <i :class="['mdi', service.icon]"></i>
+            <div class="service-card-inner">
+              <div class="service-icon">
+                <i :class="['mdi', service.icon]"></i>
+              </div>
+              <h3 class="service-title">{{ service.title }}</h3>
+              <p class="service-description">{{ service.description }}</p>
+              <ul class="service-features">
+                <li v-for="(feature, fIndex) in service.features" :key="fIndex">
+                  <div class="feature-icon">
+                    <i class="mdi mdi-check"></i>
+                  </div>
+                  <span>{{ feature }}</span>
+                </li>
+              </ul>
+              <button class="service-cta" @click="$emit('open-calendly', service.title)">
+                <span>Get Started</span>
+                <i class="mdi mdi-arrow-right"></i>
+              </button>
             </div>
-            <h3 class="service-title">{{ service.title }}</h3>
-            <p class="service-description">{{ service.description }}</p>
-            <ul class="service-features">
-              <li v-for="(feature, fIndex) in service.features" :key="fIndex">
-                <i class="mdi mdi-check"></i>
-                <span>{{ feature }}</span>
-              </li>
-            </ul>
-            <button class="service-cta" @click="$emit('open-calendly', service.title)">
-              Get Started
-            </button>
+            <div class="card-bg-gradient"></div>
           </div>
+        </div>
+        
+        <div class="services-cta">
+          <div class="cta-content">
+            <h3>Need a custom solution?</h3>
+            <p>Let's discuss your specific requirements and build something amazing together.</p>
+          </div>
+          <button class="cta-button" @click="$emit('open-calendly')">
+            <span>Schedule a Call</span>
+            <i class="mdi mdi-arrow-right"></i>
+          </button>
         </div>
       </div>
     </section>
