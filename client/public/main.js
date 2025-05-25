@@ -655,19 +655,13 @@ const app = Vue.createApp({
             </v-btn>
           </div>
           
-          <!-- Mobile Navigation Toggle -->
+              <!-- Mobile Navigation Toggle -->
           <div class="d-flex d-md-none align-center">
             <!-- Mobile Menu Toggle -->
-            <v-btn 
-              icon 
-              color="primary"
-              variant="tonal"
-              size="large"
-              class="mobile-menu-btn"
+            <v-app-bar-nav-icon
+              color="primary" 
               @click="drawer = !drawer"
-            >
-              <v-icon size="large">mdi-menu</v-icon>
-            </v-btn>
+            ></v-app-bar-nav-icon>
           </div>
         </v-container>
         

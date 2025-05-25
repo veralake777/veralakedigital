@@ -1,188 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <meta name="description" content="Veralake.digital - Transform your business with innovative digital solutions that deliver real results">
-    <meta name="keywords" content="digital agency, web design, digital marketing, SEO, brand identity, mobile app development, UI/UX design">
-    <title>veralake.digital | Modern Digital Solutions for Growing Businesses</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.3.4/dist/vuetify.min.css" rel="stylesheet">
-    <style>
-      :root {
-        --primary: 255, 88, 100; /* Vibrant coral/red - #FF5864 */
-        --secondary: 32, 39, 56; /* Dark blue - #202738 */
-        --accent: 131, 222, 207; /* Mint/teal - #83DECF */
-        --neutral: 245, 247, 250; /* Off-white - #F5F7FA */
-        --dark: 18, 25, 41; /* Very dark blue - #121929 */
-        --success: 63, 195, 128; /* Green - #3FC380 */
-        --warning: 255, 186, 73; /* Amber - #FFBA49 */
-        --error: 235, 87, 87; /* Red - #EB5757 */
-        --gradient-primary: linear-gradient(135deg, rgba(255, 88, 100, 1) 0%, rgba(249, 58, 111, 1) 100%);
-        --gradient-accent: linear-gradient(135deg, rgba(131, 222, 207, 1) 0%, rgba(100, 210, 222, 1) 100%);
-        --gradient-dark: linear-gradient(135deg, rgba(32, 39, 56, 1) 0%, rgba(18, 25, 41, 1) 100%);
-      }
-      
-      body {
-        font-family: 'Manrope', sans-serif;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-      }
-      
-      h1, h2, h3, h4, h5, h6 {
-        font-family: 'Space Grotesk', sans-serif;
-        letter-spacing: -0.02em;
-      }
-      
-      .v-btn {
-        font-family: 'Raleway', sans-serif;
-        letter-spacing: 0.03em;
-        text-transform: none;
-        font-weight: 600;
-      }
-      
-      .calendly-inline-widget {
-        min-width: 320px;
-        height: 630px;
-      }
-      
-      /* Custom scroll bar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      
-      ::-webkit-scrollbar-track {
-        background: rgba(var(--neutral), 0.5);
-      }
-      
-      ::-webkit-scrollbar-thumb {
-        background: rgba(var(--primary), 0.7);
-        border-radius: 4px;
-      }
-      
-      ::-webkit-scrollbar-thumb:hover {
-        background: rgba(var(--primary), 1);
-      }
-      
-      /* Animations */
-      .fade-in-up {
-        animation: fadeInUp 0.8s ease forwards;
-      }
-      
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      
-      /* Make images responsive */
-      img {
-        max-width: 100%;
-        height: auto;
-      }
-      
-      /* Accessibility improvements */
-      a:focus, button:focus {
-        outline: 2px solid rgba(var(--accent), 0.7);
-        outline-offset: 2px;
-      }
-      
-      /* Custom cursors for interactive elements */
-      .v-btn, a {
-        cursor: pointer;
-      }
-    </style>
-    
-    <!-- Schema.org structured data for better SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "veralake.digital",
-      "url": "https://veralake.digital/",
-      "logo": "https://veralake.digital/logo.png",
-      "description": "Transform your business with innovative digital solutions that deliver real results.",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "123 Innovation Drive",
-        "addressLocality": "San Francisco",
-        "addressRegion": "CA",
-        "postalCode": "94107",
-        "addressCountry": "US"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 37.7749,
-        "longitude": -122.4194
-      },
-      "telephone": "+1-555-123-4567",
-      "openingHours": "Mo,Tu,We,Th,Fr 09:00-17:00",
-      "sameAs": [
-        "https://www.facebook.com/veralakedigital",
-        "https://www.twitter.com/veralakedigital",
-        "https://www.linkedin.com/company/veralakedigital",
-        "https://www.instagram.com/veralakedigital"
-      ],
-      "priceRange": "$$"
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VeraLake Digital - Marketing & Design Agency</title>
+  <meta name="description" content="A modern digital agency offering marketing, web development, and branding solutions that deliver measurable results.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Vuetify -->
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@3.4.3/dist/vuetify.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
     }
-    </script>
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=PLACEHOLDER_GA_ID"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    [v-cloak] {
+      display: none;
+    }
+    
+    /* Fix for mobile navigation */
+    @media (max-width: 767px) {
+      .v-navigation-drawer {
+        z-index: 2000 !important;
+        top: 0 !important;
+      }
       
-      // Load Analytics only after cookie consent
-      const cookiesAccepted = localStorage.getItem('cookies-accepted');
-      if (cookiesAccepted === 'true') {
-        // Fetch the actual GA ID from the server
-        fetch('/api/ga-id')
-          .then(response => response.json())
-          .then(data => {
-            if (data.measurementId) {
-              gtag('config', data.measurementId);
-            }
-          })
-          .catch(error => {
-            console.error('Error fetching GA ID:', error);
-          });
+      /* Fix for content padding */
+      .v-application {
+        padding-top: 0 !important;
       }
-    </script>
-  </head>
-  <body>
-    <div id="app"></div>
-    
-    <!-- Vue and Vuetify -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.3.4/dist/vuetify.min.js"></script>
-    
-    <!-- Lazy load images for better performance -->
-    <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js"></script>
-    
-    <!-- Calendly script for booking widget (loaded on demand) -->
-    <script type="text/javascript">
-      function loadCalendly() {
-        if (!window.Calendly) {
-          const script = document.createElement('script');
-          script.src = 'https://assets.calendly.com/assets/external/widget.js';
-          script.async = true;
-          document.head.appendChild(script);
-        }
+      
+      /* Fix for header spacing */
+      .v-app-bar {
+        position: fixed !important;
+        top: 0 !important;
+        z-index: 100 !important;
       }
-    </script>
+      
+      /* Prevent drawer from showing on load */
+      .v-navigation-drawer:not(.v-navigation-drawer--active) {
+        transform: translateX(-100%) !important;
+      }
+    }
     
-    <!-- Main Application Script -->
-    <script src="main.js"></script>
-  </body>
+    /* Animation keyframes */
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+    
+    .bounce {
+      animation: bounce 2s infinite;
+    }
+    
+    /* Scroll animation classes */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Client scroller */
+    @keyframes scrollClients {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+    
+    .client-scroller {
+      animation: scrollClients 20s linear infinite;
+    }
+    
+    .client-scroller:hover {
+      animation-play-state: paused;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak></div>
+  
+  <!-- Vue 3 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.js"></script>
+  
+  <!-- Vuetify -->
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@3.4.3/dist/vuetify.min.js"></script>
+  
+  <!-- MDI Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css" rel="stylesheet">
+  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DE8YBR2PBJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DE8YBR2PBJ');
+  </script>
+  
+  <!-- Calendly -->
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  
+  <!-- Main App Script -->
+  <script src="/main.js"></script>
+</body>
 </html>
