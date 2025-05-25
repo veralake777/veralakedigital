@@ -1,79 +1,27 @@
 <template>
-  <section id="portfolio" class="py-16 bg-secondary">
-    <v-container>
-      <v-row class="mb-10">
-        <v-col cols="12" md="8" offset-md="2" class="text-center">
-          <h2 class="text-h3 font-weight-bold text-white mb-4">Our Portfolio</h2>
-          <p class="text-subtitle-1 text-white text-opacity-80">
-            Explore our latest projects that showcase our expertise and creative approach.
-            Each project represents our commitment to delivering exceptional results.
-          </p>
-        </v-col>
-      </v-row>
-
-      <v-row>
-        <v-col 
-          v-for="(project, index) in projects"
-          :key="index"
-          cols="12" sm="6" lg="4"
-          class="mb-6"
-        >
-          <v-hover v-slot="{ isHovering, props }">
-            <v-card
-              v-bind="props"
-              :elevation="isHovering ? 10 : 3"
-              class="transition-swing h-100"
-            >
-              <v-img
-                :src="project.image"
-                height="200"
-                cover
-              >
-                <template v-slot:placeholder>
-                  <v-row class="fill-height ma-0" align="center" justify="center">
-                    <v-progress-circular indeterminate color="primary"></v-progress-circular>
-                  </v-row>
-                </template>
-                <div 
-                  class="fill-height d-flex flex-column justify-end pa-4"
-                  :class="{'project-overlay': isHovering}"
-                >
-                  <div 
-                    :class="{'project-details': true, 'project-details-visible': isHovering}"
-                  >
-                    <v-chip size="small" color="primary" class="mb-2">{{ project.category }}</v-chip>
-                    <h3 class="text-h5 font-weight-bold text-white mb-2">{{ project.title }}</h3>
-                    <p class="text-body-2 text-white text-opacity-80">{{ project.description }}</p>
-                    <v-btn
-                      variant="text"
-                      color="white"
-                      class="px-0 mt-2"
-                      size="small"
-                    >
-                      View Case Study
-                      <v-icon end>mdi-arrow-right</v-icon>
-                    </v-btn>
-                  </div>
-                </div>
-              </v-img>
-            </v-card>
-          </v-hover>
-        </v-col>
-      </v-row>
+  <section id="portfolio" class="portfolio-section">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Our Work</h2>
+        <p class="section-subtitle">
+          Take a look at some of our recent projects
+        </p>
+      </div>
       
-      <v-row class="mt-10">
-        <v-col cols="12" class="text-center">
-          <v-btn
-            color="primary"
-            variant="flat"
-            size="large"
-          >
-            View All Projects
-            <v-icon end>mdi-arrow-right</v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
+      <div class="portfolio-grid">
+        <div v-for="(project, index) in projects" :key="index" class="portfolio-item">
+          <div class="portfolio-image">
+            <img :src="project.image" :alt="project.title" />
+            <div class="portfolio-overlay">
+              <span class="project-category">{{ project.category }}</span>
+              <h3 class="project-title">{{ project.title }}</h3>
+              <p class="project-description">{{ project.description }}</p>
+              <a href="#" class="view-project">View Project</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -90,23 +38,156 @@ export default {
 </script>
 
 <style scoped>
-.project-overlay {
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
-  transition: all 0.3s ease;
+.portfolio-section {
+  padding: 80px 0;
+  background-color: var(--background-alt-color);
 }
 
-.project-details {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.3s ease;
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-.project-details-visible {
-  opacity: 1;
-  transform: translateY(0);
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
 }
 
-.h-100 {
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-color);
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary-color);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+.portfolio-item {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  height: 300px;
+}
+
+.portfolio-image {
+  width: 100%;
   height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.portfolio-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-align: center;
+}
+
+.portfolio-item:hover .portfolio-image img {
+  transform: scale(1.1);
+}
+
+.portfolio-item:hover .portfolio-overlay {
+  opacity: 1;
+}
+
+.project-category {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.project-title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.project-description {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+.view-project {
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.view-project:hover {
+  background-color: var(--primary-dark-color);
+}
+
+@media (min-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .portfolio-item:nth-child(1) {
+    grid-column: span 2;
+  }
+  
+  .portfolio-item:nth-child(4) {
+    grid-column: span 2;
+  }
 }
 </style>

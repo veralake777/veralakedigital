@@ -1,87 +1,32 @@
 <template>
-  <section id="services" class="py-16">
-    <v-container>
-      <v-row class="mb-10">
-        <v-col cols="12" md="8" offset-md="2" class="text-center">
-          <h2 class="text-h3 font-weight-bold mb-4">Our Services</h2>
-          <p class="text-subtitle-1">
-            We offer comprehensive digital solutions tailored to your business needs.
-            From web development to digital marketing, we have the expertise to help you succeed.
-          </p>
-        </v-col>
-      </v-row>
-
-      <v-row>
-        <v-col 
-          v-for="(service, index) in services"
-          :key="index"
-          cols="12" sm="6" md="4"
-          class="mb-6"
-        >
-          <v-hover v-slot="{ isHovering, props }">
-            <v-card
-              v-bind="props"
-              :elevation="isHovering ? 8 : 2"
-              :class="{ 
-                'transition-swing': true,
-                'scale-up': isHovering,
-                'bg-surface': true
-              }"
-              height="100%"
-            >
-              <v-card-item>
-                <template v-slot:prepend>
-                  <v-avatar :color="service.color" size="48" class="elevation-1">
-                    <v-icon size="24" color="white">{{ service.icon }}</v-icon>
-                  </v-avatar>
-                </template>
-                <v-card-title class="text-h5 font-weight-bold">{{ service.title }}</v-card-title>
-              </v-card-item>
-
-              <v-card-text>
-                <p class="mb-4">{{ service.description }}</p>
-                <v-list density="compact" class="bg-transparent pa-0">
-                  <v-list-item
-                    v-for="(feature, i) in service.features"
-                    :key="i"
-                    class="px-0"
-                  >
-                    <template v-slot:prepend>
-                      <v-icon :color="service.color" size="small" class="mr-2">mdi-check-circle</v-icon>
-                    </template>
-                    <v-list-item-title class="text-body-2">{{ feature }}</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-card-text>
-
-              <v-card-actions class="mt-auto">
-                <v-spacer></v-spacer>
-                <v-btn
-                  variant="tonal"
-                  :color="service.color"
-                  @click="$emit('open-calendly')"
-                >
-                  Learn More
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-hover>
-        </v-col>
-      </v-row>
-
-      <v-row class="mt-10">
-        <v-col cols="12" class="text-center">
-          <v-btn
-            color="primary"
-            size="large"
-            @click="$emit('open-calendly')"
-          >
-            <v-icon start>mdi-calendar-clock</v-icon>
-            Schedule a Consultation
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
+  <section id="services" class="services-section">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">
+          We provide end-to-end digital solutions to help your business succeed online
+        </p>
+      </div>
+      
+      <div class="services-grid">
+        <div v-for="(service, index) in services" :key="index" class="service-card">
+          <div class="service-icon">
+            <i :class="['mdi', service.icon]"></i>
+          </div>
+          <h3 class="service-title">{{ service.title }}</h3>
+          <p class="service-description">{{ service.description }}</p>
+          <ul class="service-features">
+            <li v-for="(feature, fIndex) in service.features" :key="fIndex">
+              <i class="mdi mdi-check"></i>
+              <span>{{ feature }}</span>
+            </li>
+          </ul>
+          <button class="service-cta" @click="openCalendly(service.title)">
+            Get Started
+          </button>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -93,16 +38,152 @@ export default {
       type: Array,
       required: true
     }
+  },
+  methods: {
+    openCalendly(serviceTitle) {
+      this.$emit('open-calendly', serviceTitle)
+    }
   }
 }
 </script>
 
 <style scoped>
-.scale-up {
-  transform: scale(1.02);
+.services-section {
+  padding: 80px 0;
+  background-color: var(--background-color);
 }
 
-.bg-surface {
-  background-color: var(--v-theme-surface);
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-color);
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary-color);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+.service-card {
+  background-color: var(--card-bg-color);
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+  background-color: var(--primary-light-color);
+  color: var(--primary-color);
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.service-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-color);
+}
+
+.service-description {
+  color: var(--text-secondary-color);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.service-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+  flex-grow: 1;
+}
+
+.service-features li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  color: var(--text-color);
+}
+
+.service-features li i {
+  color: var(--primary-color);
+  margin-right: 10px;
+}
+
+.service-cta {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.service-cta:hover {
+  background-color: var(--primary-dark-color);
+}
+
+@media (min-width: 768px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 </style>

@@ -1,146 +1,223 @@
 <template>
-  <section id="home" class="bg-primary" style="min-height: 100vh;">
-    <v-container fluid class="fill-height">
-      <v-row class="fill-height align-center">
-        <v-col cols="12" md="7" class="py-16">
-          <div class="text-center text-md-left px-4 fade-in-up">
-            <h1 class="text-h2 text-md-h1 font-weight-bold text-white mb-4">
-              Modern Digital Solutions for Growing Businesses
-            </h1>
-            <p class="text-h6 text-white text-opacity-80 mb-8">
-              We help businesses transform their digital presence with 
-              innovative web development, effective marketing strategies, 
-              and memorable brand experiences.
-            </p>
-            <div class="d-flex flex-column flex-md-row justify-center justify-md-start">
-              <v-btn
-                size="large"
-                color="white"
-                class="px-8 py-3 mb-4 mb-md-0 mr-md-4"
-                @click="$emit('open-calendly')"
-              >
-                <v-icon start>mdi-calendar-clock</v-icon>
-                Book a Free Consultation
-              </v-btn>
-              <v-btn
-                size="large"
-                variant="outlined"
-                color="white"
-                class="px-8 py-3"
-                href="tel:+14706293981"
-              >
-                <v-icon start>mdi-phone</v-icon>
-                Call Us
-              </v-btn>
-            </div>
-            
-            <!-- Client logos -->
-            <div class="mt-16 d-none d-md-block">
-              <p class="text-caption text-white text-opacity-70 mb-4">TRUSTED BY INNOVATIVE COMPANIES</p>
-              <div class="client-marquee-container">
-                <div class="client-scroller d-flex">
-                  <div class="d-flex align-center" style="gap: 48px; padding-right: 48px;">
-                    <div class="text-white text-opacity-60">AFS Travelers</div>
-                    <div class="text-white text-opacity-60">Tara Whalen Law</div>
-                    <div class="text-white text-opacity-60">Mux Blank</div>
-                    <div class="text-white text-opacity-60">BCS Bulbls</div>
-                    <div class="text-white text-opacity-60">TTD Learning Solutions</div>
-                  </div>
-                  <div class="d-flex align-center" style="gap: 48px; padding-right: 48px;">
-                    <div class="text-white text-opacity-60">AFS Travelers</div>
-                    <div class="text-white text-opacity-60">Tara Whalen Law</div>
-                    <div class="text-white text-opacity-60">Mux Blank</div>
-                    <div class="text-white text-opacity-60">BCS Bulbls</div>
-                    <div class="text-white text-opacity-60">TTD Learning Solutions</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </v-col>
-        
-        <v-col cols="12" md="5" class="d-none d-md-flex justify-center align-center fade-in-up">
-          <!-- Hero image or illustration -->
-          <v-img
-            src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-            max-width="500"
-            class="rounded-xl elevation-10"
-            style="border: 8px solid rgba(255,255,255,0.1);"
-          >
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular indeterminate color="accent"></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
-        </v-col>
-      </v-row>
-      
-      <!-- Scroll indicator -->
-      <div class="text-center d-none d-md-block" style="position: absolute; bottom: 30px; left: 0; right: 0;">
-        <v-btn
-          icon="mdi-chevron-down"
-          variant="text"
-          color="white"
-          size="large"
-          @click="$emit('navigate', 'services')"
-          class="animate-bounce"
-        ></v-btn>
+  <section id="hero" class="hero-section">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Modern Solutions For <span class="highlight">Digital Growth</span>
+        </h1>
+        <p class="hero-subtitle">
+          We build beautiful, functional websites and applications that drive results for your business.
+        </p>
+        <div class="hero-actions">
+          <button class="cta-button primary" @click="openCalendly">
+            Free Consultation
+          </button>
+          <button class="cta-button secondary" @click="navigate('services')">
+            Our Services
+          </button>
+        </div>
       </div>
-    </v-container>
+      <div class="hero-image">
+        <img src="/images/hero-illustration.svg" alt="Digital Solutions" />
+      </div>
+    </div>
+    <div class="hero-clients">
+      <p>Trusted by:</p>
+      <div class="client-logos">
+        <img src="/images/clients/afs-travelers.png" alt="AFS Travelers" />
+        <img src="/images/clients/tara-whalen-law.png" alt="Tara Whalen Law" />
+        <img src="/images/clients/mux-blank.png" alt="Mux Blank" />
+        <img src="/images/clients/bcs-bulbls.png" alt="BCS Bulbls" />
+        <img src="/images/clients/ttd-learning.png" alt="TTD Learning Solutions" />
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'HeroSection'
+  name: 'HeroSection',
+  methods: {
+    navigate(sectionId) {
+      this.$emit('navigate', sectionId)
+    },
+    openCalendly() {
+      this.$emit('open-calendly')
+    }
+  }
 }
 </script>
 
 <style scoped>
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-10px); }
-  60% { transform: translateY(-5px); }
+.hero-section {
+  padding: 120px 0 60px;
+  background: linear-gradient(135deg, var(--hero-bg-start) 0%, var(--hero-bg-end) 100%);
+  color: var(--hero-text-color);
+  position: relative;
+  overflow: hidden;
 }
 
-.animate-bounce {
-  animation: bounce 2s infinite;
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-@keyframes scrollClients {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+.hero-content {
+  text-align: center;
+  max-width: 600px;
+  margin-bottom: 40px;
 }
 
-.client-scroller {
-  animation: scrollClients 20s linear infinite;
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.2;
 }
 
-.client-scroller:hover {
-  animation-play-state: paused;
+.hero-title .highlight {
+  color: var(--primary-color);
+  position: relative;
+  display: inline-block;
 }
 
-.fade-in-up {
-  animation: fadeInUp 1s ease-out;
+.hero-title .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-color: var(--primary-color);
+  opacity: 0.3;
+  z-index: -1;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+.hero-subtitle {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: var(--text-secondary-color);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.cta-button {
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-button.primary {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.cta-button.primary:hover {
+  background-color: var(--primary-dark-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cta-button.secondary {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+}
+
+.cta-button.secondary:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+}
+
+.hero-clients {
+  background-color: var(--background-alt-color);
+  padding: 20px 0;
+  margin-top: 60px;
+  text-align: center;
+}
+
+.hero-clients p {
+  font-size: 0.9rem;
+  color: var(--text-secondary-color);
+  margin-bottom: 15px;
+}
+
+.client-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.client-logos img {
+  height: 30px;
+  opacity: 0.7;
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+}
+
+.client-logos img:hover {
+  opacity: 1;
+  filter: grayscale(0);
+}
+
+@media (min-width: 768px) {
+  .hero-section {
+    padding: 150px 0 80px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .hero-container {
+    flex-direction: row;
+    text-align: left;
   }
-}
-
-/* Make sure the scrollable container doesn't overflow on mobile */
-@media (max-width: 600px) {
-  .client-marquee-container {
-    width: 100%;
-    overflow: hidden;
+  
+  .hero-content {
+    text-align: left;
+    margin-bottom: 0;
+    margin-right: 40px;
+  }
+  
+  .hero-title {
+    font-size: 3.5rem;
+  }
+  
+  .hero-actions {
+    justify-content: flex-start;
+  }
+  
+  .client-logos img {
+    height: 40px;
   }
 }
 </style>
