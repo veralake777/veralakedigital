@@ -746,66 +746,54 @@ const app = Vue.createApp({
         }
       </style>
       
-      <!-- Mobile Navigation Menu -->
-      <div id="mobileDrawer" 
-           class="mobile-nav-overlay" 
-           v-if="drawer" 
-           @click="drawer = false"
-      ></div>
-      
-      <!-- Custom Mobile Navigation -->
-      <div id="mobileMenu" 
-           class="mobile-menu" 
-           :class="{ 'open': drawer }"
-           v-cloak
+      <!-- Mobile Navigation Drawer (using Vuetify's built-in component) -->
+      <v-navigation-drawer
+        v-model="drawer"
+        temporary
+        location="left"
+        width="280"
       >
-        <div class="mobile-menu-header">
-          <div class="d-flex align-center px-4 py-3">
-            <v-avatar color="primary" size="36" class="mr-3">
-              <span class="text-white font-weight-bold">V</span>
-            </v-avatar>
-            <div>
+        <v-list>
+          <v-list-item>
+            <div class="d-flex align-center py-3">
+              <v-avatar color="primary" size="36" class="mr-3">
+                <span class="text-white font-weight-bold">V</span>
+              </v-avatar>
               <span class="text-primary font-weight-bold text-h6 text-lowercase">veralake</span>
               <span class="font-weight-bold text-lowercase">.digital</span>
             </div>
-            <v-spacer></v-spacer>
-            <v-btn icon @click="drawer = false" color="primary">
-              <v-icon>mdi-close</v-icon>
-            </v-btn>
-          </div>
+          </v-list-item>
+          
           <v-divider></v-divider>
-        </div>
-        
-        <div class="mobile-menu-content">
-          <v-list>
-            <v-list-item 
-              v-for="item in menuItems" 
-              :key="item.title"
-              @click="scrollToSection(item.url.substring(1)); drawer = false;"
-              class="mobile-nav-item"
-            >
-              <v-list-item-title class="mobile-nav-title">
-                {{ item.title }}
-              </v-list-item-title>
-            </v-list-item>
-          </v-list>
           
-          <v-divider class="my-3"></v-divider>
+          <!-- Navigation Links -->
+          <v-list-item
+            v-for="item in menuItems"
+            :key="item.title"
+            @click="scrollToSection(item.url.substring(1)); drawer = false"
+            :title="item.title"
+            link
+          ></v-list-item>
           
-          <div class="px-4 py-2">
-            <v-btn 
-              color="primary" 
-              block 
+          <v-divider class="my-2"></v-divider>
+          
+          <!-- Action Buttons -->
+          <v-list-item>
+            <v-btn
+              color="primary"
+              block
               class="mb-3"
-              @click="openCalendlyModal(); drawer = false;"
+              @click="openCalendlyModal(); drawer = false"
             >
               <v-icon start>mdi-calendar-clock</v-icon>
               Book a Call
             </v-btn>
-            
-            <v-btn 
-              color="success" 
-              block 
+          </v-list-item>
+          
+          <v-list-item>
+            <v-btn
+              color="success"
+              block
               class="mb-3"
               href="tel:+14706293981"
               @click="trackEvent('phone_call', 'contact', 'drawer')"
@@ -813,9 +801,11 @@ const app = Vue.createApp({
               <v-icon start>mdi-phone</v-icon>
               Call Now
             </v-btn>
-            
-            <v-btn 
-              :color="theme === 'light' ? 'grey-darken-3' : 'grey-lighten-3'" 
+          </v-list-item>
+          
+          <v-list-item>
+            <v-btn
+              :color="theme === 'light' ? 'grey-darken-3' : 'grey-lighten-3'"
               block
               variant="outlined"
               @click="toggleTheme"
@@ -823,70 +813,9 @@ const app = Vue.createApp({
               <v-icon start>{{ theme === 'light' ? 'mdi-weather-night' : 'mdi-weather-sunny' }}</v-icon>
               {{ theme === 'light' ? 'Dark Mode' : 'Light Mode' }}
             </v-btn>
-          </div>
-        </div>
-      </div>
-      
-      <style>
-        [v-cloak] {
-          display: none;
-        }
-        
-        .mobile-nav-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.5);
-          z-index: 1999;
-          display: block;
-        }
-        
-        .mobile-menu {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 85%;
-          max-width: 300px;
-          height: 100%;
-          background: #fff;
-          z-index: 2000;
-          transform: translateX(-100%);
-          transition: transform 0.3s ease;
-          display: flex;
-          flex-direction: column;
-          box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .mobile-menu.open {
-          transform: translateX(0);
-        }
-        
-        .dark .mobile-menu {
-          background: #202738;
-        }
-        
-        .mobile-menu-content {
-          flex: 1;
-          overflow-y: auto;
-          padding: 8px 0;
-        }
-        
-        .mobile-nav-item {
-          padding: 12px 24px;
-          cursor: pointer;
-        }
-        
-        .mobile-nav-item:hover {
-          background: rgba(255, 88, 100, 0.1);
-        }
-        
-        .mobile-nav-title {
-          font-size: 16px;
-          font-weight: 500;
-        }
-      </style>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
 
       <v-main>
         <!-- Hero Section - Modern & Eye-catching -->
