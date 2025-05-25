@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VeraLake Digital - Marketing & Design Agency</title>
+  <meta name="description" content="A modern digital agency offering marketing, web development, and branding solutions that deliver measurable results.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Google Analytics -->
+  <script>
+    // Fetch the measurement ID from server
+    fetch('/api/ga-id')
+      .then(response => response.json())
+      .then(data => {
+        // Store measurement ID for analytics.js to use
+        window.GA_MEASUREMENT_ID = data.id;
+        // Initialize GA
+        if (typeof initGA === 'function') {
+          initGA();
+        }
+      })
+      .catch(error => {
+        console.warn('Failed to fetch Google Analytics ID:', error);
+      });
+  </script>
+  <script src="/analytics.js"></script>
+  
+  <!-- Calendly -->
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
