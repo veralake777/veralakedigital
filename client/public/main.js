@@ -1814,8 +1814,8 @@ const app = Vue.createApp({
   `,
 });
 
-// Create the Vuetify instance
-const vuetify = Vuetify.createVuetify();
+// Create Vuetify instance using the theme options we defined earlier
+const vuetify = Vuetify.createVuetify(vuetifyThemeOptions);
 
-// Mount the app with Vuetify
+// Use Vuetify with Vue app and mount
 app.use(vuetify).mount("#app");
