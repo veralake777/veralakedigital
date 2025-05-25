@@ -133,23 +133,23 @@
       const toggleButton = document.createElement('button');
       toggleButton.id = 'mobile-menu-toggle';
       toggleButton.innerHTML = '☰';
-      toggleButton.style.position = 'fixed';
-      toggleButton.style.top = '12px';
+      toggleButton.style.position = 'absolute';
+      toggleButton.style.top = '10px';
       toggleButton.style.right = '15px';
       toggleButton.style.zIndex = '9997';
       toggleButton.style.backgroundColor = '#ff5864';
       toggleButton.style.color = 'white';
       toggleButton.style.border = 'none';
-      toggleButton.style.borderRadius = '5px';
-      toggleButton.style.padding = '8px 12px';
-      toggleButton.style.fontSize = '20px';
+      toggleButton.style.borderRadius = '4px';
+      toggleButton.style.padding = '0';
+      toggleButton.style.fontSize = '24px';
       toggleButton.style.cursor = 'pointer';
-      toggleButton.style.display = 'none';
       toggleButton.style.width = '40px';
       toggleButton.style.height = '40px';
       toggleButton.style.display = 'flex';
       toggleButton.style.alignItems = 'center';
       toggleButton.style.justifyContent = 'center';
+      toggleButton.style.fontWeight = 'bold';
       
       // Hide the desktop navigation on mobile
       function hideDesktopNavOnMobile() {
@@ -221,31 +221,44 @@
           
           /* Fix header positioning and padding */
           .v-app-bar {
-            padding-top: 0 !important;
-            height: auto !important;
-            min-height: 64px !important;
+            padding: 0 !important;
+            height: 60px !important;
+            min-height: 60px !important;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+            background-color: white !important;
           }
           
           /* Adjust logo position and size */
           .v-app-bar .v-container {
-            padding-top: 8px !important;
-            padding-bottom: 8px !important;
+            padding: 0 16px !important;
+            height: 60px !important;
           }
           
           /* Ensure proper vertical alignment */
           .v-app-bar .d-flex.align-center {
-            min-height: 48px !important;
+            height: 60px !important;
           }
           
-          /* Fix hero section padding */
+          /* Fix hero section to remove any gaps */
           #home {
-            padding-top: 80px !important;
+            padding-top: 60px !important;
+            margin-top: 0 !important;
           }
           
-          /* Fix main content */
+          /* Remove any space between app bar and content */
           .v-main {
-            padding-top: 64px !important;
+            padding-top: 60px !important;
+          }
+          
+          /* Fix any potential gap with main content */
+          section {
+            margin-top: 0 !important;
+          }
+          
+          /* Ensure body has no extra margins */
+          body {
+            margin: 0 !important;
+            padding: 0 !important;
           }
         }
       `;
