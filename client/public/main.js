@@ -787,20 +787,80 @@ const app = Vue.createApp({
       </style>
       
       <!-- Mobile Navigation Drawer -->
-      <v-navigation-drawer v-model="drawer" temporary>
-        <v-list>
+      <v-navigation-drawer 
+        v-model="drawer" 
+        temporary 
+        :width="280"
+        class="mobile-drawer"
+      >
+        <v-list class="py-4">
+          <!-- Logo in drawer -->
+          <v-list-item class="mb-4">
+            <div class="d-flex align-center">
+              <v-avatar
+                color="primary"
+                size="42"
+                class="mr-3"
+              >
+                <span class="text-white font-weight-bold text-h6">V</span>
+              </v-avatar>
+              <span class="text-primary font-weight-bold text-h6 text-lowercase">veralake</span>
+              <span class="font-weight-bold text-lowercase">.digital</span>
+            </div>
+          </v-list-item>
+          
+          <v-divider class="mb-4"></v-divider>
+          
+          <!-- Navigation Items -->
           <v-list-item
             v-for="item in menuItems"
             :key="item.title"
-            @click="scrollToSection(item.url.substring(1))"
+            @click="scrollToSection(item.url.substring(1)); drawer = false;"
+            class="mb-1 rounded"
+            :active="activeSection === item.url.substring(1)"
+            :active-color="'primary'"
           >
+            <template v-slot:prepend>
+              <v-icon 
+                :color="activeSection === item.url.substring(1) ? 'primary' : ''"
+                class="mr-2"
+              >
+                {{ {
+                  'Home': 'mdi-home',
+                  'Services': 'mdi-briefcase',
+                  'Portfolio': 'mdi-image-multiple',
+                  'Testimonials': 'mdi-star',
+                  'Blog': 'mdi-post',
+                  'Contact': 'mdi-email'
+                }[item.title] || 'mdi-chevron-right' }}
+              </v-icon>
+            </template>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item>
-          <v-divider class="my-2"></v-divider>
-          <v-list-item @click="openCalendlyModal">
+          
+          <v-divider class="my-4"></v-divider>
+          
+          <!-- Actions -->
+          <v-list-item @click="openCalendlyModal(); drawer = false;" class="mb-1 rounded">
+            <template v-slot:prepend>
+              <v-icon color="primary" class="mr-2">mdi-calendar-clock</v-icon>
+            </template>
             <v-list-item-title>Book a Call</v-list-item-title>
           </v-list-item>
-          <v-list-item @click="toggleTheme">
+          
+          <v-list-item href="tel:+14706293981" class="mb-1 rounded" @click="trackEvent('phone_call', 'contact', 'drawer')">
+            <template v-slot:prepend>
+              <v-icon color="success" class="mr-2">mdi-phone</v-icon>
+            </template>
+            <v-list-item-title>Call (470) 629-3981</v-list-item-title>
+          </v-list-item>
+          
+          <v-list-item @click="toggleTheme" class="mb-1 rounded">
+            <template v-slot:prepend>
+              <v-icon :color="theme === 'light' ? 'warning' : 'info'" class="mr-2">
+                {{ theme === 'light' ? 'mdi-weather-night' : 'mdi-weather-sunny' }}
+              </v-icon>
+            </template>
             <v-list-item-title>
               {{ theme === 'light' ? 'Dark Mode' : 'Light Mode' }}
             </v-list-item-title>
@@ -873,10 +933,11 @@ const app = Vue.createApp({
                         <div class="mt-16 mb-16" style="position: relative; z-index: 5;">
                           <h3 class="text-white text-h5 font-weight-bold mb-6">BRANDS I'VE HELPED</h3>
                           
-                          <!-- Client Marquee Effect -->
+                          <!-- Client Marquee Effect (Responsive) -->
                           <div class="client-marquee-container">
-                            <div class="position-relative" style="overflow: hidden; height: 100px;">
-                              <div ref="clientScroller" class="client-scroller d-flex" style="animation: scrollClients 20s linear infinite;">
+                            <div class="position-relative" style="overflow: hidden;">
+                              <!-- Desktop version -->
+                              <div ref="clientScroller" class="client-scroller d-none d-md-flex" style="animation: scrollClients 20s linear infinite; height: 100px;">
                                 <!-- First set of clients -->
                                 <v-card 
                                   v-for="(client, index) in [
@@ -902,7 +963,7 @@ const app = Vue.createApp({
                                   <span class="font-weight-bold text-primary text-body-1">{{ client.name }}</span>
                                 </v-card>
                                 
-                                <!-- Duplicate set for seamless scrolling -->
+                                <!-- Duplicate set for seamless scrolling (desktop) -->
                                 <v-card 
                                   v-for="(client, index) in [
                                     {name: 'AFS Travelers', icon: 'mdi-airplane', color: 'info'},
@@ -927,6 +988,42 @@ const app = Vue.createApp({
                                   <span class="font-weight-bold text-primary text-body-1">{{ client.name }}</span>
                                 </v-card>
                               </div>
+                              
+                              <!-- Mobile version with smaller cards -->
+                              <v-carousel
+                                class="d-md-none"
+                                height="90"
+                                hide-delimiters
+                                cycle
+                                show-arrows="hover"
+                                interval="3000"
+                              >
+                                <v-carousel-item
+                                  v-for="(client, index) in [
+                                    {name: 'AFS Travelers', icon: 'mdi-airplane', color: 'info'},
+                                    {name: 'Tara Whalen Law', icon: 'mdi-scale-balance', color: 'success'},
+                                    {name: 'Mux Blank', icon: 'mdi-music', color: 'warning'},
+                                    {name: 'BCS Bulbls', icon: 'mdi-lightbulb', color: 'accent'},
+                                    {name: 'TTD Learning Solutions', icon: 'mdi-school', color: 'error'}
+                                  ]"
+                                  :key="index"
+                                >
+                                  <div class="d-flex justify-center">
+                                    <v-card 
+                                      class="rounded-lg py-2 px-3 d-flex align-center mx-auto" 
+                                      color="white"
+                                      elevation="3"
+                                      max-width="90%"
+                                      @click="trackEvent('client_click', 'reference', client.name)"
+                                    >
+                                      <v-avatar :color="client.color" class="mr-3" size="36">
+                                        <v-icon color="white" size="small">{{ client.icon }}</v-icon>
+                                      </v-avatar>
+                                      <span class="font-weight-bold text-primary">{{ client.name }}</span>
+                                    </v-card>
+                                  </div>
+                                </v-carousel-item>
+                              </v-carousel>
                             </div>
                           </div>
                           
@@ -944,6 +1041,13 @@ const app = Vue.createApp({
                             }
                             .client-scroller:hover {
                               animation-play-state: paused;
+                            }
+                            /* Make sure the scrollable container doesn't overflow on mobile */
+                            @media (max-width: 600px) {
+                              .client-marquee-container {
+                                width: 100%;
+                                overflow: hidden;
+                              }
                             }
                           </style>
                         </div>
