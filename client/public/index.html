@@ -56,22 +56,9 @@
       animation-play-state: paused;
     }
     
-    /* Mobile navigation fixes */
-    #mobileMenu {
-      display: none !important; 
-    }
-    
-    .mobile-nav-overlay {
-      display: none !important;
-    }
-    
-    .mobile-menu {
-      display: none !important;
-    }
-    
-    .mobile-menu-header, 
-    .mobile-menu-content {
-      display: none !important;
+    /* Remove all inline styles for mobile menu */
+    .v-navigation-drawer {
+      z-index: 2000 !important;
     }
   </style>
 </head>
