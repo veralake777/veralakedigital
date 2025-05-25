@@ -818,7 +818,7 @@ const app = Vue.createApp({
             @click="scrollToSection(item.url.substring(1)); drawer = false;"
             class="mb-1 rounded"
             :active="activeSection === item.url.substring(1)"
-            :active-color="'primary'"
+            color="primary"
           >
             <template v-slot:prepend>
               <v-icon 
@@ -989,41 +989,47 @@ const app = Vue.createApp({
                                 </v-card>
                               </div>
                               
-                              <!-- Mobile version with smaller cards -->
-                              <v-carousel
-                                class="d-md-none"
-                                height="90"
-                                hide-delimiters
-                                cycle
-                                show-arrows="hover"
-                                interval="3000"
-                              >
-                                <v-carousel-item
-                                  v-for="(client, index) in [
-                                    {name: 'AFS Travelers', icon: 'mdi-airplane', color: 'info'},
-                                    {name: 'Tara Whalen Law', icon: 'mdi-scale-balance', color: 'success'},
-                                    {name: 'Mux Blank', icon: 'mdi-music', color: 'warning'},
-                                    {name: 'BCS Bulbls', icon: 'mdi-lightbulb', color: 'accent'},
-                                    {name: 'TTD Learning Solutions', icon: 'mdi-school', color: 'error'}
-                                  ]"
-                                  :key="index"
+                              <!-- Mobile version with single stacked cards -->
+                              <div class="d-md-none px-4">
+                                <v-slide-group
+                                  show-arrows="hover"
+                                  class="mb-4"
                                 >
-                                  <div class="d-flex justify-center">
-                                    <v-card 
-                                      class="rounded-lg py-2 px-3 d-flex align-center mx-auto" 
-                                      color="white"
-                                      elevation="3"
-                                      max-width="90%"
-                                      @click="trackEvent('client_click', 'reference', client.name)"
-                                    >
-                                      <v-avatar :color="client.color" class="mr-3" size="36">
-                                        <v-icon color="white" size="small">{{ client.icon }}</v-icon>
-                                      </v-avatar>
-                                      <span class="font-weight-bold text-primary">{{ client.name }}</span>
-                                    </v-card>
-                                  </div>
-                                </v-carousel-item>
-                              </v-carousel>
+                                  <v-slide-group-item
+                                    v-for="(client, index) in [
+                                      {name: 'AFS Travelers', icon: 'mdi-airplane', color: 'info'},
+                                      {name: 'Tara Whalen Law', icon: 'mdi-scale-balance', color: 'success'},
+                                      {name: 'Mux Blank', icon: 'mdi-music', color: 'warning'},
+                                      {name: 'BCS Bulbls', icon: 'mdi-lightbulb', color: 'accent'},
+                                      {name: 'TTD Learning Solutions', icon: 'mdi-school', color: 'error'}
+                                    ]"
+                                    :key="index"
+                                  >
+                                    <div class="pa-2">
+                                      <v-card 
+                                        class="rounded-lg py-2 px-3 d-flex align-center" 
+                                        color="white"
+                                        elevation="2"
+                                        width="180"
+                                        @click="trackEvent('client_click', 'reference', client.name)"
+                                      >
+                                        <v-avatar :color="client.color" class="mr-2" size="32">
+                                          <v-icon color="white" size="small">{{ client.icon }}</v-icon>
+                                        </v-avatar>
+                                        <span class="font-weight-bold text-primary text-body-2">{{ client.name }}</span>
+                                      </v-card>
+                                    </div>
+                                  </v-slide-group-item>
+                                </v-slide-group>
+                                
+                                <!-- Mobile swipe indicator -->
+                                <div class="text-center mb-2">
+                                  <span class="text-caption text-white d-flex align-center justify-center">
+                                    <v-icon size="small" color="white" class="mr-1">mdi-gesture-swipe-horizontal</v-icon>
+                                    Swipe to see more
+                                  </span>
+                                </div>
+                              </div>
                             </div>
                           </div>
                           
