@@ -37,9 +37,9 @@ Follow these instructions to get the project running on your local machine.
 3. Set up environment variables:
    Create a `.env` file in the root directory with the following:
    ```
-   VITE_GA_MEASUREMENT_ID=G-DE8YBR2PBJ
+   VITE_GA_MEASUREMENT_ID=your-measurement-id
    ```
-   Replace with your own Google Analytics Measurement ID if needed.
+   Replace with your own Google Analytics Measurement ID.
 
 ### Running the Application
 
