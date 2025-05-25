@@ -739,22 +739,44 @@ const app = Vue.createApp({
         }
       </style>
       
-      <v-navigation-drawer v-model="drawer">
+      <v-navigation-drawer 
+        v-model="drawer"
+        temporary
+      >
         <v-list>
-          <v-list-item title="Menu"></v-list-item>
+          <v-list-item>
+            <v-list-item-title class="text-h6">
+              <v-avatar color="primary" size="36" class="mr-2">
+                <span class="text-white font-weight-bold">V</span>
+              </v-avatar>
+              veralake.digital
+            </v-list-item-title>
+          </v-list-item>
+          
           <v-divider></v-divider>
+          
           <v-list-item 
             v-for="item in menuItems" 
             :key="item.title"
             :title="item.title"
+            link
             @click="scrollToSection(item.url.substring(1)); drawer = false"
           ></v-list-item>
+          
           <v-divider></v-divider>
+          
           <v-list-item>
-            <v-btn block color="primary" @click="openCalendlyModal(); drawer = false">Book a Call</v-btn>
+            <v-btn block color="primary" class="mb-2" @click="openCalendlyModal(); drawer = false">
+              <v-icon start>mdi-calendar-clock</v-icon>
+              Book a Call
+            </v-btn>
           </v-list-item>
+          
           <v-list-item>
-            <v-btn block color="success" href="tel:+14706293981">Call Now</v-btn>
+            <v-btn block color="success" href="tel:+14706293981">
+              <v-icon start>mdi-phone</v-icon>
+              Call Now
+            </v-btn>
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
