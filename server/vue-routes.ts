@@ -18,6 +18,16 @@ export function registerVueRoutes(app: Express): void {
       res.status(404).send("Preview page not found");
     }
   });
+  
+  // Route for our component-based Vue application
+  app.get("/components", (req: Request, res: Response) => {
+    const componentsPath = path.resolve("client/public/vue-components.html");
+    if (fs.existsSync(componentsPath)) {
+      res.sendFile(componentsPath);
+    } else {
+      res.status(404).send("Vue components page not found");
+    }
+  });
 
   // Serve the Vue.js application for all other routes
   app.get("*", (req: Request, res: Response) => {

@@ -1,217 +1,254 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VeraLake Digital - Marketing & Design Agency</title>
-  <meta name="description" content="A modern digital agency offering marketing, web development, and branding solutions that deliver measurable results.">
-  
-  <!-- Favicon -->
-  <link rel="icon" href="/favicon.ico">
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  
-  <!-- MDI Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css" rel="stylesheet">
-  
-  <!-- Vuetify CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/vuetify@3.4.3/dist/vuetify.min.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VeraLake Digital - Marketing & Design Agency</title>
+    <meta
+      name="description"
+      content="A modern digital agency offering marketing, web development, and branding solutions that deliver measurable results."
+    />
 
-  <style>
-    [v-cloak] {
-      display: none;
-    }
-    
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-    }
-    
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-10px); }
-      60% { transform: translateY(-5px); }
-    }
-    
-    .bounce {
-      animation: bounce 2s infinite;
-    }
-    
-    @keyframes scrollClients {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
-    
-    .client-scroller {
-      animation: scrollClients 20s linear infinite;
-    }
-  </style>
-</head>
-<body>
-  <div id="app" v-cloak></div>
-  
-  <!-- Vue 3 -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.js"></script>
-  
-  <!-- Vuetify -->
-  <script src="https://cdn.jsdelivr.net/npm/vuetify@3.4.3/dist/vuetify.min.js"></script>
-  
-  <!-- Google Analytics -->
-  <script>
-    // Fetch the measurement ID from server
-    fetch('/api/ga-id')
-      .then(response => response.json())
-      .then(data => {
-        // Store measurement ID for analytics.js to use
-        window.GA_MEASUREMENT_ID = data.id;
-        // Initialize GA
-        initGA();
-      })
-      .catch(error => {
-        console.warn('Failed to fetch Google Analytics ID:', error);
-      });
-  </script>
-  <script src="/analytics.js"></script>
-  
-  <!-- Calendly -->
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-  
-  <!-- Simple Mobile Menu Implementation -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Create a simple mobile menu before main.js loads
-      const mobileMenu = document.createElement('div');
-      mobileMenu.id = 'simple-mobile-menu';
-      mobileMenu.style.position = 'fixed';
-      mobileMenu.style.top = '0';
-      mobileMenu.style.left = '-300px';
-      mobileMenu.style.width = '300px';
-      mobileMenu.style.height = '100%';
-      mobileMenu.style.backgroundColor = '#fff';
-      mobileMenu.style.zIndex = '9999';
-      mobileMenu.style.transition = 'left 0.3s ease';
-      mobileMenu.style.boxShadow = '0 0 10px rgba(0,0,0,0.2)';
-      mobileMenu.style.overflowY = 'auto';
-      mobileMenu.style.display = 'none';
-      
-      // Add menu overlay
-      const overlay = document.createElement('div');
-      overlay.id = 'mobile-menu-overlay';
-      overlay.style.position = 'fixed';
-      overlay.style.top = '0';
-      overlay.style.left = '0';
-      overlay.style.width = '100%';
-      overlay.style.height = '100%';
-      overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
-      overlay.style.zIndex = '9998';
-      overlay.style.display = 'none';
-      
-      // Close menu when overlay is clicked
-      overlay.addEventListener('click', function() {
-        mobileMenu.style.left = '-300px';
-        overlay.style.display = 'none';
-        setTimeout(() => {
-          mobileMenu.style.display = 'none';
-        }, 300);
-      });
-      
-      // Add menu toggle function to window
-      window.toggleMobileMenu = function() {
-        if (mobileMenu.style.left === '-300px' || mobileMenu.style.display === 'none') {
-          mobileMenu.style.display = 'block';
-          overlay.style.display = 'block';
-          setTimeout(() => {
-            mobileMenu.style.left = '0';
-          }, 10);
-        } else {
-          mobileMenu.style.left = '-300px';
-          overlay.style.display = 'none';
-          setTimeout(() => {
-            mobileMenu.style.display = 'none';
-          }, 300);
-        }
-      };
-      
-      // Add toggle button at top right
-      const toggleButton = document.createElement('button');
-      toggleButton.id = 'mobile-menu-toggle';
-      toggleButton.innerHTML = '☰';
-      toggleButton.style.position = 'absolute';
-      toggleButton.style.top = '10px';
-      toggleButton.style.right = '15px';
-      toggleButton.style.zIndex = '9997';
-      toggleButton.style.backgroundColor = '#ff5864';
-      toggleButton.style.color = 'white';
-      toggleButton.style.border = 'none';
-      toggleButton.style.borderRadius = '4px';
-      toggleButton.style.padding = '0';
-      toggleButton.style.fontSize = '24px';
-      toggleButton.style.cursor = 'pointer';
-      toggleButton.style.width = '40px';
-      toggleButton.style.height = '40px';
-      toggleButton.style.display = 'flex';
-      toggleButton.style.alignItems = 'center';
-      toggleButton.style.justifyContent = 'center';
-      toggleButton.style.fontWeight = 'bold';
-      
-      // Hide the desktop navigation on mobile
-      function hideDesktopNavOnMobile() {
-        // Find and hide desktop nav items
-        setTimeout(() => {
-          if (window.innerWidth < 768) {
-            // Hide all desktop navigation links
-            const desktopNavItems = document.querySelectorAll('.d-none.d-md-flex');
-            desktopNavItems.forEach(item => {
-              item.style.display = 'none !important';
-            });
-            
-            // Also hide other navigation items in header
-            const navButtons = document.querySelectorAll('.v-app-bar .v-btn:not(#mobile-menu-toggle)');
-            navButtons.forEach(btn => {
-              if (window.getComputedStyle(btn).display !== 'none' && 
-                  !btn.classList.contains('v-app-bar-nav-icon')) {
-                btn.setAttribute('data-original-display', btn.style.display);
-                btn.style.display = 'none';
-              }
-            });
-          }
-        }, 500); // Small delay to ensure the DOM is ready
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- MDI Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Vuetify CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/vuetify@3.4.3/dist/vuetify.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      [v-cloak] {
+        display: none;
       }
-      
-      // Only show on mobile devices
-      function updateMenuVisibility() {
-        if (window.innerWidth < 768) {
-          toggleButton.style.display = 'block';
-        } else {
-          toggleButton.style.display = 'none';
-          // Also hide menu if it's open and we resize to desktop
-          if (mobileMenu.style.left === '0px') {
-            mobileMenu.style.left = '-300px';
-            overlay.style.display = 'none';
+
+      body {
+        font-family: "Inter", sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-5px);
+        }
+      }
+
+      .bounce {
+        animation: bounce 2s infinite;
+      }
+
+      @keyframes scrollClients {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      .client-scroller {
+        animation: scrollClients 20s linear infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" v-cloak></div>
+
+    <!-- Vue 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.js"></script>
+
+    <!-- Vuetify -->
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.4.3/dist/vuetify.min.js"></script>
+
+    <!-- Google Analytics -->
+    <script>
+      // Fetch the measurement ID from server
+      fetch("/api/ga-id")
+        .then((response) => response.json())
+        .then((data) => {
+          // Store measurement ID for analytics.js to use
+          window.GA_MEASUREMENT_ID = data.id;
+          // Initialize GA
+          initGA();
+        })
+        .catch((error) => {
+          console.warn("Failed to fetch Google Analytics ID:", error);
+        });
+    </script>
+    <script src="/analytics.js"></script>
+
+    <!-- Calendly -->
+    <script
+      src="https://assets.calendly.com/assets/external/widget.js"
+      async
+    ></script>
+
+    <!-- Simple Mobile Menu Implementation -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Create a simple mobile menu before main.js loads
+        const mobileMenu = document.createElement("div");
+        mobileMenu.id = "simple-mobile-menu";
+        mobileMenu.style.position = "fixed";
+        mobileMenu.style.top = "0";
+        mobileMenu.style.left = "-300px";
+        mobileMenu.style.width = "300px";
+        mobileMenu.style.height = "100%";
+        mobileMenu.style.backgroundColor = "#fff";
+        mobileMenu.style.zIndex = "9999";
+        mobileMenu.style.transition = "left 0.3s ease";
+        mobileMenu.style.boxShadow = "0 0 10px rgba(0,0,0,0.2)";
+        mobileMenu.style.overflowY = "auto";
+        mobileMenu.style.display = "none";
+
+        // Add menu overlay
+        const overlay = document.createElement("div");
+        overlay.id = "mobile-menu-overlay";
+        overlay.style.position = "fixed";
+        overlay.style.top = "0";
+        overlay.style.left = "0";
+        overlay.style.width = "100%";
+        overlay.style.height = "100%";
+        overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
+        overlay.style.zIndex = "9998";
+        overlay.style.display = "none";
+
+        // Close menu when overlay is clicked
+        overlay.addEventListener("click", function () {
+          mobileMenu.style.left = "-300px";
+          overlay.style.display = "none";
+          setTimeout(() => {
+            mobileMenu.style.display = "none";
+          }, 300);
+        });
+
+        // Add menu toggle function to window
+        window.toggleMobileMenu = function () {
+          if (
+            mobileMenu.style.left === "-300px" ||
+            mobileMenu.style.display === "none"
+          ) {
+            mobileMenu.style.display = "block";
+            overlay.style.display = "block";
             setTimeout(() => {
-              mobileMenu.style.display = 'none';
+              mobileMenu.style.left = "0";
+            }, 10);
+          } else {
+            mobileMenu.style.left = "-300px";
+            overlay.style.display = "none";
+            setTimeout(() => {
+              mobileMenu.style.display = "none";
             }, 300);
           }
+        };
+
+        // Add toggle button at top right
+        const toggleButton = document.createElement("button");
+        toggleButton.id = "mobile-menu-toggle";
+        toggleButton.innerHTML = "☰";
+        toggleButton.style.position = "absolute";
+        toggleButton.style.top = "10px";
+        toggleButton.style.right = "15px";
+        toggleButton.style.zIndex = "9997";
+        toggleButton.style.backgroundColor = "#ff5864";
+        toggleButton.style.color = "white";
+        toggleButton.style.border = "none";
+        toggleButton.style.borderRadius = "4px";
+        toggleButton.style.padding = "0";
+        toggleButton.style.fontSize = "24px";
+        toggleButton.style.cursor = "pointer";
+        toggleButton.style.width = "40px";
+        toggleButton.style.height = "40px";
+        toggleButton.style.display = "flex";
+        toggleButton.style.alignItems = "center";
+        toggleButton.style.justifyContent = "center";
+        toggleButton.style.fontWeight = "bold";
+
+        // Hide the desktop navigation on mobile
+        function hideDesktopNavOnMobile() {
+          // Find and hide desktop nav items
+          setTimeout(() => {
+            if (window.innerWidth < 768) {
+              // Hide all desktop navigation links
+              const desktopNavItems =
+                document.querySelectorAll(".d-none.d-md-flex");
+              desktopNavItems.forEach((item) => {
+                item.style.display = "none !important";
+              });
+
+              // Also hide other navigation items in header
+              const navButtons = document.querySelectorAll(
+                ".v-app-bar .v-btn:not(#mobile-menu-toggle)",
+              );
+              navButtons.forEach((btn) => {
+                if (
+                  window.getComputedStyle(btn).display !== "none" &&
+                  !btn.classList.contains("v-app-bar-nav-icon")
+                ) {
+                  btn.setAttribute("data-original-display", btn.style.display);
+                  btn.style.display = "none";
+                }
+              });
+            }
+          }, 500); // Small delay to ensure the DOM is ready
         }
-      }
-      
-      // Initial check
-      updateMenuVisibility();
-      
-      // Check on resize
-      window.addEventListener('resize', updateMenuVisibility);
-      
-      // Call the function to hide desktop navigation on mobile
-      hideDesktopNavOnMobile();
-      
-      // Add custom CSS to hide navigation items on mobile and fix header
-      const customCSS = document.createElement('style');
-      customCSS.textContent = `
+
+        // Only show on mobile devices
+        function updateMenuVisibility() {
+          if (window.innerWidth < 768) {
+            toggleButton.style.display = "block";
+          } else {
+            toggleButton.style.display = "none";
+            // Also hide menu if it's open and we resize to desktop
+            if (mobileMenu.style.left === "0px") {
+              mobileMenu.style.left = "-300px";
+              overlay.style.display = "none";
+              setTimeout(() => {
+                mobileMenu.style.display = "none";
+              }, 300);
+            }
+          }
+        }
+
+        // Initial check
+        updateMenuVisibility();
+
+        // Check on resize
+        window.addEventListener("resize", updateMenuVisibility);
+
+        // Call the function to hide desktop navigation on mobile
+        hideDesktopNavOnMobile();
+
+        // Add custom CSS to hide navigation items on mobile and fix header
+        const customCSS = document.createElement("style");
+        customCSS.textContent = `
         @media (max-width: 767px) {
           /* Hide desktop navigation on mobile */
           .v-app-bar .d-none.d-md-flex,
@@ -270,17 +307,17 @@
           }
         }
       `;
-      document.head.appendChild(customCSS);
-      
-      toggleButton.addEventListener('click', window.toggleMobileMenu);
-      
-      // Add to DOM
-      document.body.appendChild(mobileMenu);
-      document.body.appendChild(overlay);
-      document.body.appendChild(toggleButton);
-      
-      // Simple menu content
-      mobileMenu.innerHTML = `
+        document.head.appendChild(customCSS);
+
+        toggleButton.addEventListener("click", window.toggleMobileMenu);
+
+        // Add to DOM
+        document.body.appendChild(mobileMenu);
+        document.body.appendChild(overlay);
+        document.body.appendChild(toggleButton);
+
+        // Simple menu content
+        mobileMenu.innerHTML = `
         <div style="padding: 20px;">
           <div style="display: flex; align-items: center; margin-bottom: 20px;">
             <div style="width: 36px; height: 36px; border-radius: 50%; background-color: #ff5864; color: white; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold;">V</div>
@@ -300,24 +337,24 @@
           <button style="display: block; width: 100%; background-color: #4CAF50; color: white; border: none; border-radius: 5px; padding: 12px; font-weight: 500; cursor: pointer;">Call Now</button>
         </div>
       `;
-      
-      // Add click handlers for menu items
-      const menuLinks = mobileMenu.querySelectorAll('a');
-      menuLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const sectionId = this.getAttribute('href').substring(1);
-          const section = document.getElementById(sectionId);
-          if (section) {
-            section.scrollIntoView({ behavior: 'smooth' });
-          }
-          window.toggleMobileMenu();
+
+        // Add click handlers for menu items
+        const menuLinks = mobileMenu.querySelectorAll("a");
+        menuLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const sectionId = this.getAttribute("href").substring(1);
+            const section = document.getElementById(sectionId);
+            if (section) {
+              section.scrollIntoView({ behavior: "smooth" });
+            }
+            window.toggleMobileMenu();
+          });
         });
       });
-    });
-  </script>
-  
-  <!-- Main App Script -->
-  <script src="/main.js"></script>
-</body>
+    </script>
+
+    <!-- Main App Script -->
+    <script src="/components.js"></script>
+  </body>
 </html>
