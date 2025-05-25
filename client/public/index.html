@@ -196,10 +196,11 @@
       // Call the function to hide desktop navigation on mobile
       hideDesktopNavOnMobile();
       
-      // Add custom CSS to hide navigation items on mobile
+      // Add custom CSS to hide navigation items on mobile and fix header
       const customCSS = document.createElement('style');
       customCSS.textContent = `
         @media (max-width: 767px) {
+          /* Hide desktop navigation on mobile */
           .v-app-bar .d-none.d-md-flex,
           .v-app-bar .d-md-flex {
             display: none !important;
@@ -211,6 +212,28 @@
           
           #home-link, #services-link {
             display: none !important;
+          }
+          
+          /* Fix header positioning and padding */
+          .v-app-bar {
+            padding-top: 8px !important;
+            height: auto !important;
+            min-height: 64px !important;
+          }
+          
+          /* Adjust logo position */
+          .v-app-bar .v-avatar {
+            margin-top: 8px !important;
+          }
+          
+          /* Fix hero section padding */
+          #home {
+            padding-top: 80px !important;
+          }
+          
+          /* Fix main content */
+          .v-main {
+            padding-top: 64px !important;
           }
         }
       `;
