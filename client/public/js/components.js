@@ -132,7 +132,7 @@ const HeroSection = {
             Transform Your <span class="gradient-text">Digital Presence</span>
           </h1>
           <p class="hero-subtitle">
-            We craft innovative digital solutions that elevate your brand, engage your audience, and drive measurable results for your business.
+            I craft innovative digital solutions that elevate your brand, engage your audience, and drive measurable results for your business.
           </p>
           <div class="hero-actions">
             <button class="cta-button primary" @click="$emit('open-calendly')">
@@ -215,10 +215,10 @@ const ServicesSection = {
       </div>
       <div class="section-container">
         <div class="section-header">
-          <div class="section-tag">Our Expertise</div>
+          <div class="section-tag">My Expertise</div>
           <h2 class="section-title">Services That <span class="gradient-text">Drive Results</span></h2>
           <p class="section-subtitle">
-            We help businesses transform their digital presence with cutting-edge solutions tailored to their unique needs
+            I help businesses transform their digital presence with cutting-edge solutions tailored to their unique needs
           </p>
         </div>
         
@@ -250,7 +250,7 @@ const ServicesSection = {
         <div class="services-cta">
           <div class="cta-content">
             <h3>Need a custom solution?</h3>
-            <p>Let's discuss your specific requirements and build something amazing together.</p>
+            <p>Let's discuss your specific requirements and I'll build something amazing for you.</p>
           </div>
           <button class="cta-button" @click="$emit('open-calendly')">
             <span>Schedule a Call</span>
@@ -271,9 +271,9 @@ const PortfolioSection = {
     <section id="portfolio" class="portfolio-section">
       <div class="section-container">
         <div class="section-header">
-          <h2 class="section-title">Our Work</h2>
+          <h2 class="section-title">My Work</h2>
           <p class="section-subtitle">
-            Take a look at some of our recent projects
+            Take a look at some of my recent projects
           </p>
         </div>
         
@@ -311,7 +311,7 @@ const TestimonialsSection = {
         <div class="section-header">
           <h2 class="section-title">Client Testimonials</h2>
           <p class="section-subtitle">
-            What our clients say about working with us
+            What my clients say about working with me
           </p>
         </div>
         

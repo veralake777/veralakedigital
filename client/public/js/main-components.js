@@ -127,25 +127,25 @@ const app = Vue.createApp({
       ],
       testimonials: [
         {
-          quote: "Working with Veralake Digital transformed our business. Their team delivered a website that not only looks great but also converts visitors into customers consistently.",
+          quote: "Working with Vera Lake Digital transformed our business. Emily delivered a website that not only looks great but also converts visitors into customers consistently.",
           name: "Sarah Johnson",
           position: "CEO, AFS Travelers",
           avatar: "https://randomuser.me/api/portraits/women/32.jpg"
         },
         {
-          quote: "The mobile app Veralake built for our law firm has significantly streamlined our client consultation process. It's intuitive, secure, and our clients love it.",
+          quote: "The mobile app Emily built for our law firm has significantly streamlined our client consultation process. It's intuitive, secure, and our clients love it.",
           name: "Michael Whalen",
           position: "Partner, Tara Whalen Law",
           avatar: "https://randomuser.me/api/portraits/men/41.jpg"
         },
         {
-          quote: "Their attention to detail and technical expertise is unmatched. Our e-commerce platform has seen a 40% increase in sales since launching the new site.",
+          quote: "Her attention to detail and technical expertise is unmatched. Our e-commerce platform has seen a 40% increase in sales since launching the new site.",
           name: "David Chen",
           position: "Founder, Mux Blank",
           avatar: "https://randomuser.me/api/portraits/men/22.jpg"
         },
         {
-          quote: "Veralake's digital marketing strategies helped us reach our target audience effectively. Their data-driven approach delivered measurable results within months.",
+          quote: "Emily's digital marketing strategies helped us reach our target audience effectively. Her data-driven approach delivered measurable results within months.",
           name: "Lisa Thomas",
           position: "Marketing Director, TTD Learning",
           avatar: "https://randomuser.me/api/portraits/women/45.jpg"
