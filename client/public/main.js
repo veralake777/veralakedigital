@@ -657,14 +657,10 @@ const app = Vue.createApp({
           
               <!-- Mobile Navigation Toggle -->
           <div class="d-flex d-md-none align-center">
-            <!-- Mobile Menu Toggle -->
-            <v-btn
-              icon
-              color="primary"
+            <v-app-bar-nav-icon
               @click="drawer = !drawer"
-            >
-              <v-icon>mdi-menu</v-icon>
-            </v-btn>
+              color="primary"
+            ></v-app-bar-nav-icon>
           </div>
         </v-container>
         
@@ -743,42 +739,24 @@ const app = Vue.createApp({
         }
       </style>
       
-      <v-navigation-drawer
-        v-model="drawer"
-        temporary
-        location="left"
-      >
-        <v-list-item>
-          <v-list-item-title class="text-h6">
-            <span class="text-primary font-weight-bold">veralake</span>
-            <span>.digital</span>
-          </v-list-item-title>
-        </v-list-item>
-
-        <v-divider></v-divider>
-
-        <v-list density="compact" nav>
+      <v-navigation-drawer v-model="drawer">
+        <v-list>
+          <v-list-item title="Menu"></v-list-item>
+          <v-divider></v-divider>
           <v-list-item 
             v-for="item in menuItems" 
             :key="item.title"
             :title="item.title"
             @click="scrollToSection(item.url.substring(1)); drawer = false"
           ></v-list-item>
+          <v-divider></v-divider>
+          <v-list-item>
+            <v-btn block color="primary" @click="openCalendlyModal(); drawer = false">Book a Call</v-btn>
+          </v-list-item>
+          <v-list-item>
+            <v-btn block color="success" href="tel:+14706293981">Call Now</v-btn>
+          </v-list-item>
         </v-list>
-        
-        <template v-slot:append>
-          <div class="pa-2">
-            <v-btn block color="primary" class="mb-2" @click="openCalendlyModal(); drawer = false">
-              <v-icon start>mdi-calendar-clock</v-icon>
-              Book a Call
-            </v-btn>
-            
-            <v-btn block color="success" class="mb-2" href="tel:+14706293981">
-              <v-icon start>mdi-phone</v-icon>
-              Call Now
-            </v-btn>
-          </div>
-        </template>
       </v-navigation-drawer>
 
       <v-main>
