@@ -146,6 +146,30 @@
       toggleButton.style.cursor = 'pointer';
       toggleButton.style.display = 'none';
       
+      // Hide the desktop navigation on mobile
+      function hideDesktopNavOnMobile() {
+        // Find and hide desktop nav items
+        setTimeout(() => {
+          if (window.innerWidth < 768) {
+            // Hide all desktop navigation links
+            const desktopNavItems = document.querySelectorAll('.d-none.d-md-flex');
+            desktopNavItems.forEach(item => {
+              item.style.display = 'none !important';
+            });
+            
+            // Also hide other navigation items in header
+            const navButtons = document.querySelectorAll('.v-app-bar .v-btn:not(#mobile-menu-toggle)');
+            navButtons.forEach(btn => {
+              if (window.getComputedStyle(btn).display !== 'none' && 
+                  !btn.classList.contains('v-app-bar-nav-icon')) {
+                btn.setAttribute('data-original-display', btn.style.display);
+                btn.style.display = 'none';
+              }
+            });
+          }
+        }, 500); // Small delay to ensure the DOM is ready
+      }
+      
       // Only show on mobile devices
       function updateMenuVisibility() {
         if (window.innerWidth < 768) {
@@ -168,6 +192,29 @@
       
       // Check on resize
       window.addEventListener('resize', updateMenuVisibility);
+      
+      // Call the function to hide desktop navigation on mobile
+      hideDesktopNavOnMobile();
+      
+      // Add custom CSS to hide navigation items on mobile
+      const customCSS = document.createElement('style');
+      customCSS.textContent = `
+        @media (max-width: 767px) {
+          .v-app-bar .d-none.d-md-flex,
+          .v-app-bar .d-md-flex {
+            display: none !important;
+          }
+          
+          .v-app-bar .v-btn:not(#mobile-menu-toggle) {
+            display: none !important;
+          }
+          
+          #home-link, #services-link {
+            display: none !important;
+          }
+        }
+      `;
+      document.head.appendChild(customCSS);
       
       toggleButton.addEventListener('click', window.toggleMobileMenu);
       
