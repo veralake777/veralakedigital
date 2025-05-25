@@ -242,9 +242,13 @@ const vuetify = createVuetify({
   }
 });
 
+// Add debugging console messages
+console.log('Vue app initialization starting');
+
 // Initialize Vue app
 const app = createApp({
   data() {
+    console.log('Vue data function executing');
     return {
       theme: 'light',
       drawer: false,
