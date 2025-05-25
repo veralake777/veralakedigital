@@ -221,8 +221,8 @@ const appData = {
   ],
 };
 
-// Create Vuetify instance with modern color palette
-const vuetifyOptions = {
+// Define Vuetify theme options - we'll use this later
+const vuetifyThemeOptions = {
   theme: {
     defaultTheme: "light",
     themes: {

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Test Page</title>
+  
+  <!-- Vuetify CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@3.4.3/dist/vuetify.min.css" rel="stylesheet">
+  
+  <!-- MDI Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css" rel="stylesheet">
+  
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-app-bar color="primary" app>
+        <v-app-bar-title>Vue Test</v-app-bar-title>
+      </v-app-bar>
+      
+      <v-main>
+        <v-container>
+          <v-row>
+            <v-col cols="12">
+              <v-card>
+                <v-card-title>{{ message }}</v-card-title>
+                <v-card-text>
+                  <p>If you're seeing this card with styling, Vue and Vuetify are working!</p>
+                  <v-btn color="primary" @click="increment">
+                    Count: {{ count }}
+                  </v-btn>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-main>
+    </v-app>
+  </div>
+  
+  <!-- Vue 3 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.js"></script>
+  
+  <!-- Vuetify -->
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@3.4.3/dist/vuetify.min.js"></script>
+  
+  <script>
+    // Create Vue app
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: 'Vue is Working!',
+          count: 0
+        }
+      },
+      methods: {
+        increment() {
+          this.count++
+        }
+      }
+    });
+    
+    // Create Vuetify instance
+    const vuetify = Vuetify.createVuetify();
+    
+    // Use Vuetify with Vue app
+    app.use(vuetify);
+    
+    // Mount the app
+    app.mount('#app');
+  </script>
+</body>
+</html>
