@@ -268,7 +268,7 @@ const app = Vue.createApp({
   data() {
     return {
       theme: "light",
-      drawer: false,
+      drawer: false, // Menu closed by default
       showCookieConsent: false,
       isCalendlyModalOpen: false,
       isCalendlyLoaded: false,
@@ -661,11 +661,12 @@ const app = Vue.createApp({
             <v-btn 
               icon 
               color="primary"
-              variant="text"
+              variant="tonal"
+              size="large"
               class="mobile-menu-btn"
               @click="drawer = !drawer"
             >
-              <v-icon>{{ drawer ? 'mdi-close' : 'mdi-menu' }}</v-icon>
+              <v-icon size="large">mdi-menu</v-icon>
             </v-btn>
           </div>
         </v-container>
@@ -748,7 +749,7 @@ const app = Vue.createApp({
       <!-- Mobile Navigation Menu -->
       <div id="mobileDrawer" 
            class="mobile-nav-overlay" 
-           v-show="drawer" 
+           v-if="drawer" 
            @click="drawer = false"
       ></div>
       
@@ -756,6 +757,7 @@ const app = Vue.createApp({
       <div id="mobileMenu" 
            class="mobile-menu" 
            :class="{ 'open': drawer }"
+           v-cloak
       >
         <div class="mobile-menu-header">
           <div class="d-flex align-center px-4 py-3">
@@ -826,6 +828,10 @@ const app = Vue.createApp({
       </div>
       
       <style>
+        [v-cloak] {
+          display: none;
+        }
+        
         .mobile-nav-overlay {
           position: fixed;
           top: 0;
