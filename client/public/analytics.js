@@ -24,6 +24,9 @@ function initGA() {
   window.gtag = gtag;
   
   console.log('Google Analytics initialized with Measurement ID:', MEASUREMENT_ID);
+  
+  // Also track this page view
+  trackPageView(window.location.pathname);
 }
 
 // Track page views - useful for single-page applications
