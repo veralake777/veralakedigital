@@ -62,13 +62,21 @@
   <script src="https://cdn.jsdelivr.net/npm/vuetify@3.4.3/dist/vuetify.min.js"></script>
   
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DE8YBR2PBJ"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-DE8YBR2PBJ');
+    // Fetch the measurement ID from server
+    fetch('/api/ga-id')
+      .then(response => response.json())
+      .then(data => {
+        // Store measurement ID for analytics.js to use
+        window.GA_MEASUREMENT_ID = data.id;
+        // Initialize GA
+        initGA();
+      })
+      .catch(error => {
+        console.warn('Failed to fetch Google Analytics ID:', error);
+      });
   </script>
+  <script src="/analytics.js"></script>
   
   <!-- Calendly -->
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
