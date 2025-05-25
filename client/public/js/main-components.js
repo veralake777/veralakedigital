@@ -196,11 +196,11 @@ const app = Vue.createApp({
         },
         {
           question: "How much does a website or app cost?",
-          answer: "The cost depends on the scope and complexity of your project. We provide custom quotes based on your specific requirements after an initial consultation. We're transparent about our pricing and work with you to find solutions that fit your budget while meeting your business goals."
+          answer: "The cost depends on the scope and complexity of your project. I provide custom quotes based on your specific requirements after an initial consultation. I'm transparent about my pricing and work with you to find solutions that fit your budget while meeting your business goals."
         },
         {
           question: "What technologies do you use?",
-          answer: "We use modern, industry-standard technologies that provide the best performance, security, and scalability. This includes frameworks like Vue.js, React, Angular, Node.js, Laravel, and platforms like WordPress, Shopify, and custom solutions. We select the technology stack based on what's most appropriate for your specific project."
+          answer: "I use modern, industry-standard technologies that provide the best performance, security, and scalability. This includes frameworks like Vue.js, React, Angular, Node.js, Laravel, and platforms like WordPress, Shopify, and custom solutions. I select the technology stack based on what's most appropriate for your specific project."
         }
       ],
       darkMode: false,

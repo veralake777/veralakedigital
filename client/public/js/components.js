@@ -544,7 +544,7 @@ const ContactSection = {
               <div class="info-icon">
                 <i class="mdi mdi-email"></i>
               </div>
-              <h3>Email Us</h3>
+              <h3>Email Me</h3>
               <p><a href="mailto:hello@veralake.digital">hello@veralake.digital</a></p>
             </div>
             
