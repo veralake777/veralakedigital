@@ -548,8 +548,9 @@ const app = Vue.createApp({
         :color="theme === 'light' ? 'white' : 'surface'" 
         elevation="0"
         height="80"
-        class="border-bottom"
+        class="border-bottom mobile-nav-fix"
         :class="theme === 'light' ? 'border-light' : 'border-dark'"
+        position="fixed"
       >
         <v-container class="d-flex align-center">
           <!-- Logo -->
@@ -784,6 +785,20 @@ const app = Vue.createApp({
         .nav-active {
           position: relative;
         }
+        
+        /* Fix mobile navigation spacing */
+        .v-application {
+          padding-top: 80px !important;
+        }
+        
+        .mobile-nav-fix {
+          z-index: 1000 !important;
+        }
+        
+        /* Fix hero section for mobile */
+        #home {
+          padding-top: 0 !important;
+        }
       </style>
       
       <!-- Mobile Navigation Drawer -->
@@ -992,7 +1007,7 @@ const app = Vue.createApp({
                               <!-- Mobile version with single stacked cards -->
                               <div class="d-md-none px-4">
                                 <v-slide-group
-                                  show-arrows="hover"
+                                  show-arrows
                                   class="mb-4"
                                 >
                                   <v-slide-group-item
