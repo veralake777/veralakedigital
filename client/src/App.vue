@@ -65,7 +65,7 @@
               <h3>Connect</h3>
               <ul>
                 <li><a href="tel:4706293981">(470) 629-3981</a></li>
-                <li><a href="mailto:vera@veralake.com">vera@veralake.com</a></li>
+                <li><a href="mailto:hello@veralake.digital">hello@veralake.digital</a></li>
                 <li><a href="#" @click.prevent="scrollToSection('contact')">Contact Form</a></li>
                 <li><a href="#" @click.prevent="openCalendlyModal()">Free Consultation</a></li>
               </ul>

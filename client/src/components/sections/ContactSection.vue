@@ -23,7 +23,7 @@
               <i class="mdi mdi-email"></i>
             </div>
             <h3>Email Us</h3>
-            <p><a href="mailto:vera@veralake.com">vera@veralake.com</a></p>
+            <p><a href="mailto:hello@veralake.digital">hello@veralake.digital</a></p>
           </div>
           
           <div class="info-card">

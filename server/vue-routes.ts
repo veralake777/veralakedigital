@@ -31,11 +31,11 @@ export function registerVueRoutes(app: Express): void {
 
   // Serve the Vue.js application for all other routes
   app.get("*", (req: Request, res: Response) => {
-    // First try to serve from the public index.html
-    const publicPath = path.resolve("client/public/index.html");
+    // First try to serve the component-based structure
+    const componentsPath = path.resolve("client/public/vue-components.html");
     
-    if (fs.existsSync(publicPath)) {
-      res.sendFile(publicPath);
+    if (fs.existsSync(componentsPath)) {
+      res.sendFile(componentsPath);
     } else {
       // Fall back to the regular index.html
       const indexPath = path.resolve("client/index.html");
@@ -43,7 +43,14 @@ export function registerVueRoutes(app: Express): void {
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
       } else {
-        res.status(404).send("Application not found");
+        // Final fallback to the public path
+        const publicPath = path.resolve("client/public/index.html");
+        
+        if (fs.existsSync(publicPath)) {
+          res.sendFile(publicPath);
+        } else {
+          res.status(404).send("Application not found");
+        }
       }
     }
   });
