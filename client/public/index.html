@@ -50,16 +50,6 @@
     .client-scroller {
       animation: scrollClients 20s linear infinite;
     }
-    
-    /* Critical fixes for mobile menu */
-    .v-navigation-drawer {
-      position: fixed !important;
-      z-index: 1000 !important;
-    }
-    
-    .v-overlay__scrim {
-      opacity: 0.5 !important;
-    }
   </style>
 </head>
 <body>
@@ -82,6 +72,129 @@
   
   <!-- Calendly -->
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  
+  <!-- Simple Mobile Menu Implementation -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Create a simple mobile menu before main.js loads
+      const mobileMenu = document.createElement('div');
+      mobileMenu.id = 'simple-mobile-menu';
+      mobileMenu.style.position = 'fixed';
+      mobileMenu.style.top = '0';
+      mobileMenu.style.left = '-300px';
+      mobileMenu.style.width = '300px';
+      mobileMenu.style.height = '100%';
+      mobileMenu.style.backgroundColor = '#fff';
+      mobileMenu.style.zIndex = '9999';
+      mobileMenu.style.transition = 'left 0.3s ease';
+      mobileMenu.style.boxShadow = '0 0 10px rgba(0,0,0,0.2)';
+      mobileMenu.style.overflowY = 'auto';
+      mobileMenu.style.display = 'none';
+      
+      // Add menu overlay
+      const overlay = document.createElement('div');
+      overlay.id = 'mobile-menu-overlay';
+      overlay.style.position = 'fixed';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100%';
+      overlay.style.height = '100%';
+      overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
+      overlay.style.zIndex = '9998';
+      overlay.style.display = 'none';
+      
+      // Close menu when overlay is clicked
+      overlay.addEventListener('click', function() {
+        mobileMenu.style.left = '-300px';
+        overlay.style.display = 'none';
+        setTimeout(() => {
+          mobileMenu.style.display = 'none';
+        }, 300);
+      });
+      
+      // Add menu toggle function to window
+      window.toggleMobileMenu = function() {
+        if (mobileMenu.style.left === '-300px' || mobileMenu.style.display === 'none') {
+          mobileMenu.style.display = 'block';
+          overlay.style.display = 'block';
+          setTimeout(() => {
+            mobileMenu.style.left = '0';
+          }, 10);
+        } else {
+          mobileMenu.style.left = '-300px';
+          overlay.style.display = 'none';
+          setTimeout(() => {
+            mobileMenu.style.display = 'none';
+          }, 300);
+        }
+      };
+      
+      // Add toggle button at top right
+      const toggleButton = document.createElement('button');
+      toggleButton.id = 'mobile-menu-toggle';
+      toggleButton.innerHTML = '☰';
+      toggleButton.style.position = 'fixed';
+      toggleButton.style.top = '15px';
+      toggleButton.style.right = '15px';
+      toggleButton.style.zIndex = '9997';
+      toggleButton.style.backgroundColor = '#ff5864';
+      toggleButton.style.color = 'white';
+      toggleButton.style.border = 'none';
+      toggleButton.style.borderRadius = '5px';
+      toggleButton.style.padding = '8px 12px';
+      toggleButton.style.fontSize = '24px';
+      toggleButton.style.cursor = 'pointer';
+      toggleButton.style.display = 'none';
+      
+      // Only show on mobile
+      if (window.innerWidth < 768) {
+        toggleButton.style.display = 'block';
+      }
+      
+      toggleButton.addEventListener('click', window.toggleMobileMenu);
+      
+      // Add to DOM
+      document.body.appendChild(mobileMenu);
+      document.body.appendChild(overlay);
+      document.body.appendChild(toggleButton);
+      
+      // Simple menu content
+      mobileMenu.innerHTML = `
+        <div style="padding: 20px;">
+          <div style="display: flex; align-items: center; margin-bottom: 20px;">
+            <div style="width: 36px; height: 36px; border-radius: 50%; background-color: #ff5864; color: white; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold;">V</div>
+            <div style="font-weight: bold; font-size: 20px;"><span style="color: #ff5864;">veralake</span>.digital</div>
+          </div>
+          <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 15px;"><a href="#home" style="text-decoration: none; color: #333; font-weight: 500;">Home</a></li>
+            <li style="margin-bottom: 15px;"><a href="#services" style="text-decoration: none; color: #333; font-weight: 500;">Services</a></li>
+            <li style="margin-bottom: 15px;"><a href="#portfolio" style="text-decoration: none; color: #333; font-weight: 500;">Portfolio</a></li>
+            <li style="margin-bottom: 15px;"><a href="#testimonials" style="text-decoration: none; color: #333; font-weight: 500;">Testimonials</a></li>
+            <li style="margin-bottom: 15px;"><a href="#blog" style="text-decoration: none; color: #333; font-weight: 500;">Blog</a></li>
+            <li style="margin-bottom: 15px;"><a href="#contact" style="text-decoration: none; color: #333; font-weight: 500;">Contact</a></li>
+          </ul>
+          <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+          <button style="display: block; width: 100%; background-color: #ff5864; color: white; border: none; border-radius: 5px; padding: 12px; font-weight: 500; margin-bottom: 10px; cursor: pointer;">Book a Call</button>
+          <button style="display: block; width: 100%; background-color: #4CAF50; color: white; border: none; border-radius: 5px; padding: 12px; font-weight: 500; cursor: pointer;">Call Now</button>
+        </div>
+      `;
+      
+      // Add click handlers for menu items
+      const menuLinks = mobileMenu.querySelectorAll('a');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const sectionId = this.getAttribute('href').substring(1);
+          const section = document.getElementById(sectionId);
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+          }
+          window.toggleMobileMenu();
+        });
+      });
+    });
+  </script>
   
   <!-- Main App Script -->
   <script src="/main.js"></script>
