@@ -544,13 +544,11 @@ const app = Vue.createApp({
     <v-app :theme="theme">
       <!-- Modern Navigation Bar -->
       <v-app-bar 
-        app 
         :color="theme === 'light' ? 'white' : 'surface'" 
-        elevation="0"
-        height="80"
+        elevation="1"
+        height="72"
         class="border-bottom mobile-nav-fix"
         :class="theme === 'light' ? 'border-light' : 'border-dark'"
-        position="fixed"
       >
         <v-container class="d-flex align-center">
           <!-- Logo -->
@@ -659,81 +657,12 @@ const app = Vue.createApp({
           
           <!-- Mobile Navigation Toggle -->
           <div class="d-flex d-md-none align-center">
-            <!-- Book a Call Button for Mobile -->
-            <v-btn 
-              color="primary" 
-              variant="flat"
-              size="small"
-              density="comfortable"
-              class="mr-2 text-white rounded-pill"
-              @click="openCalendlyModal"
-            >
-              <v-icon size="small">mdi-calendar-clock</v-icon>
-            </v-btn>
-            
-            <!-- Contact Button for Mobile -->
-            <v-menu
-              transition="slide-y-transition"
-              location="bottom"
-            >
-              <template v-slot:activator="{ props }">
-                <v-btn
-                  color="primary"
-                  variant="tonal"
-                  size="small"
-                  density="comfortable"
-                  class="mr-2 rounded-pill"
-                  v-bind="props"
-                >
-                  <v-icon size="small">mdi-phone</v-icon>
-                </v-btn>
-              </template>
-              <v-card min-width="200">
-                <v-card-text class="pa-4">
-                  <div class="d-flex flex-column gap-2">
-                    <v-btn
-                      block
-                      color="primary"
-                      variant="flat"
-                      href="tel:+14706293981"
-                      class="mb-2"
-                      @click="trackEvent('phone_call', 'contact', 'navbar_mobile')"
-                    >
-                      <v-icon start>mdi-phone</v-icon>
-                      Call Now
-                    </v-btn>
-                    <v-btn
-                      block
-                      color="primary"
-                      variant="outlined"
-                      href="sms:+14706293981"
-                      @click="trackEvent('text_message', 'contact', 'navbar_mobile')"
-                    >
-                      <v-icon start>mdi-message</v-icon>
-                      Send Text
-                    </v-btn>
-                  </div>
-                </v-card-text>
-              </v-card>
-            </v-menu>
-            
-            <!-- Theme Toggle for Mobile -->
+            <!-- Mobile Menu Toggle -->
             <v-btn 
               icon 
-              variant="text" 
-              size="small" 
-              class="mr-2" 
-              @click="toggleTheme"
-            >
-              <v-icon v-if="theme === 'light'">mdi-weather-night</v-icon>
-              <v-icon v-else>mdi-weather-sunny</v-icon>
-            </v-btn>
-            
-            <!-- Menu Toggle (Mobile Only) -->
-            <v-btn 
-              icon 
-              :color="drawer ? 'primary' : ''" 
+              color="primary"
               variant="text"
+              class="mobile-menu-btn"
               @click="drawer = !drawer"
             >
               <v-icon>{{ drawer ? 'mdi-close' : 'mdi-menu' }}</v-icon>
@@ -786,102 +715,172 @@ const app = Vue.createApp({
           position: relative;
         }
         
-        /* Fix mobile navigation spacing */
-        .v-application {
-          padding-top: 80px !important;
-        }
-        
-        .mobile-nav-fix {
-          z-index: 1000 !important;
-        }
-        
-        /* Fix hero section for mobile */
-        #home {
-          padding-top: 0 !important;
+        /* Mobile fixes */
+        @media (max-width: 768px) {
+          .v-navigation-drawer {
+            top: 0 !important;
+            height: 100% !important;
+            z-index: 2000 !important;
+          }
+          
+          .mobile-menu-btn {
+            font-size: 24px !important;
+          }
+          
+          .v-application {
+            padding-top: 0 !important;
+          }
+          
+          /* Fix spacing */
+          #home {
+            padding-top: 72px !important; 
+          }
+          
+          /* Make sure elements don't get cut off */
+          .client-marquee-container {
+            padding: 0 16px;
+            margin: 0 -16px;
+            overflow-x: hidden;
+          }
         }
       </style>
       
-      <!-- Mobile Navigation Drawer -->
-      <v-navigation-drawer 
-        v-model="drawer" 
-        temporary 
-        :width="280"
-        class="mobile-drawer"
+      <!-- Mobile Navigation Menu -->
+      <div id="mobileDrawer" 
+           class="mobile-nav-overlay" 
+           v-show="drawer" 
+           @click="drawer = false"
+      ></div>
+      
+      <!-- Custom Mobile Navigation -->
+      <div id="mobileMenu" 
+           class="mobile-menu" 
+           :class="{ 'open': drawer }"
       >
-        <v-list class="py-4">
-          <!-- Logo in drawer -->
-          <v-list-item class="mb-4">
-            <div class="d-flex align-center">
-              <v-avatar
-                color="primary"
-                size="42"
-                class="mr-3"
-              >
-                <span class="text-white font-weight-bold text-h6">V</span>
-              </v-avatar>
+        <div class="mobile-menu-header">
+          <div class="d-flex align-center px-4 py-3">
+            <v-avatar color="primary" size="36" class="mr-3">
+              <span class="text-white font-weight-bold">V</span>
+            </v-avatar>
+            <div>
               <span class="text-primary font-weight-bold text-h6 text-lowercase">veralake</span>
               <span class="font-weight-bold text-lowercase">.digital</span>
             </div>
-          </v-list-item>
+            <v-spacer></v-spacer>
+            <v-btn icon @click="drawer = false" color="primary">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </div>
+          <v-divider></v-divider>
+        </div>
+        
+        <div class="mobile-menu-content">
+          <v-list>
+            <v-list-item 
+              v-for="item in menuItems" 
+              :key="item.title"
+              @click="scrollToSection(item.url.substring(1)); drawer = false;"
+              class="mobile-nav-item"
+            >
+              <v-list-item-title class="mobile-nav-title">
+                {{ item.title }}
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
           
-          <v-divider class="mb-4"></v-divider>
+          <v-divider class="my-3"></v-divider>
           
-          <!-- Navigation Items -->
-          <v-list-item
-            v-for="item in menuItems"
-            :key="item.title"
-            @click="scrollToSection(item.url.substring(1)); drawer = false;"
-            class="mb-1 rounded"
-            :active="activeSection === item.url.substring(1)"
-            color="primary"
-          >
-            <template v-slot:prepend>
-              <v-icon 
-                :color="activeSection === item.url.substring(1) ? 'primary' : ''"
-                class="mr-2"
-              >
-                {{ {
-                  'Home': 'mdi-home',
-                  'Services': 'mdi-briefcase',
-                  'Portfolio': 'mdi-image-multiple',
-                  'Testimonials': 'mdi-star',
-                  'Blog': 'mdi-post',
-                  'Contact': 'mdi-email'
-                }[item.title] || 'mdi-chevron-right' }}
-              </v-icon>
-            </template>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item>
-          
-          <v-divider class="my-4"></v-divider>
-          
-          <!-- Actions -->
-          <v-list-item @click="openCalendlyModal(); drawer = false;" class="mb-1 rounded">
-            <template v-slot:prepend>
-              <v-icon color="primary" class="mr-2">mdi-calendar-clock</v-icon>
-            </template>
-            <v-list-item-title>Book a Call</v-list-item-title>
-          </v-list-item>
-          
-          <v-list-item href="tel:+14706293981" class="mb-1 rounded" @click="trackEvent('phone_call', 'contact', 'drawer')">
-            <template v-slot:prepend>
-              <v-icon color="success" class="mr-2">mdi-phone</v-icon>
-            </template>
-            <v-list-item-title>Call (470) 629-3981</v-list-item-title>
-          </v-list-item>
-          
-          <v-list-item @click="toggleTheme" class="mb-1 rounded">
-            <template v-slot:prepend>
-              <v-icon :color="theme === 'light' ? 'warning' : 'info'" class="mr-2">
-                {{ theme === 'light' ? 'mdi-weather-night' : 'mdi-weather-sunny' }}
-              </v-icon>
-            </template>
-            <v-list-item-title>
+          <div class="px-4 py-2">
+            <v-btn 
+              color="primary" 
+              block 
+              class="mb-3"
+              @click="openCalendlyModal(); drawer = false;"
+            >
+              <v-icon start>mdi-calendar-clock</v-icon>
+              Book a Call
+            </v-btn>
+            
+            <v-btn 
+              color="success" 
+              block 
+              class="mb-3"
+              href="tel:+14706293981"
+              @click="trackEvent('phone_call', 'contact', 'drawer')"
+            >
+              <v-icon start>mdi-phone</v-icon>
+              Call Now
+            </v-btn>
+            
+            <v-btn 
+              :color="theme === 'light' ? 'grey-darken-3' : 'grey-lighten-3'" 
+              block
+              variant="outlined"
+              @click="toggleTheme"
+            >
+              <v-icon start>{{ theme === 'light' ? 'mdi-weather-night' : 'mdi-weather-sunny' }}</v-icon>
               {{ theme === 'light' ? 'Dark Mode' : 'Light Mode' }}
-            </v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
+            </v-btn>
+          </div>
+        </div>
+      </div>
+      
+      <style>
+        .mobile-nav-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          z-index: 1999;
+          display: block;
+        }
+        
+        .mobile-menu {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 85%;
+          max-width: 300px;
+          height: 100%;
+          background: #fff;
+          z-index: 2000;
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mobile-menu.open {
+          transform: translateX(0);
+        }
+        
+        .dark .mobile-menu {
+          background: #202738;
+        }
+        
+        .mobile-menu-content {
+          flex: 1;
+          overflow-y: auto;
+          padding: 8px 0;
+        }
+        
+        .mobile-nav-item {
+          padding: 12px 24px;
+          cursor: pointer;
+        }
+        
+        .mobile-nav-item:hover {
+          background: rgba(255, 88, 100, 0.1);
+        }
+        
+        .mobile-nav-title {
+          font-size: 16px;
+          font-weight: 500;
+        }
+      </style>
 
       <v-main>
         <!-- Hero Section - Modern & Eye-catching -->
