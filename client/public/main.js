@@ -263,8 +263,11 @@ const vuetify = Vuetify.createVuetify({
   },
 });
 
+// Import Vue from the global variable (CDN)
+const { createApp } = Vue;
+
 // Initialize Vue app
-const app = Vue.createApp({
+const app = createApp({
   data() {
     return {
       theme: "light",
@@ -1812,6 +1815,35 @@ const app = Vue.createApp({
       </v-btn>
     </v-app>
   `,
+});
+
+// Create Vuetify instance
+const vuetify = Vuetify.createVuetify({
+  theme: {
+    defaultTheme: 'light',
+    themes: {
+      light: {
+        dark: false,
+        colors: {
+          primary: '#2A41E8',
+          secondary: '#37474F',
+          accent: '#FF5722',
+          success: '#4CAF50',
+          error: '#F44336',
+        }
+      },
+      dark: {
+        dark: true,
+        colors: {
+          primary: '#2A41E8',
+          secondary: '#37474F',
+          accent: '#FF5722',
+          success: '#4CAF50',
+          error: '#F44336',
+        }
+      }
+    }
+  }
 });
 
 // Mount the app
