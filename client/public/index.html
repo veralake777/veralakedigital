@@ -146,10 +146,28 @@
       toggleButton.style.cursor = 'pointer';
       toggleButton.style.display = 'none';
       
-      // Only show on mobile
-      if (window.innerWidth < 768) {
-        toggleButton.style.display = 'block';
+      // Only show on mobile devices
+      function updateMenuVisibility() {
+        if (window.innerWidth < 768) {
+          toggleButton.style.display = 'block';
+        } else {
+          toggleButton.style.display = 'none';
+          // Also hide menu if it's open and we resize to desktop
+          if (mobileMenu.style.left === '0px') {
+            mobileMenu.style.left = '-300px';
+            overlay.style.display = 'none';
+            setTimeout(() => {
+              mobileMenu.style.display = 'none';
+            }, 300);
+          }
+        }
       }
+      
+      // Initial check
+      updateMenuVisibility();
+      
+      // Check on resize
+      window.addEventListener('resize', updateMenuVisibility);
       
       toggleButton.addEventListener('click', window.toggleMobileMenu);
       
