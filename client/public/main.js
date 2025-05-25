@@ -222,7 +222,7 @@ const appData = {
 };
 
 // Create Vuetify instance with modern color palette
-const vuetify = Vuetify.createVuetify({
+const vuetifyOptions = {
   theme: {
     defaultTheme: "light",
     themes: {
@@ -260,14 +260,11 @@ const vuetify = Vuetify.createVuetify({
       lighten: 3,
       darken: 3,
     },
-  },
-});
+  }
+};
 
-// Import Vue from the global variable (CDN)
-const { createApp } = Vue;
-
-// Initialize Vue app
-const app = createApp({
+// Initialize Vue app using the global Vue variable
+const app = Vue.createApp({
   data() {
     return {
       theme: "light",
@@ -1817,34 +1814,8 @@ const app = createApp({
   `,
 });
 
-// Create Vuetify instance
-const vuetify = Vuetify.createVuetify({
-  theme: {
-    defaultTheme: 'light',
-    themes: {
-      light: {
-        dark: false,
-        colors: {
-          primary: '#2A41E8',
-          secondary: '#37474F',
-          accent: '#FF5722',
-          success: '#4CAF50',
-          error: '#F44336',
-        }
-      },
-      dark: {
-        dark: true,
-        colors: {
-          primary: '#2A41E8',
-          secondary: '#37474F',
-          accent: '#FF5722',
-          success: '#4CAF50',
-          error: '#F44336',
-        }
-      }
-    }
-  }
-});
+// Create the Vuetify instance
+const vuetify = Vuetify.createVuetify();
 
-// Mount the app
+// Mount the app with Vuetify
 app.use(vuetify).mount("#app");
