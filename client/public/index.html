@@ -134,7 +134,7 @@
       toggleButton.id = 'mobile-menu-toggle';
       toggleButton.innerHTML = '☰';
       toggleButton.style.position = 'fixed';
-      toggleButton.style.top = '15px';
+      toggleButton.style.top = '12px';
       toggleButton.style.right = '15px';
       toggleButton.style.zIndex = '9997';
       toggleButton.style.backgroundColor = '#ff5864';
@@ -142,9 +142,14 @@
       toggleButton.style.border = 'none';
       toggleButton.style.borderRadius = '5px';
       toggleButton.style.padding = '8px 12px';
-      toggleButton.style.fontSize = '24px';
+      toggleButton.style.fontSize = '20px';
       toggleButton.style.cursor = 'pointer';
       toggleButton.style.display = 'none';
+      toggleButton.style.width = '40px';
+      toggleButton.style.height = '40px';
+      toggleButton.style.display = 'flex';
+      toggleButton.style.alignItems = 'center';
+      toggleButton.style.justifyContent = 'center';
       
       // Hide the desktop navigation on mobile
       function hideDesktopNavOnMobile() {
@@ -216,14 +221,21 @@
           
           /* Fix header positioning and padding */
           .v-app-bar {
-            padding-top: 8px !important;
+            padding-top: 0 !important;
             height: auto !important;
             min-height: 64px !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
           }
           
-          /* Adjust logo position */
-          .v-app-bar .v-avatar {
-            margin-top: 8px !important;
+          /* Adjust logo position and size */
+          .v-app-bar .v-container {
+            padding-top: 8px !important;
+            padding-bottom: 8px !important;
+          }
+          
+          /* Ensure proper vertical alignment */
+          .v-app-bar .d-flex.align-center {
+            min-height: 48px !important;
           }
           
           /* Fix hero section padding */
