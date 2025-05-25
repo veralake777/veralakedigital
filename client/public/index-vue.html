@@ -1,57 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VeraLake Digital - Marketing & Design Agency</title>
-  <meta name="description" content="A modern digital agency offering marketing, web development, and branding solutions that deliver measurable results.">
-  
-  <!-- Favicon -->
-  <link rel="icon" href="/favicon.ico">
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  
-  <!-- Google Analytics -->
-  <script>
-    // Fetch the measurement ID from server
-    fetch('/api/ga-id')
-      .then(response => response.json())
-      .then(data => {
-        // Store measurement ID for analytics.js to use
-        window.GA_MEASUREMENT_ID = data.id;
-        // Initialize GA
-        if (typeof initGA === 'function') {
-          initGA();
-        }
-      })
-      .catch(error => {
-        console.warn('Failed to fetch Google Analytics ID:', error);
-      });
-  </script>
-  <script src="/analytics.js"></script>
-  
-  <!-- Calendly -->
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-  
-  <style>
-    [v-cloak] {
-      display: none;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Veralake Digital - Modern solutions for digital growth. We build beautiful, functional websites and applications that drive results for your business." />
     
-    body {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      font-family: 'Inter', sans-serif;
-    }
-  </style>
-</head>
-<body>
-  <div id="app" v-cloak></div>
-  <!-- We'll use a simple script tag instead of module format -->
-  <script src="/src/main.js"></script>
-</body>
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Veralake Digital - Web Development & Digital Marketing Agency" />
+    <meta property="og:description" content="We build beautiful, functional websites and applications that drive results for your business." />
+    <meta property="og:image" content="/images/og-image.jpg" />
+    <meta property="og:url" content="https://veralake.digital" />
+    <meta property="og:type" content="website" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Material Design Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.9.96/css/materialdesignicons.min.css" rel="stylesheet">
+    
+    <title>Veralake Digital - Web Development & Digital Marketing Agency</title>
+    
+    <style>
+      /* CSS Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.6;
+        background-color: #f8fafc;
+        color: #1e293b;
+      }
+      
+      /* Variables */
+      :root {
+        --primary-color: #4f46e5;
+        --primary-light-color: rgba(79, 70, 229, 0.1);
+        --text-color: #1e293b;
+        --text-secondary-color: #64748b;
+        --background-color: #ffffff;
+        --background-alt-color: #f8fafc;
+        --card-bg-color: #ffffff;
+        --border-color: #e2e8f0;
+      }
+      
+      /* Preview Message */
+      .preview-message {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        text-align: center;
+      }
+      
+      .preview-title {
+        font-size: 1.8rem;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+      }
+      
+      .preview-description {
+        margin-bottom: 25px;
+        color: var(--text-secondary-color);
+      }
+      
+      .preview-cta {
+        display: inline-block;
+        background-color: var(--primary-color);
+        color: white;
+        text-decoration: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .preview-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      
+      .tech-stack {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      
+      .tech-item {
+        display: flex;
+        align-items: center;
+        background-color: var(--primary-light-color);
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+      }
+      
+      .tech-item i {
+        margin-right: 8px;
+        color: var(--primary-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="preview-message">
+      <h1 class="preview-title">Veralake Digital - Component-Based Vue.js Website</h1>
+      <p class="preview-description">
+        Your modern, component-based website is being built with Vue.js and features a responsive design, 
+        dark mode support, animations, and complete integration with Google Analytics and Calendly.
+      </p>
+      
+      <a href="/home" class="preview-cta">View Website</a>
+      
+      <div class="tech-stack">
+        <div class="tech-item">
+          <i class="mdi mdi-vuejs"></i>
+          Vue.js
+        </div>
+        <div class="tech-item">
+          <i class="mdi mdi-responsive"></i>
+          Responsive
+        </div>
+        <div class="tech-item">
+          <i class="mdi mdi-theme-light-dark"></i>
+          Dark Mode
+        </div>
+        <div class="tech-item">
+          <i class="mdi mdi-google-analytics"></i>
+          Analytics
+        </div>
+        <div class="tech-item">
+          <i class="mdi mdi-calendar-clock"></i>
+          Calendly
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
